@@ -1,0 +1,36 @@
+.create-advert-form {
+    left: 50%;
+    top: 50%;
+    transform: translate(50%, 50%);
+
+    text-align: center;
+    width: 50%;
+
+    background-color: white;
+
+    border-radius: 0.6em;
+    box-shadow: 0 0.5em 1em -0.4em rgba(0, 0, 0, .3);
+}
+
+.create-form-div {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0.5em;
+    width: 75%;
+}
+
+.create-form-div > label {
+    text-align: left;
+    display: block;
+}
+
+.create-form-textarea {
+    height: 6em;
+}
+
+.create-btn {
+    margin: 1em;
+    width: 100px;
+    height: 25px;
+}

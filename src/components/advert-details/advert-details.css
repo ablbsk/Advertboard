@@ -1,0 +1,25 @@
+.advert-details-div {
+    transform: translate(50%, 5%);
+
+    width: 50%;
+
+    background-color: white;
+
+    border-radius: 0.6em;
+    box-shadow: 0 0.5em 1em -0.4em rgba(0, 0, 0, .3);
+}
+
+.advert-details-div > img {
+    width: 100%;
+}
+
+.advert-details-div > h2 {
+    margin: 0;
+    padding: 1em;
+
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+}

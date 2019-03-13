@@ -1,0 +1,14 @@
+ul {
+    display: inline;
+}
+
+ul > li {
+    display: inline;
+    padding: 1em;
+}
+
+li > a {
+    color: whitesmoke;
+
+    text-decoration: none;
+}
