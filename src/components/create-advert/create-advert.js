@@ -30,7 +30,7 @@ class CreateAdvert extends Component {
         </div>
         <div className="create-form-div">
           <label htmlFor="description">Description</label>
-          <textarea id="description" className="create-form-textarea" onChange={this.handleChange}></textarea>
+          <textarea id="description" className="create-form-textarea" onChange={this.handleChange} />
         </div>
         <div className="create-form-div">
           <label htmlFor="category">Category</label>
