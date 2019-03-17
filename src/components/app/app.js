@@ -6,6 +6,8 @@ import AdvertBoard from '../advert-board';
 import AdvertDetails from '../advert-details';
 import CreateAdvert from '../create-advert';
 import UpdateAdvert from '../update-advert';
+import SignIn from '../sign-in';
+import SignUp from '../sign-up';
 
 class App extends Component {
   render() {
@@ -19,6 +21,8 @@ class App extends Component {
               <Route exact path="/advert/:id" component={AdvertDetails} />
               <Route path="/create-advert" component={CreateAdvert} />
               <Route path="/advert/:id/update-advert" component={UpdateAdvert} />
+              <Route path="/sign-in" component={SignIn} />
+              <Route path="/sign-up" component={SignUp} />
             </Switch>
           </main>
         </Fragment>

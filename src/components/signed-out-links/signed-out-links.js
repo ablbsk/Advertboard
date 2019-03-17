@@ -6,8 +6,8 @@ import './signed-out-links.css';
 const SignedOutLinks = () => {
   return (
     <ul>
-      <li><NavLink to="/">Login</NavLink></li>
-      <li><NavLink to="/">Sign Up</NavLink></li>
+      <li><NavLink to="/sign-in">Login</NavLink></li>
+      <li><NavLink to="/sign-up">Sign Up</NavLink></li>
     </ul>
   );
 };

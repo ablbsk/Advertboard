@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createAdvert } from '../../actions/advert-actions';
+import { Redirect } from 'react-router-dom';
 
 import './create-advert.css';
 
 class CreateAdvert extends Component {
-  state = {
-    title: '',
-    description: ''
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -22,6 +19,11 @@ class CreateAdvert extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) {
+      return <Redirect to='/sign-in' />
+    }
+
     return (
       <form onSubmit={this.handleSubmit} className="create-advert-form">
         <div className="create-form-div">
@@ -46,10 +48,16 @@ class CreateAdvert extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
+  }
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     createAdvert: (advert) => dispatch(createAdvert(advert))
   }
 };
 
-export default connect(null, mapDispatchToProps)(CreateAdvert);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAdvert);

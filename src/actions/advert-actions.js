@@ -1,10 +1,16 @@
 export const createAdvert = (advert) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
+    const { profile } = getState().firebase;
+    const authorId = getState().firebase.auth.uid;
+    const { email } = getState().firebase.auth;
     firestore.collection('adverts').add({
       ...advert,
+      authorId,
+      email,
+      phone: profile.phone,
+      username: profile.username,
       views: 0,
-      username: 'Owner',
       created: new Date()
     }).then(() => {
       dispatch({ type: 'CREATE_ADVERT', advert });

@@ -21,12 +21,16 @@ class AdvertDetails extends Component {
     this.props.viewsAdvert(this.state, this.props.match.params.id, views)
   }
 
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
+
   render() {
     const { advert } = this.props;
     const { id } = this.props.match.params;
 
     return (
-      <div className="advert-details-div">
+      <div className="advert-details-div" key={id}>
         <h2>{advert.title}</h2>
         <img src="../public/img/no_image.jpg" alt="no photo"/>
         <table>

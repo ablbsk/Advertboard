@@ -18,7 +18,7 @@ class AdvertBoard extends Component {
 const mapStateToProps = (state) => {
   return {
     adverts: state.firestore.ordered.adverts
-  }
+  };
 };
 
 export default compose(
