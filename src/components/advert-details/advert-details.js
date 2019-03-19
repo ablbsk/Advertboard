@@ -28,7 +28,6 @@ class AdvertDetails extends Component {
   render() {
     const { advert } = this.props;
     const { id } = this.props.match.params;
-
     return (
       <div className="advert-details-div" key={id}>
         <h2>{advert.title}</h2>
@@ -74,6 +73,7 @@ class AdvertDetails extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
+  console.log(state);
   const { adverts } = state.firestore.data;
   const advert = adverts ? adverts[id] : null;
 

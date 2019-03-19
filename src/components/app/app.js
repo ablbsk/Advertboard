@@ -9,6 +9,9 @@ import UpdateAdvert from '../update-advert';
 import SignIn from '../sign-in';
 import SignUp from '../sign-up';
 
+import UsersList from '../users-list';
+import UserDetails from '../user-details';
+
 class App extends Component {
   render() {
     return (
@@ -23,6 +26,9 @@ class App extends Component {
               <Route path="/advert/:id/update-advert" component={UpdateAdvert} />
               <Route path="/sign-in" component={SignIn} />
               <Route path="/sign-up" component={SignUp} />
+
+              <Route exact path="/users" component={UsersList} />
+              <Route path="/users/:id" component={UserDetails} />
             </Switch>
           </main>
         </Fragment>
