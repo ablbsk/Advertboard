@@ -1,0 +1,10 @@
+.user-advert-item {
+    display: flex;
+    align-items: center;
+}
+
+.user-advert-item > a {
+    flex-grow: 2;
+    color: #2856B6;
+    text-decoration: none;
+}
