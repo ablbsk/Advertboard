@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import {NavLink} from "react-router-dom";
 
 import UserAdvertItem from '../user-advert-item';
 
@@ -21,7 +22,15 @@ class UserDetails extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, auth } = this.props;
+    const { id } = this.props.match.params;
+
+    const link = (auth.uid && auth.uid === id) ? (
+        <div>
+          <NavLink to={`/users/${id}/update`}>Update User</NavLink>
+        </div>
+      ) : null;
+    console.log(this.props);
     return (
       <div className="advert-details-div">
         <h2>{user.username}</h2>
@@ -45,7 +54,7 @@ class UserDetails extends Component {
           </tr>
           </tbody>
         </table>
-
+        {link}
         <div>
           { user.advertsId && user.advertsId.map((id) => (
             <UserAdvertItem id={id} key={id} properties={this.getProperties(id)} />
@@ -62,7 +71,8 @@ const mapStateToProps = (state, ownProps) => {
   const user = users ? users[id] : null;
   return {
     user,
-    adverts: state.firestore.ordered.adverts
+    adverts: state.firestore.ordered.adverts,
+    auth: state.firebase.auth
   };
 };
 

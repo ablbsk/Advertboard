@@ -32,7 +32,7 @@ export const createAdvert = (advert) => {
 };
 
 export const removeAdvert = (id) => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
+  return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     firestore.collection('adverts').doc(id).delete().then(() => {
       dispatch({ type: 'REMOVE_ADVERT', id });

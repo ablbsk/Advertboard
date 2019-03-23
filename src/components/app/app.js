@@ -11,6 +11,7 @@ import SignUp from '../sign-up';
 
 import UsersList from '../users-list';
 import UserDetails from '../user-details';
+import UpdateUser from '../update-user';
 
 class App extends Component {
   render() {
@@ -28,7 +29,8 @@ class App extends Component {
               <Route path="/sign-up" component={SignUp} />
 
               <Route exact path="/users" component={UsersList} />
-              <Route path="/users/:id" component={UserDetails} />
+              <Route exact path="/users/:id" component={UserDetails} />
+              <Route path="/users/:id/update" component={UpdateUser} />
             </Switch>
           </main>
         </Fragment>
