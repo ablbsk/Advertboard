@@ -15,6 +15,7 @@ class UpdateUser extends Component {
     firstName: this.props.user.firstName,
     lastName: this.props.user.lastName,
     email: this.props.user.email,
+    phone: this.props.user.phone,
     currentPassword: this.props.user.currentPassword,
     curPassword: this.props.user.curPassword,
     newPassword: this.props.user.newPassword,
@@ -29,10 +30,13 @@ class UpdateUser extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { id } = this.props.match.params;
-    const result = updateUserValidation(this.state);
+    const { username, firstName, lastName, phone } = this.state;
+    const obj = { username, firstName, lastName, phone };
+    const result = updateUserValidation(obj);
+    console.log(this.state);
     if (result === 'good') {
-      this.props.updateUser(this.state, id);
-      this.props.history.push(`/advert/${ id }`);
+      this.props.updateUser(obj, id);
+      this.props.history.push(`/users/${ id }`);
     } else {
       console.log(result);
     }

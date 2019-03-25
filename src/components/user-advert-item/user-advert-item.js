@@ -7,7 +7,7 @@ import './user-advert-item.css';
 const UserAdvertItem = ({ id, properties }) => {
   return (
     <div className="user-advert-item">
-      <Link to={`/advert/${ id }`}>
+      <Link to={`/advert/${id}`}>
         {properties.title}
       </Link>
       <ul>

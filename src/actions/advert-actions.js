@@ -32,11 +32,16 @@ export const createAdvert = (advert) => {
 export const removeAdvert = (id) => {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
+    const authorId = getState().firebase.auth.uid;
     firestore.collection('adverts').doc(id).delete().then(() => {
       dispatch({ type: 'REMOVE_ADVERT', id });
     }).catch((err) => {
       dispatch({ type: 'REMOVE_ADVERT_ERROR', err });
     });
+
+    firestore.collection('users').doc(`${authorId}`).update({
+      advertsId: firestore.FieldValue.arrayRemove(id)
+    })
   };
 };
 

@@ -13,7 +13,8 @@ class AdvertDetails extends Component {
 
   handleSubmitRemove = (e) => {
     e.preventDefault();
-    this.props.removeAdvert(this.props.match.params.id);
+    const { id } = this.props.match.params;
+    this.props.removeAdvert(id);
     this.props.history.push('/');
   };
 

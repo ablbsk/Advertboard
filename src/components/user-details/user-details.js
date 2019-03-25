@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import {NavLink} from 'react-router-dom';
-import {BreadcrumbsItem} from 'react-breadcrumbs-dynamic';
+import { NavLink } from 'react-router-dom';
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
 import UserAdvertItem from '../user-advert-item';
 
@@ -31,7 +29,6 @@ class UserDetails extends Component {
           <NavLink to={`/users/${id}/update`}>Update User</NavLink>
         </div>
       ) : null;
-    console.log(this.props);
     return (
       <div className="advert-details-div">
 
@@ -80,9 +77,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'adverts'}
-  ])
-)(UserDetails);
+export default connect(mapStateToProps)(UserDetails);

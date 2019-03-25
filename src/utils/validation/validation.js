@@ -31,7 +31,7 @@ export const signUpValidation = (state) => {
       .error(new Error('Please Enter you first name')),
     lastName: Joi.string().regex(/[a-zA-Z]{2,20}/).required()
       .error(new Error('Please Enter you last name')),
-    phone: Joi.string().regex(/((\+375)+(29|33)+([0-9]){7})/).required()
+    phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('Please Enter you phone')),
   });
 
@@ -50,7 +50,7 @@ export const updateUserValidation = (state) => {
       .error(new Error('Please Enter you first name')),
     lastName: Joi.string().regex(/[a-zA-Z]{2,20}/).required()
       .error(new Error('Please Enter you last name')),
-    phone: Joi.string().regex(/((\+375)+(29|33)+([0-9]){7})/).required()
+    phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('Please Enter you phone')),
   });
 
