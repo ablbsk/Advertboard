@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { removeAdvert, viewsAdvert } from "../../actions/advert-actions";
+import {BreadcrumbsItem} from "react-breadcrumbs-dynamic";
 
 import './advert-details.css';
 
@@ -13,6 +14,7 @@ class AdvertDetails extends Component {
   handleSubmitRemove = (e) => {
     e.preventDefault();
     this.props.removeAdvert(this.props.match.params.id);
+    this.props.history.push('/');
   };
 
   componentDidMount() {
@@ -26,10 +28,12 @@ class AdvertDetails extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { advert } = this.props;
     const { id } = this.props.match.params;
     return (
       <div className="advert-details-div" key={id}>
+        <BreadcrumbsItem to={`/advert/${id}`}>{advert.title}</BreadcrumbsItem>
         <h2>{advert.title}</h2>
         <img src="../public/img/no_image.jpg" alt="no photo"/>
         <table>
@@ -73,7 +77,6 @@ class AdvertDetails extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
-  console.log(state);
   const { adverts } = state.firestore.data;
   const advert = adverts ? adverts[id] : null;
 

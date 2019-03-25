@@ -31,6 +31,9 @@ module.exports = {
     }),
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+  },
+  node: {
+    net: 'empty',
   },
 };

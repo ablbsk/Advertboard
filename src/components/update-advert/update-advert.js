@@ -3,10 +3,19 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { updateAdvert } from "../../actions/advert-actions";
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
 import './update-advert.css';
+import {advertValidation} from "../../utils/validation/validation";
 
 class UpdateAdvert extends Component {
+
+  state = {
+    title: this.props.advert.title,
+    description: this.props.advert.description,
+    category: this.props.advert.category,
+    price: this.props.advert.price,
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -16,13 +25,24 @@ class UpdateAdvert extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.updateAdvert(this.state, this.props.match.params.id);
+    const { id } = this.props.match.params;
+    const result = advertValidation(this.state);
+    if (result === 'good') {
+      this.props.updateAdvert(this.state, id);
+      this.props.history.push(`/advert/${ id }`);
+    } else {
+      console.log(result);
+    }
   };
 
   render() {
     const { advert } = this.props;
+    console.log(this.state);
     return (
       <div className="update-div">
+
+        <BreadcrumbsItem to={`/advert/${advert.id}/update-advert`}>Update</BreadcrumbsItem>
+
        <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>

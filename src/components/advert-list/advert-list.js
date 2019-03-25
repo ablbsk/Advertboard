@@ -6,6 +6,7 @@ import AdvertItem from '../advert-item';
 import './advert-list.css';
 
 const AdvertList = ({ adverts }) => {
+
   return (
     <section>
       { adverts && adverts.map((advert) => (

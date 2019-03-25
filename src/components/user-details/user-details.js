@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import {NavLink} from "react-router-dom";
+import {NavLink} from 'react-router-dom';
+import {BreadcrumbsItem} from 'react-breadcrumbs-dynamic';
 
 import UserAdvertItem from '../user-advert-item';
 
@@ -33,6 +34,9 @@ class UserDetails extends Component {
     console.log(this.props);
     return (
       <div className="advert-details-div">
+
+        <BreadcrumbsItem to={`/users/${id}`}>{user.username}</BreadcrumbsItem>
+
         <h2>{user.username}</h2>
         <table>
           <tbody>

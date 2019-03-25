@@ -4,9 +4,21 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { updateUser, deleteUser, deleteUserDB, changePassword, changeEmail } from '../../actions/user-actions';
 import { removeAdvert } from '../../actions/advert-actions';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { updateUserValidation, changeUserEmailValidation, changeUserPassValidation } from '../../utils/validation/validation';
 
 class UpdateUser extends Component {
+
+  state = {
+    username: this.props.user.username,
+    firstName: this.props.user.firstName,
+    lastName: this.props.user.lastName,
+    email: this.props.user.email,
+    currentPassword: this.props.user.currentPassword,
+    curPassword: this.props.user.curPassword,
+    newPassword: this.props.user.newPassword,
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -17,23 +29,41 @@ class UpdateUser extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { id } = this.props.match.params;
-    this.props.updateUser(this.state, id);
+    const result = updateUserValidation(this.state);
+    if (result === 'good') {
+      this.props.updateUser(this.state, id);
+      this.props.history.push(`/advert/${ id }`);
+    } else {
+      console.log(result);
+    }
   };
 
   changeEmailSubmit = (e) => {
     e.preventDefault();
-    const { currentPassword, email } = this.state;
     const { id } = this.props.match.params;
-    this.props.changeEmail(currentPassword, email);
-    this.deleteItems(email);
-    this.props.updateUser(this.state, id);
+    const { currentPassword, email } = this.state;
+    const obj = { currentPassword, email };
+    const result = changeUserEmailValidation(obj);
+    if (result === 'good') {
+      this.props.changeEmail(currentPassword, email);
+      this.deleteItems(email);
+      this.props.updateUser(this.state, id);
+    } else {
+      console.log(result);
+    }
   };
 
   changePasswordSubmit = (e) => {
     e.preventDefault();
     const { curPassword, newPassword } = this.state;
-    this.props.changePassword(curPassword, newPassword);
-    this.deleteItems();
+    const obj = { curPassword, newPassword };
+    const result = changeUserPassValidation(obj);
+    if (result === 'good') {
+      this.props.changePassword(curPassword, newPassword);
+      this.deleteItems();
+    } else {
+      console.log(result);
+    }
   };
 
   deleteItems = (email) => {
@@ -47,7 +77,6 @@ class UpdateUser extends Component {
     const { id } = this.props.match.params;
     for (let i = 0; i < advertsId.length; i++) {
       const id = advertsId[i];
-
       this.props.removeAdvert(id);
     }
     this.props.deleteUserDB(id);
@@ -61,6 +90,10 @@ class UpdateUser extends Component {
     }
     return (
       <div className="update-div">
+
+        <BreadcrumbsItem to={`/users/${auth.uid}`}>{user.username}</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/users/${auth.uid}/update`}>Update</BreadcrumbsItem>
+
         <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>

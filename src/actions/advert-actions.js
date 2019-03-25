@@ -21,8 +21,6 @@ export const createAdvert = (advert) => {
      firestore.collection('adverts').orderBy('created', 'desc').limit(1).get()
        .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          console.log(doc.id);
-
           firestore.collection('users').doc(`${authorId}`).update({
             advertsId: firestore.FieldValue.arrayUnion(doc.id)
           });

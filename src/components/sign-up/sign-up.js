@@ -2,16 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../actions/auth-actions';
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import {signUpValidation} from '../../utils/validation/validation';
 
 class SignUp extends Component {
-  state = {
-    username: '',
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    phone: ''
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -21,47 +15,55 @@ class SignUp extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.signUp(this.state);
+    const result = signUpValidation(this.state);
+    if (result === 'good') {
+      this.props.signUp(this.state);
+    } else {
+      console.log(result);
+    }
   };
 
   render() {
     const { auth, authError } = this.props;
-
+    console.log(this.props);
     if (auth.uid) {
       return <Redirect to='/' />
     }
 
     return (
-      <form onSubmit={this.handleSubmit} className="create-advert-form">
-        <div className="create-form-div">
-          <label htmlFor="username">Username</label>
-          <input id="username" type="text" onChange={this.handleChange}/>
-        </div>
-        <div className="create-form-div">
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" onChange={this.handleChange}/>
-        </div>
-        <div className="create-form-div">
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" onChange={this.handleChange}/>
-        </div>
-        <div className="create-form-div">
-          <label htmlFor="firstName">First name</label>
-          <input id="firstName" type="text" onChange={this.handleChange}/>
-        </div>
-        <div className="create-form-div">
-          <label htmlFor="lastName">Last name</label>
-          <input id="lastName" type="text" onChange={this.handleChange}/>
-        </div>
-        <div className="create-form-div">
-          <label htmlFor="phone">Phone</label>
-          <input id="phone" type="text" onChange={this.handleChange}/>
-        </div>
-        <button className="create-btn">Create User</button>
-        <div>
-          { authError ? <p>{authError}</p> : null }
-        </div>
-      </form>
+      <div>
+        <BreadcrumbsItem to="/sign-in">Sign Up</BreadcrumbsItem>
+        <form onSubmit={this.handleSubmit} className="create-advert-form">
+          <div className="create-form-div">
+            <label htmlFor="username">Username</label>
+            <input id="username" type="text" onChange={this.handleChange}/>
+          </div>
+          <div className="create-form-div">
+            <label htmlFor="email">Email</label>
+            <input id="email" type="email" onChange={this.handleChange}/>
+          </div>
+          <div className="create-form-div">
+            <label htmlFor="password">Password</label>
+            <input id="password" type="password" onChange={this.handleChange}/>
+          </div>
+          <div className="create-form-div">
+            <label htmlFor="firstName">First name</label>
+            <input id="firstName" type="text" onChange={this.handleChange}/>
+          </div>
+          <div className="create-form-div">
+            <label htmlFor="lastName">Last name</label>
+            <input id="lastName" type="text" onChange={this.handleChange}/>
+          </div>
+          <div className="create-form-div">
+            <label htmlFor="phone">Phone</label>
+            <input id="phone" type="text" onChange={this.handleChange}/>
+          </div>
+          <button className="create-btn">Create User</button>
+          <div>
+            { authError ? <p>{authError}</p> : null }
+          </div>
+        </form>
+      </div>
     )
   }
 }
