@@ -1,30 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
-
-
+import React, { Fragment } from 'react';
 import AdvertList from '../advert-list';
+import Search from '../search';
 
-class AdvertBoard extends Component {
-  render() {
-    const { adverts } = this.props;
-    return (
-      <AdvertList adverts={adverts} />
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    adverts: state.firestore.ordered.adverts,
-  };
+const AdvertBoard = () => {
+  return (
+    <Fragment>
+      <AdvertList />
+      <Search />
+    </Fragment>
+  );
 };
 
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'adverts' },
-    { collection: 'users' },
-  ])
-)(AdvertBoard);
+export default AdvertBoard;

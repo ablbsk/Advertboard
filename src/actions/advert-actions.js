@@ -18,8 +18,8 @@ export const createAdvert = (advert) => {
       dispatch({ type: 'CREATE_ADVERT_ERROR', err });
     });
 
-     firestore.collection('adverts').orderBy('created', 'desc').limit(1).get()
-       .then((querySnapshot) => {
+    firestore.collection('adverts').orderBy('created', 'desc').limit(1).get()
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           firestore.collection('users').doc(`${authorId}`).update({
             advertsId: firestore.FieldValue.arrayUnion(doc.id)

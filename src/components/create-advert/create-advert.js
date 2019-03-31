@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { createAdvert } from '../../actions/advert-actions';
+import { firestoreConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { createAdvert } from '../../actions/advert-actions';
 import { advertValidation } from '../../utils/validation/validation';
 
 import './create-advert.css';
@@ -27,7 +29,7 @@ class CreateAdvert extends Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const { auth, categories } = this.props;
     if (!auth.uid) {
       return <Redirect to='/sign-in' />
     }
@@ -62,6 +64,7 @@ class CreateAdvert extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
+    categories: state.firestore.ordered.categories,
   }
 };
 
@@ -71,4 +74,9 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAdvert);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    { collection: 'categories' },
+  ])
+)(CreateAdvert);

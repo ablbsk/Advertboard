@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
-import { updateAdvert } from "../../actions/advert-actions";
+import { compose } from 'redux';
+import { updateAdvert } from '../../actions/advert-actions';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
 import './update-advert.css';
-import {advertValidation} from "../../utils/validation/validation";
+import { advertValidation } from '../../utils/validation/validation';
 
 class UpdateAdvert extends Component {
 
@@ -29,6 +29,7 @@ class UpdateAdvert extends Component {
     const result = advertValidation(this.state);
     if (result === 'good') {
       this.props.updateAdvert(this.state, id);
+      this.refreshCategories();
       this.props.history.push(`/advert/${ id }`);
     } else {
       console.log(result);
