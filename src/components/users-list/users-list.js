@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { Link } from 'react-router-dom';
-import {BreadcrumbsItem} from 'react-breadcrumbs-dynamic';
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
 import UserItem from '../user-item';
 

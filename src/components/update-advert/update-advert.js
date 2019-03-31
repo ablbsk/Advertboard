@@ -29,7 +29,6 @@ class UpdateAdvert extends Component {
     const result = advertValidation(this.state);
     if (result === 'good') {
       this.props.updateAdvert(this.state, id);
-      this.refreshCategories();
       this.props.history.push(`/advert/${ id }`);
     } else {
       console.log(result);
@@ -38,11 +37,12 @@ class UpdateAdvert extends Component {
 
   render() {
     const { advert } = this.props;
-    console.log(this.state);
+    const { id } = this.props.match.params;
     return (
       <div className="update-div">
 
-        <BreadcrumbsItem to={`/advert/${advert.id}/update-advert`}>Update</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/advert/${id}`}>{advert.title}</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/advert/${id}/update-advert`}>Update</BreadcrumbsItem>
 
        <form onSubmit={this.handleSubmit}>
           <table>

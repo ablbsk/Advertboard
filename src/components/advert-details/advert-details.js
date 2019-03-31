@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { removeAdvert, viewsAdvert } from "../../actions/advert-actions";
-import {BreadcrumbsItem} from "react-breadcrumbs-dynamic";
+import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 
 import './advert-details.css';
 
@@ -94,9 +92,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([{
-    collection: 'adverts',
-  }]),
-)(AdvertDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(AdvertDetails);
