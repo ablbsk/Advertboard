@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+
 import { createAdvert } from '../../actions/advert-actions';
 import { advertValidation } from '../../utils/validation/validation';
 
 import './create-advert.css';
 
 class CreateAdvert extends Component {
+
+  state = {
+    validError: null,
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -24,39 +27,99 @@ class CreateAdvert extends Component {
       this.props.createAdvert(this.state);
       this.props.history.push('/');
     } else {
-      console.log(result);
+      this.setValidError(result);
     }
   };
 
+  setValidError(result) {
+    this.setState( {
+      validError: result
+    });
+  }
+
   render() {
-    const { auth, categories } = this.props;
+    const { auth } = this.props;
+    const { validError } = this.state;
+    const options = ['Transport', 'Equipment', 'Fashion', 'For kids', 'For home', 'Hobbies & sports', 'Work & study', 'Animals'];
+
     if (!auth.uid) {
       return <Redirect to='/sign-in' />
     }
 
     return (
-      <div>
-        <BreadcrumbsItem to="/create-advert">Create Advert</BreadcrumbsItem>
-        <form onSubmit={this.handleSubmit} className="create-advert-form">
-          <div className="create-form-div">
-            <label htmlFor="title">Title</label>
-            <input id="title" type="text" onChange={this.handleChange}/>
+      <Fragment>
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to="/create-advert"
+        >
+          Create Advert
+        </BreadcrumbsItem>
+        <form
+          className="create-advert__form"
+          onSubmit={this.handleSubmit}
+        >
+          <div className="create-advert__content">
+            <label
+              className="create-advert__label"
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <input
+              className="create-advert__input"
+              id="title"
+              type="text"
+              placeholder="Enter title ..."
+              onChange={this.handleChange} />
           </div>
-          <div className="create-form-div">
-            <label htmlFor="description">Description</label>
-            <textarea id="description" className="create-form-textarea" onChange={this.handleChange} />
+          <div className="create-advert__content">
+            <label
+              className="create-advert__label"
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              className="create-advert__textarea"
+              id="description"
+              placeholder="Enter description ..."
+              onChange={this.handleChange}
+            />
           </div>
-          <div className="create-form-div">
-            <label htmlFor="category">Category</label>
-            <input id="category" type="text" onChange={this.handleChange}/>
+          <div className="create-advert__content">
+            <label
+              className="create-advert__label"
+              htmlFor="category"
+            >
+              Category
+            </label>
+            <select
+              className="create-advert__select"
+              id="category"
+              onChange={this.handleChange}>
+              { options.map((option) => (
+                <option value={option} key={option}>{option}</option>
+              ))}
+            </select>
           </div>
-          <div className="create-form-div">
-            <label htmlFor="price">Price</label>
-            <input id="price" type="text" onChange={this.handleChange}/>
+          <div className="create-advert__content">
+            <label
+              className="create-advert__label"
+              htmlFor="price"
+            >
+              Price
+            </label>
+            <input
+              className="create-advert__input"
+              id="price"
+              type="text"
+              placeholder="Enter price ..."
+              onChange={this.handleChange} />
           </div>
-          <button className="create-btn">Create</button>
+          <button className="create-advert__button">Create</button>
+          { validError ? <p className="create-advert__error">{validError}</p> : null }
         </form>
-      </div>
+      </Fragment>
     )
   }
 }
@@ -64,7 +127,6 @@ class CreateAdvert extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
-    categories: state.firestore.ordered.categories,
   }
 };
 
@@ -74,9 +136,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([
-    { collection: 'categories' },
-  ])
-)(CreateAdvert);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAdvert);

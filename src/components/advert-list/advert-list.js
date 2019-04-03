@@ -19,10 +19,10 @@ class AdvertList extends Component {
             return advert.title.indexOf(search) > -1;
           })
           .map((advert) => (
-          <Link to={`/advert/${ advert.id}`} key={advert.id}>
-            <AdvertItem advert={advert} />
-          </Link>
-          )) }
+            <Link to={`/advert/${ advert.id }`} key={advert.id}>
+              <AdvertItem advert={advert} />
+            </Link>
+          ))}
       </section>
     );
   }
@@ -38,6 +38,6 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'adverts' },
+    { collection: 'adverts', orderBy: ['created', 'desc'] },
   ])
 )(AdvertList);

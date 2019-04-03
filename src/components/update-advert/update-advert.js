@@ -41,8 +41,19 @@ class UpdateAdvert extends Component {
     return (
       <div className="update-div">
 
-        <BreadcrumbsItem to={`/advert/${id}`}>{advert.title}</BreadcrumbsItem>
-        <BreadcrumbsItem to={`/advert/${id}/update-advert`}>Update</BreadcrumbsItem>
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to={`/advert/${id}`}
+        >
+          {advert.title}
+        </BreadcrumbsItem>
+
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to={`/advert/${id}/update-advert`}
+        >
+          Update
+        </BreadcrumbsItem>
 
        <form onSubmit={this.handleSubmit}>
           <table>

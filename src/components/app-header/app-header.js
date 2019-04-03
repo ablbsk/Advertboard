@@ -12,9 +12,9 @@ class AppHeader extends Component {
     const { auth } = this.props;
     const links = auth.uid ? <SignedInLinks uid={auth.uid} /> : <SignedOutLinks />;
     return (
-      <header>
-        <nav>
-          <h1 className="logo"><NavLink to="/">Callboard</NavLink></h1>
+      <header className="app-header">
+        <nav className="app-header__nav">
+          <NavLink className="app-header__logo" to="/">Callboard</NavLink>
           { links }
         </nav>
       </header>

@@ -1,0 +1,29 @@
+:root {
+    --borderColor: #ABABAB;
+    --accentColor: #2856B6;
+    --placeholderColor: silver;
+    --errorColor: #FF4040;
+    --buttonActive: #e5e5e5;
+
+    --inputFontSize: 1em;
+    --inputPadding: 0.25em;
+
+    --indent: 0.5em;
+
+    --outline: none;
+
+    --fontFamily: Poppins, serif;
+
+    --border: 2px solid var(--borderColor);
+    --borderActive: 2px solid var(--accentColor);
+
+    --placeholderOpacity: 0;
+    --placeholderTransition: opacity 0.75s ease;
+
+    --buttonShadow: inset 0 0 0.25em #c1c1c1;
+}
+
+.sign-in__form {
+    width: 50%;
+    padding: 1.5em 2em;
+}

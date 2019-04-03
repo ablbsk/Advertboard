@@ -1,28 +1,51 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
 import { signOut } from '../../actions/auth-actions';
 
 import './signed-in-links.css';
 
 const SignedInLinks = (props) => {
-  const { username } = props.profile;
   return (
-    <ul>
-      <li><NavLink to="/create-advert">New Advert</NavLink></li>
-      <li><NavLink to="/users">Users</NavLink></li>
-      <li><NavLink to={`/users/${ props.uid }`}>{ username }</NavLink></li>
-      <li><a onClick={ props.signOut }>Log Out</a></li>
+    <ul className="signed-in-links__ul">
+      <li>
+        <NavLink to="/create-advert" title="Create advert">
+          <img
+            className="signed-in-links__img"
+            src="../../../public/img/create-advert_icon.png"
+            alt="Create advert"
+          />
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/users" title="Users">
+          <img
+            className="signed-in-links__img"
+            src="../../../public/img/users.png"
+            alt="Users"
+          />
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={`/users/${props.uid}`} title="Profile">
+          <img
+            className="signed-in-links__img"
+            src="../../../public/img/profile.png"
+            alt="Profile"
+          />
+        </NavLink>
+      </li>
+      <li>
+        <NavLink onClick={props.signOut} to="/" title="Logout">
+        <img
+          className="signed-in-links__img"
+          src="../../../public/img/logout.png"
+          alt="Logout"
+        />
+        </NavLink>
+      </li>
     </ul>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    profile: state.firebase.profile
-  }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -31,9 +54,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([
-    { collection: 'users' },
-  ])
-)(SignedInLinks);
+export default connect(null, mapDispatchToProps)(SignedInLinks);

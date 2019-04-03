@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import { Breadcrumbs, BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
@@ -26,21 +26,31 @@ const Advert = () => {
 
 const Users = () => {
   return (
-    <div>
-      <BreadcrumbsItem to="/users">Users</BreadcrumbsItem>
+    <Fragment>
+      <BreadcrumbsItem
+        className="breadcrumbs-item"
+        to="/users"
+      >
+        Users
+      </BreadcrumbsItem>
       <Switch>
         <Route exact path="/users" component={UsersList} />
         <Route exact path="/users/:id" component={UserDetails} />
         <Route path="/users/:id/update" component={UpdateUser} />
       </Switch>
-    </div>
+    </Fragment>
   );
 };
 
 const Main = () => {
   return (
     <main>
-      <BreadcrumbsItem to="/">Home</BreadcrumbsItem>
+      <BreadcrumbsItem
+        className="breadcrumbs-item"
+        to="/"
+      >
+        Home
+      </BreadcrumbsItem>
       <Switch>
         <Route exact path="/" component={AdvertBoard} />
         <Route path="/advert/:id" component={Advert} />
@@ -53,20 +63,23 @@ const Main = () => {
   );
 };
 
-class App extends Component {
-  render() {
-    return (
-        <Fragment>
-          <AppHeader />
-          <Breadcrumbs
-            separator={<i> / </i>}
-            item={ NavLink }
-            finalItem={"i"}
-            />
-          <Main />
-        </Fragment>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Fragment>
+      <AppHeader />
+      <div className="breadcrumbs__div">
+        <Breadcrumbs
+          separator={<i className="breadcrumbs__i">/</i>}
+          item={NavLink}
+          finalItem="span"
+          finalProps={{
+            style: { color: '#2856B6', cursor: 'default' }
+          }}
+        />
+      </div>
+      <Main />
+    </Fragment>
+  );
+};
 
 export default App;

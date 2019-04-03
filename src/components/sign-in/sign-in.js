@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { signIn } from '../../actions/auth-actions';
 import {Redirect} from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { signIn } from '../../actions/auth-actions';
+
+import './sign-in.css';
 
 class SignIn extends Component {
 
@@ -18,37 +20,61 @@ class SignIn extends Component {
   };
 
   render() {
-    const { authError, auth } = this.props;
+    const { signInError, auth } = this.props;
+
     if (auth.uid) {
       return <Redirect to='/' />
     }
     return (
-      <div>
-        <BreadcrumbsItem to="/sign-in">Login</BreadcrumbsItem>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" onChange={this.handleChange} />
+      <Fragment>
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to="/sign-in"
+        >
+          Login
+        </BreadcrumbsItem>
+        <form
+          className="sign-in__form"
+          onSubmit={this.handleSubmit}>
+          <div className="sign-in__content">
+            <label
+              className="sign-in__label"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              className="sign-in__input"
+              type="email"
+              id="email"
+              placeholder="Enter email"
+              onChange={this.handleChange} />
           </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={this.handleChange} />
+          <div className="sign-in__content">
+            <label
+              className="sign-in__label"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              className="sign-in__input"
+              type="password"
+              id="password"
+              placeholder="Enter password"
+              onChange={this.handleChange} />
           </div>
-          <div>
-            <button>Login</button>
-            <div>
-              { authError ? <p>{ authError }</p> : null }
-            </div>
-          </div>
+          <button className="sign-in__button">Login</button>
+          { signInError ? <p className="sign-in__error">{ signInError }</p> : null }
         </form>
-      </div>
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError,
+    signInError: state.auth.signInError,
     auth: state.firebase.auth
   }
 };

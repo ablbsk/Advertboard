@@ -1,0 +1,33 @@
+body {
+	margin: 0;
+	padding: 0;
+
+	background-color: #f2f2f2;
+}
+
+.breadcrumbs__div {
+	margin: 2em 0 6vh 0;
+
+	text-align: center;
+}
+
+.breadcrumbs__i {
+	padding: 0 0.3em;
+
+	font-size: 1.1em;
+}
+
+.breadcrumbs-item {
+	text-decoration: none;
+
+	color: dimgrey;
+
+	font-family: Poppins, serif;
+	font-size: 0.9em;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

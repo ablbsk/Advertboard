@@ -1,10 +1,31 @@
-.user-advert-item {
-    display: flex;
-    align-items: center;
+:root {
+    --accentColor: #2856B6;
 }
 
-.user-advert-item > a {
-    flex-grow: 2;
-    color: #2856B6;
-    text-decoration: none;
+.user-advert-item__content {
+	display: flex;
+	align-items: center;
+}
+
+.user-advert-item__li {
+	display: inline;
+
+	padding-left: 1.5em;
+
+	list-style-type: none;
+}
+
+
+.user-advert-item__content > a {
+	flex-grow: 2;
+
+	text-decoration: none;
+
+	color: black;
+}
+
+.user-advert-item__content > a:hover {
+	transition: 0.5s;
+
+	color: var(--accentColor);
 }

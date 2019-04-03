@@ -39,6 +39,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "csscomb": "^4.2.0",
     "firebase": "^5.8.6",
     "joi": "^14.3.1",
     "moment": "^2.24.0",

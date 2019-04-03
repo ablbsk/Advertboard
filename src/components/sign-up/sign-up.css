@@ -23,7 +23,7 @@
     --buttonShadow: inset 0 0 0.25em #c1c1c1;
 }
 
-.sign-in__form {
+.sign-up__form {
     width: 50%;
     padding: 1.5em 2em;
 
@@ -32,14 +32,14 @@
     box-shadow: 0 0.8em 2em rgba(0,0,0,0.25), 0 0.5em 0.75em rgba(0,0,0,0.22);
 }
 
-.sign-in__content {
+.sign-up__content {
     display: flex;
     flex-direction: column;
 
     padding: var(--indent);
 }
 
-.sign-in__label {
+.sign-up__label {
     padding-bottom: 0.3em;
 
     color: var(--accentColor);
@@ -49,9 +49,9 @@
     font-weight: 900;
 }
 
-/* =============== SIGN-IN__INPUT =============== */
+/* =============== SIGN-UP__INPUT =============== */
 
-.sign-in__input {
+.sign-up__input {
     height: 2em;
     padding: var(--inputPadding);
 
@@ -64,38 +64,38 @@
     font-size: var(--inputFontSize);
 }
 
-.sign-in__input:focus {
+.sign-up__input:focus {
     border: none;
     border-bottom: var(--borderActive);
 }
 
-.sign-in__input:focus::-webkit-input-placeholder {
+.sign-up__input:focus::-webkit-input-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-.sign-in__input:focus::-moz-placeholder {
+.sign-up__input:focus::-moz-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-.sign-in__input:focus:-moz-placeholder {
+.sign-up__input:focus:-moz-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-.sign-in__input:focus:-ms-input-placeholder {
+.sign-up__input:focus:-ms-input-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-/* =============== SIGN-IN__BUTTON =============== */
+/* =============== SIGN-UP__BUTTON =============== */
 
-.sign-in__button {
+.sign-up__button {
     margin: var(--indent);
     padding: 0.5em 1em;
 
@@ -112,7 +112,7 @@
     font-size: 0.95em;
 }
 
-.sign-in__button:active {
+.sign-up__button:active {
     background-color: var(--buttonActive);
     -webkit-box-shadow: var(--buttonShadow);
     -moz-box-shadow: var(--buttonShadow);
@@ -121,7 +121,7 @@
 
 /* ===================================================== */
 
-.sign-in__error {
+.sign-up__error {
     margin-bottom: 0;
 
     text-align: center;

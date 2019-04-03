@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -7,6 +7,8 @@ import { removeAdvert } from '../../actions/advert-actions';
 import { Redirect } from "react-router-dom";
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { updateUserValidation, changeUserEmailValidation, changeUserPassValidation } from '../../utils/validation/validation';
+
+import './update-user.css';
 
 class UpdateUser extends Component {
 
@@ -42,7 +44,7 @@ class UpdateUser extends Component {
     }
   };
 
-  changeEmailSubmit = (e) => {
+  changeEmail = (e) => {
     e.preventDefault();
     const { id } = this.props.match.params;
     const { currentPassword, email } = this.state;
@@ -57,7 +59,7 @@ class UpdateUser extends Component {
     }
   };
 
-  changePasswordSubmit = (e) => {
+  changePassword = (e) => {
     e.preventDefault();
     const { curPassword, newPassword } = this.state;
     const obj = { curPassword, newPassword };
@@ -75,8 +77,7 @@ class UpdateUser extends Component {
     this.setState(this.state);
   };
 
-  deleteHandleSubmit = (e) => {
-    e.preventDefault();
+  deleteAccount = () => {
     const { advertsId } = this.props.user;
     const { id } = this.props.match.params;
     for (let i = 0; i < advertsId.length; i++) {
@@ -89,79 +90,125 @@ class UpdateUser extends Component {
 
   render() {
     const { user, auth } = this.props;
+    const content = [
+      {head: 'Username', id: 'username', placeholder: 'username', defaultValue: user.username},
+      {head: 'First name', id: 'firstName', placeholder: 'first name', defaultValue: user.firstName},
+      {head: 'Last name', id: 'lastName', placeholder: 'last name', defaultValue: user.lastName},
+      {head: 'Phone', id: 'phone', placeholder: 'phone', defaultValue: user.phone}
+    ];
     if (!auth.uid) {
       return <Redirect to='/' />
     }
     return (
-      <div className="update-div">
+      <Fragment>
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to={`/users/${auth.uid}`}
+        >
+          {user.username}
+        </BreadcrumbsItem>
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to={`/users/${auth.uid}/update`}
+        >
+          Update
+        </BreadcrumbsItem>
+        <div className="update-user__div">
+          <form onSubmit={this.handleSubmit}>
+            {content.map((item) => (
+              <div className="update-user__data">
+                <label
+                  className="update-user__label"
+                  htmlFor={item.id}
+                >
+                  {item.head}
+                </label>
+                <input
+                  className="update-user__input"
+                  type="text"
+                  id={item.id}
+                  placeholder={item.placeholder}
+                  defaultValue={item.defaultValue}
+                  onChange={this.handleChange}/>
+              </div>
+            ))}
+            <button className="update-user__button">ACCEPT</button>
+          </form>
 
-        <BreadcrumbsItem to={`/users/${auth.uid}`}>{user.username}</BreadcrumbsItem>
-        <BreadcrumbsItem to={`/users/${auth.uid}/update`}>Update</BreadcrumbsItem>
+          <form onSubmit={this.changeEmail}>
+            <h4 className="update-user__h4">CHANGE EMAIL</h4>
+            <div className="update-user__data">
+              <label
+                className="update-user__label"
+                htmlFor="currentPassword"
+              >
+                Confirm the password
+              </label>
+              <input
+                className="update-user__input"
+                type="password"
+                id="currentPassword"
+                placeholder="Enter current password ..."
+                onChange={this.handleChange} />
+            </div>
+            <div className="update-user__data">
+              <label
+                className="update-user__label"
+                htmlFor="email"
+              >
+                New email
+              </label>
+              <input
+                className="update-user__input"
+                type="email"
+                id="email"
+                placeholder="Enter new email ..."
+                onChange={this.handleChange} />
+            </div>
+            <button className="update-user__button">UPDATE EMAIL</button>
+          </form>
 
-        <form onSubmit={this.handleSubmit}>
-          <table>
-            <tbody>
-            <tr>
-              <td>First Name</td>
-              <td>
-                <input type="text" id="firstName" defaultValue={user.firstName} onChange={this.handleChange} />
-              </td>
-            </tr>
-            <tr>
-              <td>Last Name</td>
-              <td>
-                <input id="lastName" defaultValue={user.lastName} onChange={this.handleChange} />
-              </td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>
-                <input type="text" id="phone" defaultValue={user.phone} onChange={this.handleChange} />
-              </td>
-            </tr>
-            <tr>
-              <td>Username</td>
-              <td>
-                <input type="text" id="username" defaultValue={user.username} onChange={this.handleChange} />
-              </td>
-            </tr>
-            </tbody>
-          </table>
-          <button>ACCEPT</button>
-        </form>
+          <form onSubmit={this.changePassword}>
+            <h4 className="update-user__h4">CHANGE PASSWORD</h4>
+            <div className="update-user__data">
+              <label
+                className="update-user__label"
+                htmlFor="curPassword"
+              >
+                Confirm the password
+              </label>
+              <input
+                className="update-user__input"
+                type="password"
+                id="curPassword"
+                placeholder="Enter password ..."
+                onChange={this.handleChange} />
+            </div>
+            <div className="update-user__data">
+              <label
+                className="update-user__label"
+                htmlFor="newPassword"
+              >
+                New password
+              </label>
+              <input
+                className="update-user__input"
+                type="password"
+                id="newPassword"
+                placeholder="Enter new password ..."
+                onChange={this.handleChange} />
+            </div>
+            <button className="update-user__button">Change password</button>
+          </form>
 
-        <form onSubmit={this.changeEmailSubmit}>
-          <input
-            type="password"
-            id="currentPassword"
-            placeholder="Enter password"
-            onChange={this.handleChange} />
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter new email"
-            onChange={this.handleChange} />
-          <button>UPDATE EMAIL</button>
-        </form>
-
-        <form onSubmit={this.changePasswordSubmit}>
-          <input
-            type="password"
-            id="curPassword"
-            placeholder="Enter password"
-            onChange={this.handleChange} />
-          <input
-            type="password"
-            id="newPassword"
-            placeholder="Enter new password"
-            onChange={this.handleChange} />
-          <button>UPDATE PASSWORD</button>
-        </form>
-
-        <form onSubmit={this.deleteHandleSubmit}>
-          <button>DELETE USER</button>
-        </form>
-      </div>
+          <button
+            className="update-user__button-warning"
+            onSubmit={this.deleteAccount}
+          >
+            DELETE ACCOUNT
+          </button>
+        </div>
+      </Fragment>
     );
   }
 }

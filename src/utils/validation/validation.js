@@ -6,8 +6,7 @@ export const advertValidation = (state) => {
       .error(new Error('Please Enter you title')),
     description: Joi.string().regex(/^[a-zA-Z0-9-.\s]+$/).required()
       .error(new Error('Please Enter you description')),
-    category: Joi.string().regex(/^([a-zA-Z0-9-.]{5,20})+$/).required()
-      .error(new Error('Please Enter you category')),
+    category: Joi.string(),
     price: Joi.string().regex(/^\d*\.?\d+$/).required()
       .error(new Error('Please Enter you price')),
   });

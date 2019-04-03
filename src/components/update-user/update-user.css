@@ -3,18 +3,13 @@
     --accentColor: #2856B6;
     --placeholderColor: silver;
     --errorColor: #FF4040;
-    --buttonActive: #e5e5e5;
-
-    --inputFontSize: 1em;
-    --inputPadding: 0.25em;
 
     --indent: 0.5em;
-
-    --outline: none;
 
     --fontFamily: Poppins, serif;
 
     --border: 2px solid var(--borderColor);
+    --borderRadius: 0.3em;
     --borderActive: 2px solid var(--accentColor);
 
     --placeholderOpacity: 0;
@@ -23,7 +18,7 @@
     --buttonShadow: inset 0 0 0.25em #c1c1c1;
 }
 
-.sign-in__form {
+.update-user__div {
     width: 50%;
     padding: 1.5em 2em;
 
@@ -32,14 +27,14 @@
     box-shadow: 0 0.8em 2em rgba(0,0,0,0.25), 0 0.5em 0.75em rgba(0,0,0,0.22);
 }
 
-.sign-in__content {
+.update-user__data {
     display: flex;
     flex-direction: column;
 
     padding: var(--indent);
 }
 
-.sign-in__label {
+.update-user__label {
     padding-bottom: 0.3em;
 
     color: var(--accentColor);
@@ -49,9 +44,9 @@
     font-weight: 900;
 }
 
-/* =============== SIGN-IN__INPUT =============== */
+/* =============== UPDATE-USER__INPUT =============== */
 
-.sign-in__input {
+.update-user__input {
     height: 2em;
     padding: var(--inputPadding);
 
@@ -64,38 +59,44 @@
     font-size: var(--inputFontSize);
 }
 
-.sign-in__input:focus {
+.update-user__input:focus {
     border: none;
     border-bottom: var(--borderActive);
 }
 
-.sign-in__input:focus::-webkit-input-placeholder {
+.update-user__input:focus::-webkit-input-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-.sign-in__input:focus::-moz-placeholder {
+.update-user__input:focus::-moz-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-.sign-in__input:focus:-moz-placeholder {
+.update-user__input:focus:-moz-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-.sign-in__input:focus:-ms-input-placeholder {
+.update-user__input:focus:-ms-input-placeholder {
     transition: var(--placeholderTransition);
 
     opacity: var(--placeholderOpacity);
 }
 
-/* =============== SIGN-IN__BUTTON =============== */
+.update-user__h4 {
+    color: var(--accentColor);
+    text-align: center;
+    margin: 1em 0 2em 0;
+}
 
-.sign-in__button {
+/* =============== UPDATE-USER__BUTTON =============== */
+
+.update-user__button {
     margin: var(--indent);
     padding: 0.5em 1em;
 
@@ -109,25 +110,36 @@
     background-color: var(--accentColor);
 
     font-family: var(--fontFamily);
-    font-size: 0.95em;
+    font-size: 0.8em
 }
 
-.sign-in__button:active {
+.update-user__button:active {
     background-color: var(--buttonActive);
     -webkit-box-shadow: var(--buttonShadow);
     -moz-box-shadow: var(--buttonShadow);
     box-shadow: var(--buttonShadow);
 }
 
-/* ===================================================== */
+.update-user__button-warning {
+    margin: var(--indent);
+    padding: 0.5em 1em;
 
-.sign-in__error {
-    margin-bottom: 0;
+    cursor: pointer;
+    transition: 0.3s;
 
-    text-align: center;
-
-    color: var(--errorColor);
+    color: white;
+    border: none;
+    border-radius: var(--borderRadius);
+    outline: var(--outline);
+    background-color: var(--errorColor);
 
     font-family: var(--fontFamily);
-    font-size: 1em;
+    font-size: 0.8em
+}
+
+.update-user__button-warning:active {
+    background-color: var(--buttonActive);
+    -webkit-box-shadow: var(--buttonShadow);
+    -moz-box-shadow: var(--buttonShadow);
+    box-shadow: var(--buttonShadow);
 }

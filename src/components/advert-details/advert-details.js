@@ -32,7 +32,14 @@ class AdvertDetails extends Component {
     const { id } = this.props.match.params;
     return (
       <div className="advert-details-div" key={id}>
-        <BreadcrumbsItem to={`/advert/${id}`}>{advert.title}</BreadcrumbsItem>
+
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to={`/advert/${id}`}
+        >
+          {advert.title}
+        </BreadcrumbsItem>
+
         <h2>{advert.title}</h2>
         <img src="../public/img/no_image.jpg" alt="no photo"/>
         <table>

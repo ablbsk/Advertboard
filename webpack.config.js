@@ -23,6 +23,10 @@ module.exports = {
           'css-loader',
         ],
       },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url?limit=25000',
+      },
     ],
   },
   plugins: [

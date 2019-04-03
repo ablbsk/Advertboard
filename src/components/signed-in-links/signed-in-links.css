@@ -1,14 +1,17 @@
-ul {
-    display: inline;
+.signed-in-links__ul {
+	display: inline;
 }
 
-ul > li {
-    display: inline;
-    padding: 1em;
+.signed-in-links__ul > li {
+	display: inline;
+
+	height: 2em;
+	padding: 1em;
 }
 
-li > a {
-    color: whitesmoke;
+.signed-in-links__img {
+	display: inline;
 
-    text-decoration: none;
+	width: 1.5em;
+	padding: 0;
 }

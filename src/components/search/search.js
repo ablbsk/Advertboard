@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchAdverts } from '../../actions/filter-action';
 
+import './search.css';
+
 class Search extends Component {
 
   handleChange = (e) => {
@@ -12,14 +14,22 @@ class Search extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.searchAdverts(this.state.search);
+    const {search} = this.state;
+    this.props.searchAdverts(search);
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" id="search" onChange={this.handleChange} />
-        <button>Search</button>
+      <form
+        className="search__form"
+        onSubmit={this.handleSubmit}
+      >
+        <input
+          className="search__input"
+          type="text"
+          id="search"
+          onChange={this.handleChange} />
+        <button className="search__button">Search</button>
       </form>
     );
   };

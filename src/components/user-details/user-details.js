@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
 import UserAdvertItem from '../user-advert-item';
+
+import './user-details.css';
 
 class UserDetails extends Component {
 
@@ -23,45 +25,52 @@ class UserDetails extends Component {
   render() {
     const { user, auth } = this.props;
     const { id } = this.props.match.params;
-
+    const data = [
+      { head: 'Email', paragraph: user.email },
+      { head: 'First name', paragraph: user.firstName },
+      { head: 'Last name', paragraph: user.lastName },
+      { head: 'Phone', paragraph: user.phone }
+    ];
     const link = (auth.uid && auth.uid === id) ? (
-        <div>
-          <NavLink to={`/users/${id}/update`}>Update User</NavLink>
-        </div>
-      ) : null;
+      <NavLink to={`/users/${id}/update`}>Update</NavLink>
+    ) : null;
+
     return (
-      <div className="advert-details-div">
-
-        <BreadcrumbsItem to={`/users/${id}`}>{user.username}</BreadcrumbsItem>
-
-        <h2>{user.username}</h2>
-        <table>
-          <tbody>
-          <tr>
-            <td>Email</td>
-            <td>{user.email}</td>
-          </tr>
-          <tr>
-            <td>First Name</td>
-            <td>{user.firstName}</td>
-          </tr>
-          <tr>
-            <td>Last Name</td>
-            <td>{user.lastName}</td>
-          </tr>
-          <tr>
-            <td>Phone</td>
-            <td>{user.phone}</td>
-          </tr>
-          </tbody>
-        </table>
-        {link}
-        <div>
-          { user.advertsId && user.advertsId.map((id) => (
-            <UserAdvertItem id={id} key={id} properties={this.getProperties(id)} />
+      <Fragment>
+        <BreadcrumbsItem
+          className="breadcrumbs-item"
+          to={`/users/${id}`}
+        >
+          {user.username}
+        </BreadcrumbsItem>
+        <div className="user-details__div">
+          <h2 className="user-details__head">{user.username}</h2>
+          {data.map((item) => (
+            <div className="user-details__content" key={item.head}>
+              <h5 className="user-details__h5">{item.head}</h5>
+              <p className="user-details__p">{item.paragraph}</p>
+            </div>
           ))}
+          {link}
+          <h4 className="user-details__head">Your adverts</h4>
+          <div>
+            <div className="user-details__advert-head">
+              <span>Title</span>
+              <ul className="user-details__advert-head-ul">
+                <li>Views</li>
+                <li>Created</li>
+              </ul>
+            </div>
+            { user.advertsId && user.advertsId.map((advertId) => (
+              <UserAdvertItem
+                id={advertId}
+                key={advertId}
+                properties={this.getProperties(advertId)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </Fragment>
     );
   };
 }

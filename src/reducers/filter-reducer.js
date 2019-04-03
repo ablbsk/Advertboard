@@ -1,5 +1,5 @@
 const initState = {
-  search: ''
+  search: '',
 };
 
 const filterReducer = (state = initState, action) => {
@@ -8,7 +8,7 @@ const filterReducer = (state = initState, action) => {
       console.log('search');
       return {
         ...state,
-        search: action.payload
+        search: action.search,
       };
 
     default:

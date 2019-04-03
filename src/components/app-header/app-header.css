@@ -1,24 +1,27 @@
-header {
-    height: 3em;
-
-    background-color: #2856B6;
+:root {
+    --accentColor: #2856B6;
 }
 
-nav {
-    display: flex;
-    align-items: center;
+.app-header {
+	height: 3em;
 
-    padding: 0 3em;
-    height: 100%;
+	background-color: var(--accentColor);
 }
 
-.logo {
-    flex-grow: 2;
+.app-header__nav {
+	display: flex;
+	align-items: center;
 
-    font-size: 2em;
-    font-family: Satisfy, cursive;
+	height: 100%;
+	padding: 0 3em;
 }
 
-.logo > a {
-    color: white;
+.app-header__logo {
+	flex-grow: 2;
+
+	color: white;
+
+	font-family: Satisfy, cursive;
+	font-size: 2em;
+	font-weight: 900;
 }

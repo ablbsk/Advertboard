@@ -1,14 +1,18 @@
-ul {
-    display: inline;
+.signed-out-links__ul {
+	display: inline;
 }
 
-ul > li {
-    display: inline;
-    padding: 1em;
+.signed-out-links__ul > li {
+	display: inline;
+
+	padding: 1em;
 }
 
-li > a {
-    color: whitesmoke;
+.signed-out-links__a {
+	text-decoration: none;
 
-    text-decoration: none;
+	color: whitesmoke;
+
+	font-family: Poppins, serif;
+	font-size: 1em;
 }
