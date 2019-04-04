@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
-import { removeAdvert, viewsAdvert } from "../../actions/advert-actions";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { removeAdvert, viewsAdvert } from '../../actions/advert-actions';
 
 import './advert-details.css';
 
@@ -16,10 +16,46 @@ class AdvertDetails extends Component {
     this.props.history.push('/');
   };
 
+  viewOwnerOptions(id) {
+    return (
+      <div className="advert-details__options">
+        <NavLink
+          className="advert-details__button"
+          to={`/advert/${id}/update-advert`}
+        >
+          UPDATE ADVERT
+        </NavLink>
+        <form
+          className="advert-details__form"
+          onSubmit={this.handleSubmitRemove}
+        >
+          <button className="advert-details__button-warning">
+            REMOVE ADVERT
+          </button>
+        </form>
+      </div>
+    )
+  }
+
+  static viewLastUpdate(modified) {
+    return (
+      <div>
+        <h5 className="advert-details__h5">Last update</h5>
+        <p>
+          {moment(modified
+            .toDate())
+            .subtract(10, 'days')
+            .calendar()}
+        </p>
+      </div>
+    )
+  }
+
   componentDidMount() {
+    const { id } = this.props.match.params;
     let { views } = this.props.advert;
     views++;
-    this.props.viewsAdvert(this.state, this.props.match.params.id, views)
+    this.props.viewsAdvert(this.state, id, views)
   }
 
   componentDidCatch(error, info) {
@@ -27,56 +63,82 @@ class AdvertDetails extends Component {
   }
 
   render() {
-    console.log(this.props);
-    const { advert } = this.props;
+    const { advert, auth } = this.props;
+    const { authorId } = advert;
     const { id } = this.props.match.params;
-    return (
-      <div className="advert-details-div" key={id}>
 
+    const link = (auth.uid && auth.uid === authorId) ? (
+      this.viewOwnerOptions(id)
+    ) : null;
+
+    const update = (advert.modified ?
+      AdvertDetails.viewLastUpdate(advert.modified) : null);
+
+    return (
+      <Fragment>
         <BreadcrumbsItem
           className="breadcrumbs-item"
           to={`/advert/${id}`}
         >
           {advert.title}
         </BreadcrumbsItem>
-
-        <h2>{advert.title}</h2>
-        <img src="../public/img/no_image.jpg" alt="no photo"/>
-        <table>
-          <tbody>
-            <tr>
-              <td>Описание</td>
-              <td>{advert.description}</td>
-            </tr>
-            <tr>
-              <td>Стоимость</td>
-              <td>{advert.price}</td>
-            </tr>
-            <tr>
-              <td>Добавил</td>
-              <td>{advert.username}</td>
-            </tr>
-            <tr>
-              <td>Категория</td>
-              <td>{advert.category}</td>
-            </tr>
-            <tr>
-              <td>Просмотрели</td>
-              <td>{advert.views}</td>
-            </tr>
-            <tr>
-              <td>Добавлено</td>
-              <td>{moment(advert.created.toDate()).subtract(10, 'days').calendar()}</td>
-            </tr>
-          </tbody>
-        </table>
-        <form onSubmit={this.handleSubmitRemove}>
-          <button>REMOVE ADVERT</button>
-        </form>
-        <div>
-          <NavLink to={`/advert/${id}/update-advert`}>Update Advert</NavLink>
+        <div className="advert-details__div">
+          <h2 className="advert-details__head">{advert.title}</h2>
+          <img src="../public/img/no_image.jpg" alt="no photo"/>
+          <div className="advert-details__content">
+            <div className="advert-details__description">
+              <div>
+                <h5 className="advert-details__h5">Description</h5>
+                <p>{advert.description}</p>
+              </div>
+              <p className="advert-details__price">${advert.price}</p>
+            </div>
+            <div className="advert-details__contacts">
+              <h5 className="advert-details__h5">Contacts</h5>
+              <div className="advert-details__contacts-div">
+                <p className="advert-details__contacts-p">
+                  <img src="../../../public/img/owner.png" alt="Owner" />
+                  <NavLink
+                    className="advert-details__owner"
+                    to={`/users/${advert.authorId}`}
+                  >
+                    {advert.username}
+                  </NavLink>
+                </p>
+                <p className="advert-details__contacts-p">
+                  <img src="../../../public/img/email.png" alt="Email" />
+                  <span>{advert.email}</span>
+                </p>
+                <p className="advert-details__contacts-p">
+                  <img src="../../../public/img/phone.png" alt="Phone" />
+                  <span>{advert.phone}</span>
+                </p>
+              </div>
+            </div>
+            <div className="advert-details__additionally">
+              <div>
+                <h5 className="advert-details__h5">Category</h5>
+                <p>{advert.category}</p>
+              </div>
+              <div>
+                <h5 className="advert-details__h5">Views</h5>
+                <p>{advert.views}</p>
+              </div>
+              <div>
+                <h5 className="advert-details__h5">Created at</h5>
+                <p>
+                  {moment(advert.created
+                    .toDate())
+                    .subtract(10, 'days')
+                    .calendar()}
+                </p>
+              </div>
+              {update}
+            </div>
+            {link}
+          </div>
         </div>
-      </div>
+      </Fragment>
     );
   };
 }
@@ -88,7 +150,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     advert,
-    removeStatus: state.advert.removeStatus
+    removeStatus: state.advert.removeStatus,
+    auth: state.firebase.auth
   };
 };
 

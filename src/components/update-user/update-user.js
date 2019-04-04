@@ -77,7 +77,8 @@ class UpdateUser extends Component {
     this.setState(this.state);
   };
 
-  deleteAccount = () => {
+  deleteAccount = (e) => {
+    e.preventDefault();
     const { advertsId } = this.props.user;
     const { id } = this.props.match.params;
     for (let i = 0; i < advertsId.length; i++) {
@@ -86,6 +87,7 @@ class UpdateUser extends Component {
     }
     this.props.deleteUserDB(id);
     this.props.deleteUser();
+    this.props.history.push('/');
   };
 
   render() {
@@ -116,7 +118,7 @@ class UpdateUser extends Component {
         <div className="update-user__div">
           <form onSubmit={this.handleSubmit}>
             {content.map((item) => (
-              <div className="update-user__data">
+              <div className="update-user__data" key={item.id}>
                 <label
                   className="update-user__label"
                   htmlFor={item.id}
@@ -201,12 +203,11 @@ class UpdateUser extends Component {
             <button className="update-user__button">Change password</button>
           </form>
 
-          <button
-            className="update-user__button-warning"
-            onSubmit={this.deleteAccount}
-          >
-            DELETE ACCOUNT
-          </button>
+          <form onSubmit={this.deleteAccount}>
+            <button className="update-user__button-warning">
+              DELETE ACCOUNT
+            </button>
+          </form>
         </div>
       </Fragment>
     );

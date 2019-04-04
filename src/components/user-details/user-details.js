@@ -22,18 +22,50 @@ class UserDetails extends Component {
     }
   }
 
+  viewUserAdverts(adverts) {
+    return (
+      <div>
+        <h4 className="user-details__head">Users adverts</h4>
+        <div className="user-details__advert-head">
+          <span>Title</span>
+          <ul className="user-details__advert-head-ul">
+            <li>Views</li>
+            <li>Created</li>
+          </ul>
+        </div>
+        { adverts && adverts.map((advertId) => (
+          <UserAdvertItem
+            id={advertId}
+            key={advertId}
+            properties={this.getProperties(advertId)}
+          />
+        ))}
+      </div>
+    );
+  }
+
   render() {
     const { user, auth } = this.props;
     const { id } = this.props.match.params;
+    const { advertsId } = user;
     const data = [
       { head: 'Email', paragraph: user.email },
+      { head: 'Phone', paragraph: user.phone },
       { head: 'First name', paragraph: user.firstName },
-      { head: 'Last name', paragraph: user.lastName },
-      { head: 'Phone', paragraph: user.phone }
+      { head: 'Last name', paragraph: user.lastName }
     ];
+
     const link = (auth.uid && auth.uid === id) ? (
-      <NavLink to={`/users/${id}/update`}>Update</NavLink>
+      <NavLink
+        className="user-details__button"
+        to={`/users/${id}/update`}
+      >
+        Update
+      </NavLink>
     ) : null;
+
+    const advertList = (typeof(advertsId) === 'object') ?
+      this.viewUserAdverts(advertsId) : null;
 
     return (
       <Fragment>
@@ -52,23 +84,7 @@ class UserDetails extends Component {
             </div>
           ))}
           {link}
-          <h4 className="user-details__head">Your adverts</h4>
-          <div>
-            <div className="user-details__advert-head">
-              <span>Title</span>
-              <ul className="user-details__advert-head-ul">
-                <li>Views</li>
-                <li>Created</li>
-              </ul>
-            </div>
-            { user.advertsId && user.advertsId.map((advertId) => (
-              <UserAdvertItem
-                id={advertId}
-                key={advertId}
-                properties={this.getProperties(advertId)}
-              />
-            ))}
-          </div>
+          {advertList}
         </div>
       </Fragment>
     );

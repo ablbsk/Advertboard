@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from 'redux';
 import { updateAdvert } from '../../actions/advert-actions';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
-import './update-advert.css';
 import { advertValidation } from '../../utils/validation/validation';
+
+import './update-advert.css';
 
 class UpdateAdvert extends Component {
 
@@ -38,9 +39,9 @@ class UpdateAdvert extends Component {
   render() {
     const { advert } = this.props;
     const { id } = this.props.match.params;
+    const options = ['Transport', 'Equipment', 'Fashion', 'For kids', 'For home', 'Hobbies & sports', 'Work & study', 'Animals'];
     return (
-      <div className="update-div">
-
+      <Fragment>
         <BreadcrumbsItem
           className="breadcrumbs-item"
           to={`/advert/${id}`}
@@ -55,38 +56,77 @@ class UpdateAdvert extends Component {
           Update
         </BreadcrumbsItem>
 
-       <form onSubmit={this.handleSubmit}>
-          <table>
-            <tbody>
-            <tr>
-              <td>Заголовок</td>
-              <td>
-                <input type="text" id="title" defaultValue={advert.title} onChange={this.handleChange} />
-              </td>
-            </tr>
-            <tr>
-              <td>Описание</td>
-              <td>
-                <textarea id="description" defaultValue={advert.description} onChange={this.handleChange} />
-              </td>
-            </tr>
-            <tr>
-              <td>Стоимость</td>
-              <td>
-                <input type="text" id="price" defaultValue={advert.price} onChange={this.handleChange} />
-              </td>
-            </tr>
-            <tr>
-              <td>Категория</td>
-              <td>
-                <input type="text" id="category" defaultValue={advert.category} onChange={this.handleChange} />
-              </td>
-            </tr>
-            </tbody>
-          </table>
-         <button>ACCEPT</button>
+       <form
+         className="update-user__form"
+         onSubmit={this.handleSubmit}>
+
+         <div className="update-user__content">
+           <label
+             className="update-user__label"
+             htmlFor="title"
+           >
+             Title
+           </label>
+           <input
+             className="update-user__input"
+             id="title"
+             type="text"
+             defaultValue={advert.title}
+             placeholder="Enter title ..."
+             onChange={this.handleChange} />
+         </div>
+         <div className="update-user__content">
+           <label
+             className="update-user__label"
+             htmlFor="description"
+           >
+             Description
+           </label>
+           <textarea
+             className="update-user__textarea"
+             id="description"
+             placeholder="Enter description ..."
+             defaultValue={advert.description}
+             onChange={this.handleChange}
+           />
+         </div>
+         <div className="update-user__content">
+           <label
+             className="update-user__label"
+             htmlFor="category"
+           >
+             Category
+           </label>
+           <select
+             className="update-user__select"
+             id="category"
+             defaultValue={advert.category}
+             onChange={this.handleChange}
+           >
+             { options.map((option) => (
+               <option value={option} key={option}>{option}</option>
+             ))}
+           </select>
+         </div>
+         <div className="update-user__content">
+           <label
+             className="update-user__label"
+             htmlFor="price"
+           >
+             Price
+           </label>
+           <input
+             className="update-user__input"
+             id="price"
+             type="text"
+             placeholder="Enter price ..."
+             defaultValue={advert.price}
+             onChange={this.handleChange} />
+         </div>
+
+         <button className="update-user__button">CHANGE ADVERT</button>
         </form>
-      </div>
+      </Fragment>
     );
   }
 }

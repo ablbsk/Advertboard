@@ -1,40 +1,154 @@
-.advert-details-div {
-    transform: translate(50%, 5%);
+:root {
+    --accentColor: #2856B6;
 
+    --space: 2rem;
+
+    --fontFamily: Poppins, serif;
+}
+
+.advert-details__div {
     width: 50%;
+    padding: 1.5em 0;
+    font-family: var(--fontFamily);
 
+    border-radius: 0.5em;
     background-color: white;
-
-    border-radius: 0.6em;
-    box-shadow: 0 0.5em 1em -0.4em rgba(0, 0, 0, .3);
+    box-shadow: 0 0.8em 2em rgba(0,0,0,0.25), 0 0.5em 0.75em rgba(0,0,0,0.22);
 }
 
-.advert-details-div > img {
-    width: 100%;
+.advert-details__content {
+    margin: 0 var(--space);
 }
 
-.advert-details-div > h2 {
-    margin: 0;
-    padding: 1em;
-
+.advert-details__head {
     text-align: center;
+    color: var(--accentColor);
+    margin: 1em 0 var(--space) 0;
 }
 
-.advert-details-div > div {
-    padding: 0 1.5em
+.advert-details__div > img {
+    width: 100%;
+    margin-bottom: var(--space);
 }
 
-
-
-.advert-price {
-    text-align: right;
-
-    color: #2856B6;
-
-    font-weight: 600;
-    font-size: 1.6em;
+.advert-details__h5 {
+    color: var(--accentColor);
+    margin: 0;
 }
 
-table {
-    margin: 0 auto;
+.advert-details__description {
+    display: flex;
+    align-items: flex-end;
+    margin: var(--space) 0;
+}
+
+.advert-details__description > div {
+    flex-grow: 2;
+}
+
+.advert-details__price {
+    color: var(--accentColor);
+    font-size: 1.5em;
+    font-weight: 900;
+    margin-top: 0;
+    padding-left: var(--space);
+}
+
+.advert-details__contacts {
+    margin: var(--space) 0;
+}
+
+.advert-details__contacts-div {
+    display: flex;
+}
+
+.advert-details__contacts-p {
+    padding-right: 2em;
+    display: flex;
+    align-items: center;
+}
+
+.advert-details__contacts-p > img {
+    height: 1.35em;
+    padding-right: 0.4em;
+}
+
+.advert-details__owner {
+    text-decoration: none;
+    color: black;
+}
+
+.advert-details__owner:hover {
+    color: var(--accentColor);
+    transition: 0.3s;
+}
+
+.advert-details__additionally {
+    display: flex;
+    margin: var(--space) 0;
+}
+
+.advert-details__additionally > div {
+    padding-right: 2em;
+}
+
+/* =============== ADVERT-DETAILS__OPTIONS =============== */
+
+.advert-details__options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.advert-details__form {
+    display: inline;
+    padding: 0;
+}
+
+/* =============== ADVERT-DETAILS__BUTTON =============== */
+
+.advert-details__button {
+    padding: 0.5em 1em;
+
+    cursor: pointer;
+    transition: 0.3s;
+
+    color: white;
+    border: none;
+    border-radius: var(--borderRadius);
+    outline: var(--outline);
+    background-color: var(--accentColor);
+
+    font-family: var(--fontFamily);
+    font-size: 0.8em;
+    text-decoration: none;
+}
+
+.advert-details__button:active {
+    background-color: var(--buttonActive);
+    -webkit-box-shadow: var(--buttonShadow);
+    -moz-box-shadow: var(--buttonShadow);
+    box-shadow: var(--buttonShadow);
+}
+
+.advert-details__button-warning {
+    padding: 0.5em 1em;
+
+    cursor: pointer;
+    transition: 0.3s;
+
+    color: white;
+    border: none;
+    border-radius: var(--borderRadius);
+    outline: var(--outline);
+    background-color: var(--errorColor);
+
+    font-family: var(--fontFamily);
+    font-size: 0.8em
+}
+
+.advert-details__button-warning:active {
+    background-color: var(--buttonActive);
+    -webkit-box-shadow: var(--buttonShadow);
+    -moz-box-shadow: var(--buttonShadow);
+    box-shadow: var(--buttonShadow);
 }

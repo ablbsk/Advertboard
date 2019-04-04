@@ -1,10 +1,183 @@
-.update-div {
-    transform: translate(50%, 50%);
+:root {
+    --borderColor: #ABABAB;
+    --accentColor: #2856B6;
+    --placeholderColor: silver;
+    --errorColor: #FF4040;
+    --buttonActive: #e5e5e5;
 
-    width: 50%;
+    --inputFontSize: 1em;
+    --inputPadding: 0.25em;
 
-    background-color: white;
+    --indent: 0.5em;
 
-    border-radius: 0.6em;
-    box-shadow: 0 0.5em 1em -0.4em rgba(0, 0, 0, .3);
+    --outline: none;
+
+    --fontFamily: Poppins, serif;
+
+    --border: 2px solid var(--borderColor);
+    --borderRadius: 0.3em;
+    --borderActive: 2px solid var(--accentColor);
+
+    --placeholderOpacity: 0;
+    --placeholderTransition: opacity 0.75s ease;
+
+    --buttonShadow: inset 0 0 0.25em #c1c1c1;
 }
+
+.update-user__form {
+    width: 50%;
+    padding: 1.5em 2em;
+
+    border-radius: 0.5em;
+    background-color: white;
+    box-shadow: 0 0.8em 2em rgba(0,0,0,0.25), 0 0.5em 0.75em rgba(0,0,0,0.22);
+}
+
+.update-user__content {
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--indent);
+}
+
+.update-user__label {
+    padding-bottom: 0.3em;
+
+    color: var(--accentColor);
+
+    font-family: var(--fontFamily);
+    font-size: 0.85em;
+    font-weight: 900;
+}
+
+/* =============== CREATE-ADVERT__INPUT =============== */
+
+.update-user__input {
+    height: 2em;
+    padding: var(--inputPadding);
+
+    border: none;
+    border-bottom: var(--border);
+    outline: var(--outline);
+    background-color: transparent;
+
+    font-family: var(--fontFamily);
+    font-size: var(--inputFontSize);
+}
+
+.update-user__input:focus {
+    border: none;
+    border-bottom: var(--borderActive);
+}
+
+.update-user__input:focus::-webkit-input-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+.update-user__input:focus::-moz-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+.update-user__input:focus:-moz-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+.update-user__input:focus:-ms-input-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+/* =============== CREATE-ADVERT__TEXTAREA =============== */
+
+.update-user__textarea {
+    height: 10em;
+    padding: var(--inputPadding);
+
+    resize: none;
+
+    border: var(--border);
+    border-radius: var(--borderRadius);
+    outline: var(--outline);
+    background-color: transparent;
+
+    font-family: var(--fontFamily);
+    font-size: var(--inputFontSize);
+}
+
+.update-user__textarea:focus {
+    border: var(--borderActive);
+}
+
+.update-user__textarea:focus::-webkit-input-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+.update-user__textarea:focus::-moz-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+.update-user__textarea:focus::-moz-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+.update-user__textarea:focus::-ms-input-placeholder {
+    transition: var(--placeholderTransition);
+
+    opacity: var(--placeholderOpacity);
+}
+
+/* =============== CREATE-ADVERT__SELECT =============== */
+
+.update-user__select {
+    border: var(--border);
+    border-radius: var(--borderRadius);
+    outline: var(--outline);
+
+    font-family: var(--fontFamily);
+    font-size: var(--inputFontSize);
+}
+
+.update-user__select:focus {
+    border: var(--borderActive);
+}
+
+/* =============== CREATE-ADVERT__BUTTON =============== */
+
+.update-user__button {
+    margin: var(--indent);
+    padding: 0.5em 1em;
+
+    cursor: pointer;
+    transition: 0.3s;
+
+    color: white;
+    border: none;
+    border-radius: var(--borderRadius);
+    outline: var(--outline);
+    background-color: var(--accentColor);
+
+    font-family: var(--fontFamily);
+    font-size: 0.95em;
+}
+
+.update-user__button:active {
+    background-color: var(--buttonActive);
+    -webkit-box-shadow: var(--buttonShadow);
+    -moz-box-shadow: var(--buttonShadow);
+    box-shadow: var(--buttonShadow);
+}
+
+/* ===================================================== */

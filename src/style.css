@@ -1,12 +1,26 @@
+:root {
+	--accentColor: #2856B6;
+}
+
+html {
+	height: 100%;
+}
+
 body {
 	margin: 0;
 	padding: 0;
-
+	height: 100%;
 	background-color: #f2f2f2;
 }
 
+#root {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+}
+
 .breadcrumbs__div {
-	margin: 2em 0 6vh 0;
+	margin: 2em 0;
 
 	text-align: center;
 }
@@ -27,7 +41,16 @@ body {
 }
 
 main {
+	flex: 1 0 auto;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+}
+
+footer {
+	flex: 0 0 auto;
+	height: 1em;
+	background-color: var(--accentColor);
+	margin-top: 4em;
 }

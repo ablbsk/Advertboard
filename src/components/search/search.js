@@ -28,8 +28,12 @@ class Search extends Component {
           className="search__input"
           type="text"
           id="search"
-          onChange={this.handleChange} />
-        <button className="search__button">Search</button>
+          placeholder="Enter advert title ..."
+          onChange={this.handleChange}
+        />
+        <button className="search__button">
+          <img src="../../../public/img/search.png" alt="search"/>
+        </button>
       </form>
     );
   };

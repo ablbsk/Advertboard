@@ -7,13 +7,15 @@ import CreateAdvert from '../create-advert';
 import SignIn from '../sign-in';
 import SignUp from '../sign-up';
 
-import AdvertBoard from '../advert-board';
+import AdvertList from '../advert-list';
 import AdvertDetails from '../advert-details';
 import UpdateAdvert from '../update-advert';
 
 import UsersList from '../users-list';
 import UserDetails from '../user-details';
 import UpdateUser from '../update-user';
+
+import Search from '../search';
 
 const Advert = () => {
   return (
@@ -52,7 +54,7 @@ const Main = () => {
         Home
       </BreadcrumbsItem>
       <Switch>
-        <Route exact path="/" component={AdvertBoard} />
+        <Route exact path="/" component={AdvertList} />
         <Route path="/advert/:id" component={Advert} />
         <Route path="/users" component={Users} />
         <Route path="/create-advert" component={CreateAdvert} />
@@ -64,6 +66,8 @@ const Main = () => {
 };
 
 const App = () => {
+  const location = window.location.pathname;
+  const search = (location === '/') ? <Search /> : null;
   return (
     <Fragment>
       <AppHeader />
@@ -77,7 +81,9 @@ const App = () => {
           }}
         />
       </div>
+      {search}
       <Main />
+      <footer />
     </Fragment>
   );
 };

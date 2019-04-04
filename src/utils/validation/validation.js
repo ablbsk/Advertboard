@@ -32,6 +32,7 @@ export const signUpValidation = (state) => {
       .error(new Error('Please Enter you last name')),
     phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('Please Enter you phone')),
+    validError: Joi.insensitive()
   });
 
   const result = Joi.validate(state, schema);

@@ -1,8 +1,7 @@
-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.advert-list__section {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 
-    width: 75%;
-    margin: 1em auto;
+	width: 90%;
 }
