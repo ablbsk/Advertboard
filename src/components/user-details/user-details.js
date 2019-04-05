@@ -22,7 +22,7 @@ class UserDetails extends Component {
     }
   }
 
-  viewUserAdverts(adverts) {
+  viewUserAdverts(advertsList) {
     return (
       <div>
         <h4 className="user-details__head">Users adverts</h4>
@@ -33,11 +33,11 @@ class UserDetails extends Component {
             <li>Created</li>
           </ul>
         </div>
-        { adverts && adverts.map((advertId) => (
+        { advertsList && advertsList.map((id) => (
           <UserAdvertItem
-            id={advertId}
-            key={advertId}
-            properties={this.getProperties(advertId)}
+            id={id}
+            key={id}
+            properties={this.getProperties(id)}
           />
         ))}
       </div>
@@ -45,9 +45,10 @@ class UserDetails extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { user, auth } = this.props;
     const { id } = this.props.match.params;
-    const { advertsId } = user;
+    const { advertsList } = user;
     const data = [
       { head: 'Email', paragraph: user.email },
       { head: 'Phone', paragraph: user.phone },
@@ -63,9 +64,9 @@ class UserDetails extends Component {
         Update
       </NavLink>
     ) : null;
-
-    const advertList = (typeof(advertsId) === 'object') ?
-      this.viewUserAdverts(advertsId) : null;
+    console.log(typeof(advertsList));
+    const advertList = (typeof(advertsList) === 'object') ?
+      this.viewUserAdverts(advertsList) : null;
 
     return (
       <Fragment>

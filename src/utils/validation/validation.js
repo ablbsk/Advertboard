@@ -9,6 +9,7 @@ export const advertValidation = (state) => {
     category: Joi.string(),
     price: Joi.string().regex(/^\d*\.?\d+$/).required()
       .error(new Error('Please Enter you price')),
+    validError: Joi.string().insensitive()
   });
 
   const result = Joi.validate(state, schema);
@@ -32,7 +33,7 @@ export const signUpValidation = (state) => {
       .error(new Error('Please Enter you last name')),
     phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('Please Enter you phone')),
-    validError: Joi.insensitive()
+    validError: Joi.string().insensitive()
   });
 
   const result = Joi.validate(state, schema);
@@ -63,7 +64,7 @@ export const updateUserValidation = (state) => {
 
 export const changeUserEmailValidation = (state) => {
   const schema = Joi.object().keys({
-    currentPassword: Joi.string().min(6).required()
+    curPassUserEmail: Joi.string().required()
       .error(new Error('Please Enter you password')),
     email: Joi.string().email().min(3).max(30).required()
       .error(new Error('Please Enter you email'))

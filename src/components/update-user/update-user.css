@@ -94,6 +94,12 @@
     margin: 1em 0 2em 0;
 }
 
+.update-user__h4-delete {
+    color: var(--errorColor);
+    text-align: center;
+    margin: 1em 0 2em 0;
+}
+
 /* =============== UPDATE-USER__BUTTON =============== */
 
 .update-user__button {

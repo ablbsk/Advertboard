@@ -36,5 +36,6 @@ export default compose(
   connect(mapStateToProps),
   firestoreConnect([
     { collection: 'adverts', orderBy: ['created', 'desc'] },
+    { collection: 'users' }
   ])
 )(AdvertList);

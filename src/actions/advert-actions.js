@@ -22,7 +22,7 @@ export const createAdvert = (advert) => {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           firestore.collection('users').doc(`${authorId}`).update({
-            advertsId: firestore.FieldValue.arrayUnion(doc.id)
+            advertsList: firestore.FieldValue.arrayUnion(doc.id)
           });
         });
       });
@@ -33,15 +33,33 @@ export const removeAdvert = (id) => {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     const authorId = getState().firebase.auth.uid;
-    firestore.collection('adverts').doc(id).delete().then(() => {
-      dispatch({ type: 'REMOVE_ADVERT', id });
-    }).catch((err) => {
-      dispatch({ type: 'REMOVE_ADVERT_ERROR', err });
+    const usersRef = firestore.collection('users').doc(`${authorId}`);
+
+    firestore.collection('adverts').doc(id).delete()
+      .then(() => {
+        dispatch({ type: 'REMOVE_ADVERT', id });
+      })
+      .catch((err) => {
+        dispatch({ type: 'REMOVE_ADVERT_ERROR', err });
+      });
+
+    usersRef.update({
+      advertsList: firestore.FieldValue.arrayRemove(id)
     });
 
-    firestore.collection('users').doc(`${authorId}`).update({
-      advertsId: firestore.FieldValue.arrayRemove(id)
-    })
+    usersRef.get().then((doc) => {
+      const data = doc.data();
+      const { advertsList } = data;
+      console.log(advertsList.length);
+
+      if (advertsList.length === 0) {
+        firestore.collection('users')
+          .doc(`${authorId}`)
+          .update({
+            advertsList: firestore.FieldValue.delete()
+          })
+      }
+    });
   };
 };
 

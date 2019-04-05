@@ -1,6 +1,4 @@
-const initState = {
-  validError: null
-};
+const initState = {};
 
 const advertReducer = (state = initState, action) => {
   switch (action.type) {
