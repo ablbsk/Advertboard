@@ -6,10 +6,10 @@ export const advertValidation = (state) => {
       .error(new Error('Please Enter you title')),
     description: Joi.string().regex(/^[a-zA-Z0-9-.\s]+$/).required()
       .error(new Error('Please Enter you description')),
-    category: Joi.string(),
     price: Joi.string().regex(/^\d*\.?\d+$/).required()
       .error(new Error('Please Enter you price')),
-    validError: Joi.string().insensitive()
+    category: Joi.any().optional(),
+    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);
@@ -33,7 +33,7 @@ export const signUpValidation = (state) => {
       .error(new Error('Please Enter you last name')),
     phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('Please Enter you phone')),
-    validError: Joi.string().insensitive()
+    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);
@@ -53,6 +53,7 @@ export const updateUserValidation = (state) => {
       .error(new Error('Please Enter you last name')),
     phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('Please Enter you phone')),
+    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);
@@ -67,7 +68,8 @@ export const changeUserEmailValidation = (state) => {
     curPassUserEmail: Joi.string().required()
       .error(new Error('Please Enter you password')),
     email: Joi.string().email().min(3).max(30).required()
-      .error(new Error('Please Enter you email'))
+      .error(new Error('Please Enter you email')),
+    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);
@@ -77,12 +79,13 @@ export const changeUserEmailValidation = (state) => {
   return result.error.message;
 };
 
-export const changeUserPassValidation = (state) => {
+export const changePasswordValidation = (state) => {
   const schema = Joi.object().keys({
-    curPassword: Joi.string().min(6).required()
+    curPassUserPass: Joi.string().min(6).required()
       .error(new Error('Please Enter you password')),
     newPassword: Joi.string().min(6).required()
       .error(new Error('Please Enter you password')),
+    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);

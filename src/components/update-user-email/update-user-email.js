@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateUser, changeEmail } from '../../actions/user-actions';
+import { changeEmail } from '../../actions/user-actions';
 import { changeUserEmailValidation } from '../../utils/validation/validation';
 
 class UpdateUserEmail extends Component {
+
+  state = {
+    validError: null
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -14,19 +18,25 @@ class UpdateUserEmail extends Component {
 
   changeEmail = (e) => {
     e.preventDefault();
-    const { uid } = this.props.auth;
     const {curPassUserEmail, email} = this.state;
-    const result = changeUserEmailValidation(this.state);
-    if (result === 'good') {
-      this.props.changeEmail(curPassUserEmail, email);
+    const resultValid = changeUserEmailValidation(this.state);
+    if (resultValid) {
       delete this.state.curPassUserEmail;
-      this.props.updateUser(this.state, uid);
+      this.props.changeEmail(curPassUserEmail, email)
     } else {
-      console.log(result);
+      this.setValidError(resultValid);
     }
   };
 
+  setValidError(result) {
+    this.setState( {
+      validError: result
+    });
+  }
+
   render() {
+    const { changeEmailError } = this.props;
+    const { validError } = this.state;
     return (
       <form onSubmit={this.changeEmail}>
         <h4 className="update-user__h4">CHANGE EMAIL</h4>
@@ -61,14 +71,22 @@ class UpdateUserEmail extends Component {
           />
         </div>
         <button className="update-user__button">UPDATE EMAIL</button>
+        {changeEmailError ?
+          <p className="sign-up__error">{changeEmailError}</p> : null}
+        {validError ? <p className="sign-up__error">{validError}</p> : null}
       </form>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    changeEmailError: state.user.changeEmailError
+  }
+};
+
 const mapDispatchToProps = dispatch => ({
-  updateUser: (user, id) => dispatch(updateUser(user, id)),
   changeEmail: (curPassword, newEmail) => dispatch(changeEmail(curPassword, newEmail)),
 });
 
-export default connect(null, mapDispatchToProps)(UpdateUserEmail);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserEmail);

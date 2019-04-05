@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from 'redux';
-import { updateAdvert } from '../../actions/advert-actions';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
+import { updateAdvert } from '../../actions/advert-actions';
 import { advertValidation } from '../../utils/validation/validation';
 
 import './update-advert.css';
@@ -16,6 +14,7 @@ class UpdateAdvert extends Component {
     description: this.props.advert.description,
     category: this.props.advert.category,
     price: this.props.advert.price,
+    validError: null
   };
 
   handleChange = (e) => {
@@ -30,15 +29,22 @@ class UpdateAdvert extends Component {
     const result = advertValidation(this.state);
     if (result === 'good') {
       this.props.updateAdvert(this.state, id);
-      this.props.history.push(`/advert/${ id }`);
+      this.props.history.push('/');
     } else {
-      console.log(result);
+      this.setValidError(result);
     }
   };
+
+  setValidError(result) {
+    this.setState( {
+      validError: result
+    });
+  }
 
   render() {
     const { advert } = this.props;
     const { id } = this.props.match.params;
+    const { validError } = this.state;
     const options = ['Transport', 'Equipment', 'Fashion', 'For kids', 'For home', 'Hobbies & sports', 'Work & study', 'Animals'];
     return (
       <Fragment>
@@ -48,18 +54,15 @@ class UpdateAdvert extends Component {
         >
           {advert.title}
         </BreadcrumbsItem>
-
         <BreadcrumbsItem
           className="breadcrumbs-item"
           to={`/advert/${id}/update-advert`}
         >
           Update
         </BreadcrumbsItem>
-
        <form
          className="update-user__form"
          onSubmit={this.handleSubmit}>
-
          <div className="update-user__content">
            <label
              className="update-user__label"
@@ -125,6 +128,7 @@ class UpdateAdvert extends Component {
          </div>
 
          <button className="update-user__button">CHANGE ADVERT</button>
+         { validError ? <p className="create-advert__error">{validError}</p> : null }
         </form>
       </Fragment>
     );
@@ -146,9 +150,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([{
-    collection: 'adverts',
-  }]),
-)(UpdateAdvert);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateAdvert);

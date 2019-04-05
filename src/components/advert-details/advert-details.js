@@ -9,7 +9,7 @@ import './advert-details.css';
 
 class AdvertDetails extends Component {
 
-  handleSubmitRemove = (e) => {
+  removeAdvert = (e) => {
     e.preventDefault();
     const { id } = this.props.match.params;
     this.props.removeAdvert(id);
@@ -27,7 +27,7 @@ class AdvertDetails extends Component {
         </NavLink>
         <form
           className="advert-details__form"
-          onSubmit={this.handleSubmitRemove}
+          onSubmit={this.removeAdvert}
         >
           <button className="advert-details__button-warning">
             REMOVE ADVERT

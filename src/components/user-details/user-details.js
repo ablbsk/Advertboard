@@ -45,7 +45,6 @@ class UserDetails extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { user, auth } = this.props;
     const { id } = this.props.match.params;
     const { advertsList } = user;
@@ -64,7 +63,7 @@ class UserDetails extends Component {
         Update
       </NavLink>
     ) : null;
-    console.log(typeof(advertsList));
+
     const advertList = (typeof(advertsList) === 'object') ?
       this.viewUserAdverts(advertsList) : null;
 

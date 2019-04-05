@@ -96,7 +96,9 @@ class CreateAdvert extends Component {
             <select
               className="create-advert__select"
               id="category"
+              defaultValue="none"
               onChange={this.handleChange}>
+              <option value="none" disabled hidden>Select ...</option>
               { options.map((option) => (
                 <option value={option} key={option}>{option}</option>
               ))}

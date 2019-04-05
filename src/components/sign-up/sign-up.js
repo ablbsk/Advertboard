@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+
 import { signUpValidation } from '../../utils/validation/validation';
 import { signUp } from '../../actions/auth-actions';
 
@@ -10,7 +13,7 @@ import './sign-up.css';
 class SignUp extends Component {
 
   state = {
-    validError: null,
+    validError: null
   };
 
   handleChange = (e) => {
@@ -21,13 +24,26 @@ class SignUp extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const result = signUpValidation(this.state);
-    if (result === 'good') {
-      this.props.signUp(this.state);
-    } else {
-      this.setValidError(result);
+    const resultValid = signUpValidation(this.state);
+    const resultUsername = this.uniqueCheck();
+    if (resultUsername) {
+      resultValid === 'good' ?
+        this.props.signUp(this.state) : this.setValidError(resultValid);
     }
   };
+
+  uniqueCheck() {
+  const { username } = this.state;
+  const { users } = this.props;
+  for (let i = 0; i < users.length; i++) {
+    if (username === users[i].username) {
+      const result = 'Such username already exists';
+      this.setValidError(result);
+      return false;
+      }
+    }
+  return true;
+  }
 
   setValidError(result) {
     this.setState( {
@@ -36,7 +52,7 @@ class SignUp extends Component {
   }
 
   render() {
-    const { auth, singUpError } = this.props;
+    const { auth, signUpError } = this.props;
     const { validError } = this.state;
     const content = [
       {id: 'username', label: 'Username', type: 'text', placeholder: 'username'},
@@ -46,6 +62,7 @@ class SignUp extends Component {
       {id: 'lastName', label: 'Last name', type: 'text', placeholder: 'last name'},
       {id: 'phone', label: 'Phone', type: 'text', placeholder: 'phone'},
     ];
+
     if (auth.uid) {
       return <Redirect to='/' />
     }
@@ -79,9 +96,9 @@ class SignUp extends Component {
               />
             </div>
           ))}
-          <button className="sign-up__button">Create User</button>
-          { singUpError ? <p className="sign-up__error">{singUpError}</p> : null }
-          { validError ? <p className="sign-up__error">{validError}</p> : null }
+          <button className="sign-up__button">CREATE USER</button>
+          {signUpError ? <p className="sign-up__error">{signUpError}</p> : null}
+          {validError ? <p className="sign-up__error">{validError}</p> : null}
         </form>
       </Fragment>
     )
@@ -91,7 +108,8 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
-    singUpError: state.auth.singUpError
+    users: state.firestore.ordered.users,
+    signUpError: state.auth.signUpError
   }
 };
 
@@ -101,4 +119,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    { collection: 'users' }
+  ])
+)(SignUp);

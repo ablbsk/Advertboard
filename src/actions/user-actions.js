@@ -27,18 +27,18 @@ export const deleteUser = (currentPassword, uid) => {
     reauthenticate(currentPassword, firebase).then(() => {
       firebase.auth().currentUser.delete()
         .then(() => {
+          firestore.collection('users').doc(uid).delete()
+            .then(() => {
+              dispatch({ type: 'DELETE_USER_DB' });
+            })
+            .catch((err) => {
+              dispatch({ type: 'DELETE_USER_DB_ERROR', err });
+            });
           dispatch({ type: 'DELETE_USER' });
-        })
-        .catch((err) => {
-          dispatch({ type: 'DELETE_USER_ERROR', err });
         });
-    });
-    firestore.collection('users').doc(uid).delete()
-      .then(() => {
-        dispatch({ type: 'DELETE_USER_DB' });
-      })
+    })
       .catch((err) => {
-        dispatch({ type: 'DELETE_USER_DB_ERROR', err });
+        dispatch({ type: 'DELETE_USER_ERROR', err });
       });
   };
 };
@@ -47,30 +47,42 @@ export const changePassword = (currentPassword, newPassword) => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
     const user = firebase.auth().currentUser;
-    reauthenticate(currentPassword, firebase).then(() => {
-      user.updatePassword(newPassword)
-        .then(() => {
-          dispatch({ type: 'UPDATE_USER_PASSWORD' });
-        })
-        .catch((err) => {
-          dispatch({ type: 'UPDATE_USER_PASSWORD_ERROR', err });
-        });
-    });
+    reauthenticate(currentPassword, firebase)
+      .then(() => {
+        user.updatePassword(newPassword)
+          .then(() => {
+            dispatch({ type: 'UPDATE_USER_PASSWORD' });
+          })
+          .catch((err) => {
+            dispatch({ type: 'UPDATE_USER_PASSWORD_ERROR', err });
+          });
+      })
+      .catch((err) => {
+        dispatch({ type: 'UPDATE_USER_PASSWORD_ERROR', err });
+      });
   };
 };
 
 export const changeEmail = (currentPassword, newEmail) => {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
     const firebase = getFirebase();
+    const firestore = getFirestore();
     const user = firebase.auth().currentUser;
-    reauthenticate(currentPassword, firebase).then(() => {
-      user.updateEmail(newEmail)
-        .then(() => {
-          dispatch({ type: 'UPDATE_USER_EMAIL' });
-        })
-        .catch((err) => {
-          dispatch({ type: 'UPDATE_USER_EMAIL_ERROR', err });
-        });
-    });
+    reauthenticate(currentPassword, firebase)
+      .then(() => {
+        user.updateEmail(newEmail)
+          .then(() => {
+            firestore.collection('users').doc(user.uid).update({
+              newEmail,
+            });
+            dispatch({ type: 'UPDATE_USER_EMAIL' });
+          })
+          .catch((err) => {
+            dispatch({ type: 'UPDATE_USER_EMAIL_ERROR', err });
+          });
+      })
+      .catch((err) => {
+        dispatch({ type: 'UPDATE_USER_EMAIL_ERROR', err });
+      });
   };
 };
