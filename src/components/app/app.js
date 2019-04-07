@@ -30,7 +30,7 @@ const Users = () => {
   return (
     <Fragment>
       <BreadcrumbsItem
-        className="breadcrumbs-item"
+        className="breadcrumbs__item"
         to="/users"
       >
         Users
@@ -48,7 +48,7 @@ const Main = () => {
   return (
     <main>
       <BreadcrumbsItem
-        className="breadcrumbs-item"
+        className="breadcrumbs__item"
         to="/"
       >
         Home
@@ -71,13 +71,13 @@ const App = () => {
   return (
     <Fragment>
       <AppHeader />
-      <div className="breadcrumbs__div">
+      <div className="breadcrumbs">
         <Breadcrumbs
-          separator={<i className="breadcrumbs__i">/</i>}
+          separator={<i className="breadcrumbs__separator">/</i>}
           item={NavLink}
           finalItem="span"
           finalProps={{
-            style: { color: '#2856B6', cursor: 'default' }
+            style: { color: 'var(--accentColor)', cursor: 'default' }
           }}
         />
       </div>

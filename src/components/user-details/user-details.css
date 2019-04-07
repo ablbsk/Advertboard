@@ -1,88 +1,33 @@
-:root {
-    --accentColor: #2856B6;
-
-    --fontFamily: Poppins, serif;
-}
-
-.user-details__div {
-	width: 50%;
-	padding: 1.5em 2em;
-
-	border-radius: 0.5em;
-	background-color: white;
-	box-shadow: 0 0.8em 2em rgba(0,0,0,0.25), 0 0.5em 0.75em rgba(0,0,0,0.22);
+.user-details-content {
+	margin-bottom: 1.5em;
 
 	font-family: var(--fontFamily);
 }
 
-.user-details__head {
-	margin: 1em 0 2em 0;
-
-	text-align: center;
-
-	color: var(--accentColor);
-}
-
-.user-details__content {
-	margin-bottom: 1.5em;
-}
-
-.user-details__h5 {
-	margin: 0;
-
-	color: var(--accentColor);
-}
-
-.user-details__p {
+.user-details-content__p-item {
 	margin: 0.5em 0 1.5em 0;
 }
 
-.user-details__advert-head {
+/* ================== USER'S ADVERTS ================= */
+
+.list-header {
 	display: flex;
 
 	margin: 1em 0;
+	padding: 0;
+
+	list-style-type: none;
 
 	font-family: var(--fontFamily);
 	font-size: 0.85em;
 	font-weight: 900;
 }
 
-.user-details__advert-head > span {
+.list-header__title {
+	display: inline;
 	flex-grow: 2;
 }
 
-.user-details__advert-head-ul {
-	margin: 0;
-}
-
-.user-details__advert-head-ul > li {
-	display: inline;
-
-	padding-left: 3em;
-
-	list-style-type: none;
-}
-
-.user-details__button {
-	padding: 0.5em 1em;
-
-	cursor: pointer;
-	transition: 0.3s;
-	text-decoration: none;
-
-	color: white;
-	border: none;
-	border-radius: var(--borderRadius);
-	outline: var(--outline);
-	background-color: var(--accentColor);
-
-	font-family: var(--fontFamily);
-	font-size: 0.8em;
-}
-
-.advert-details__button:active {
-	background-color: var(--buttonActive);
-	-webkit-box-shadow: var(--buttonShadow);
-	-moz-box-shadow: var(--buttonShadow);
-	box-shadow: var(--buttonShadow);
+.list-header__view {
+	padding-right: 3em;
 }

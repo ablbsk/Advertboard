@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -7,25 +7,23 @@ import SignedOutLinks from '../signed-out-links';
 
 import './app-header.css';
 
-class AppHeader extends Component {
-  render() {
-    const { auth } = this.props;
-    const links = auth.uid ? <SignedInLinks uid={auth.uid} /> : <SignedOutLinks />;
-    return (
-      <header className="app-header">
-        <nav className="app-header__nav">
-          <NavLink className="app-header__logo" to="/">Callboard</NavLink>
-          { links }
-        </nav>
-      </header>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    auth: state.firebase.auth
-  };
+const AppHeader = (props) => {
+  const { auth } = props;
+  const links = auth.uid ? <SignedInLinks uid={auth.uid} /> : <SignedOutLinks />;
+  return (
+    <header className="app-header">
+      <nav className="app-header__nav">
+        <div className="logo">
+          <NavLink className="logo__title" to="/">Advertboard</NavLink>
+        </div>
+        { links }
+      </nav>
+    </header>
+  );
 };
+
+const mapStateToProps = state => ({
+  auth: state.firebase.auth,
+});
 
 export default connect(mapStateToProps)(AppHeader);

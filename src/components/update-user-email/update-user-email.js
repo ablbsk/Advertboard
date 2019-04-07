@@ -39,41 +39,41 @@ class UpdateUserEmail extends Component {
     const { validError } = this.state;
     return (
       <form onSubmit={this.changeEmail}>
-        <h4 className="update-user__h4">CHANGE EMAIL</h4>
-        <div className="update-user__data">
+        <h4 className="headline-h4">CHANGE EMAIL</h4>
+        <div className="content">
           <label
-            className="update-user__label"
+            className="label"
             htmlFor="curPassUserEmail"
           >
             Confirm the password
           </label>
           <input
-            className="update-user__input"
+            className="input"
             type="password"
             id="curPassUserEmail"
             placeholder="Enter current password ..."
             onChange={this.handleChange}
           />
         </div>
-        <div className="update-user__data">
+        <div className="content">
           <label
-            className="update-user__label"
+            className="label"
             htmlFor="email"
           >
             New email
           </label>
           <input
-            className="update-user__input"
+            className="input"
             type="email"
             id="email"
             placeholder="Enter new email ..."
             onChange={this.handleChange}
           />
         </div>
-        <button className="update-user__button">UPDATE EMAIL</button>
+        <button className="button">UPDATE EMAIL</button>
         {changeEmailError ?
-          <p className="sign-up__error">{changeEmailError}</p> : null}
-        {validError ? <p className="sign-up__error">{validError}</p> : null}
+          <p className="error">{changeEmailError}</p> : null}
+        {validError ? <p className="error">{validError}</p> : null}
       </form>
     );
   }

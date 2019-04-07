@@ -4,8 +4,6 @@ import {Redirect} from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { signIn } from '../../actions/auth-actions';
 
-import './sign-in.css';
-
 class SignIn extends Component {
 
   handleChange = (e) => {
@@ -28,44 +26,44 @@ class SignIn extends Component {
     return (
       <Fragment>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to="/sign-in"
         >
           Login
         </BreadcrumbsItem>
         <form
-          className="sign-in__form"
+          className="block"
           onSubmit={this.handleSubmit}>
-          <div className="sign-in__content">
+          <div className="content">
             <label
-              className="sign-in__label"
+              className="label"
               htmlFor="email"
             >
               Email
             </label>
             <input
-              className="sign-in__input"
+              className="input"
               type="email"
               id="email"
               placeholder="Enter email"
               onChange={this.handleChange} />
           </div>
-          <div className="sign-in__content">
+          <div className="content">
             <label
-              className="sign-in__label"
+              className="label"
               htmlFor="password"
             >
               Password
             </label>
             <input
-              className="sign-in__input"
+              className="input"
               type="password"
               id="password"
               placeholder="Enter password"
               onChange={this.handleChange} />
           </div>
-          <button className="sign-in__button">Login</button>
-          { signInError ? <p className="sign-in__error">{ signInError }</p> : null }
+          <button className="button">Login</button>
+          { signInError ? <p className="error">{ signInError }</p> : null }
         </form>
       </Fragment>
     );

@@ -37,39 +37,39 @@ class UpdateUserPassword extends Component {
     const { validError } = this.state;
     return (
       <form onSubmit={this.changePassword}>
-        <h4 className="update-user__h4">CHANGE PASSWORD</h4>
-        <div className="update-user__data">
+        <h4 className="headline-h4">CHANGE PASSWORD</h4>
+        <div className="content">
           <label
-            className="update-user__label"
+            className="label"
             htmlFor="curPassUserPass"
           >
             Confirm the password
           </label>
           <input
-            className="update-user__input"
+            className="input"
             type="password"
             id="curPassUserPass"
             placeholder="Enter current password ..."
             onChange={this.handleChange} />
         </div>
-        <div className="update-user__data">
+        <div className="content">
           <label
-            className="update-user__label"
+            className="label"
             htmlFor="newPassword"
           >
             New password
           </label>
           <input
-            className="update-user__input"
+            className="input"
             type="password"
             id="newPassword"
             placeholder="Enter new password ..."
             onChange={this.handleChange} />
         </div>
-        <button className="update-user__button">CHANGE PASSWORD</button>
+        <button className="button">CHANGE PASSWORD</button>
         {changePassError ?
-          <p className="sign-up__error">{changePassError}</p> : null}
-        {validError ? <p className="sign-up__error">{validError}</p> : null}
+          <p className="error">{changePassError}</p> : null}
+        {validError ? <p className="error">{validError}</p> : null}
       </form>
     );
   }

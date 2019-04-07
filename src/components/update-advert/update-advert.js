@@ -5,8 +5,6 @@ import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { updateAdvert } from '../../actions/advert-actions';
 import { advertValidation } from '../../utils/validation/validation';
 
-import './update-advert.css';
-
 class UpdateAdvert extends Component {
 
   state = {
@@ -49,87 +47,88 @@ class UpdateAdvert extends Component {
     return (
       <Fragment>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to={`/advert/${id}`}
         >
           {advert.title}
         </BreadcrumbsItem>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to={`/advert/${id}/update-advert`}
         >
           Update
         </BreadcrumbsItem>
-       <form
-         className="update-user__form"
-         onSubmit={this.handleSubmit}>
-         <div className="update-user__content">
-           <label
-             className="update-user__label"
-             htmlFor="title"
-           >
-             Title
-           </label>
-           <input
-             className="update-user__input"
-             id="title"
-             type="text"
-             defaultValue={advert.title}
-             placeholder="Enter title ..."
-             onChange={this.handleChange} />
-         </div>
-         <div className="update-user__content">
-           <label
-             className="update-user__label"
-             htmlFor="description"
-           >
-             Description
-           </label>
-           <textarea
-             className="update-user__textarea"
-             id="description"
-             placeholder="Enter description ..."
-             defaultValue={advert.description}
-             onChange={this.handleChange}
-           />
-         </div>
-         <div className="update-user__content">
-           <label
-             className="update-user__label"
-             htmlFor="category"
-           >
-             Category
-           </label>
-           <select
-             className="update-user__select"
-             id="category"
-             defaultValue={advert.category}
-             onChange={this.handleChange}
-           >
-             { options.map((option) => (
-               <option value={option} key={option}>{option}</option>
-             ))}
-           </select>
-         </div>
-         <div className="update-user__content">
-           <label
-             className="update-user__label"
-             htmlFor="price"
-           >
-             Price
-           </label>
-           <input
-             className="update-user__input"
-             id="price"
-             type="text"
-             placeholder="Enter price ..."
-             defaultValue={advert.price}
-             onChange={this.handleChange} />
-         </div>
+        <form
+          className="block"
+          onSubmit={this.handleSubmit}>
+          <div className="content">
+            <label
+                className="label"
+                htmlFor="title"
+              >
+                Title
+              </label>
+            <input
+                className="input"
+                id="title"
+                type="text"
+                defaultValue={advert.title}
+                placeholder="Enter title ..."
+                onChange={this.handleChange} />
+          </div>
+          <div className="content">
+            <label
+                className="label"
+                htmlFor="description"
+              >
+                Description
+              </label>
+            <textarea
+                className="textarea"
+                id="description"
+                placeholder="Enter description ..."
+                defaultValue={advert.description}
+                onChange={this.handleChange}
+              />
+          </div>
+          <div className="content">
+            <label
+                className="label"
+                htmlFor="category"
+              >
+                Category
+              </label>
+            <select
+                className="select"
+                id="category"
+                defaultValue={advert.category}
+                onChange={this.handleChange}
+              >
+                { options.map((option) => (
+                  <option value={option} key={option}>{option}</option>
+                ))}
+              </select>
+          </div>
+          <div className="content">
+            <label
+                className="label"
+                htmlFor="price"
+              >
+                Price
+              </label>
+            <input
+                className="input"
+                id="price"
+                type="text"
+                placeholder="Enter price ..."
+                defaultValue={advert.price}
+                onChange={this.handleChange} />
+          </div>
 
-         <button className="update-user__button">CHANGE ADVERT</button>
-         { validError ? <p className="create-advert__error">{validError}</p> : null }
-        </form>
+          <button className="button">CHANGE ADVERT</button>
+          { validError ?
+            <p className="error">{validError}</p> : null }
+          </form>
       </Fragment>
     );
   }

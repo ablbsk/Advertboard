@@ -9,8 +9,6 @@ import UpdateUserEmail from '../update-user-email';
 import UpdateUserPassword from '../update-user-password';
 import UpdateUserDelete from '../update-user-delete';
 
-import './update-user.css';
-
 class UpdateUser extends Component {
 
   state = {
@@ -38,11 +36,16 @@ class UpdateUser extends Component {
   };
 
   uniqueCheck() {
-    const { username } = this.state;
+    const { username, oldUsername } = this.state;
     const { users } = this.props;
+
+    if (username === oldUsername) {
+      return true;
+    }
+
     for (let i = 0; i < users.length; i++) {
       if (username === users[i].username) {
-        const result = 'Such username already exists';
+        const result = 'Such username already exists.';
         this.setValidError(result);
         return false;
       }
@@ -56,16 +59,23 @@ class UpdateUser extends Component {
     });
   }
 
+  componentDidMount() {
+    const { username } = this.state;
+    this.setState( {
+      oldUsername: username
+    });
+  }
+
   render() {
     const { user, auth } = this.props;
-    const { validError } = this.state;
+    const { validError, successMsg } = this.state;
     const content = [
       {head: 'Username', id: 'username', placeholder: 'username', defaultValue: user.username},
       {head: 'First name', id: 'firstName', placeholder: 'first name', defaultValue: user.firstName},
       {head: 'Last name', id: 'lastName', placeholder: 'last name', defaultValue: user.lastName},
       {head: 'Phone', id: 'phone', placeholder: 'phone', defaultValue: user.phone}
     ];
-
+    console.log(this.state);
     if (!auth.uid) {
       return <Redirect to='/' />
     }
@@ -73,30 +83,30 @@ class UpdateUser extends Component {
     return (
       <Fragment>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to={`/users/${auth.uid}`}
         >
           {user.username}
         </BreadcrumbsItem>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to={`/users/${auth.uid}/update`}
         >
           Update
         </BreadcrumbsItem>
-        <div className="update-user__div">
-          <h4 className="update-user__h4">UPDATE PROFILE</h4>
+        <div className="block">
+          <h4 className="headline-h4">UPDATE USER</h4>
           <form onSubmit={this.handleSubmit}>
             {content.map((item) => (
-              <div className="update-user__data" key={item.id}>
+              <div className="content" key={item.id}>
                 <label
-                  className="update-user__label"
+                  className="label"
                   htmlFor={item.id}
                 >
                   {item.head}
                 </label>
                 <input
-                  className="update-user__input"
+                  className="input"
                   type="text"
                   id={item.id}
                   placeholder={item.placeholder}
@@ -104,9 +114,10 @@ class UpdateUser extends Component {
                   onChange={this.handleChange}/>
               </div>
             ))}
-            <button className="update-user__button">ACCEPT</button>
+            <button className="button">ACCEPT</button>
           </form>
-          {validError ? <p className="sign-up__error">{validError}</p> : null}
+          {validError ? <p className="error">{validError}</p> : null}
+          {successMsg ? <p className="error">{successMsg}</p> : null}
           <UpdateUserEmail auth={auth}/>
           <UpdateUserPassword auth={auth}/>
           <UpdateUserDelete user={user} auth={auth}/>

@@ -1,154 +1,108 @@
-:root {
-    --accentColor: #2856B6;
+/* =================== ADVERT-DETAILS ================= */
 
-    --space: 2rem;
+.advert-details {
+	width: 50%;
+	padding: 1.5em 0;
 
-    --fontFamily: Poppins, serif;
+	border-radius: var(--blockBorderRadius);
+	background-color: white;
+	box-shadow: var(--boxShadow);
+
+	font-family: var(--fontFamily);
 }
 
-.advert-details__div {
-    width: 50%;
-    padding: 1.5em 0;
-    font-family: var(--fontFamily);
-
-    border-radius: 0.5em;
-    background-color: white;
-    box-shadow: 0 0.8em 2em rgba(0,0,0,0.25), 0 0.5em 0.75em rgba(0,0,0,0.22);
+.advert-details__img {
+	width: 100%;
+	margin-bottom: var(--space);
 }
 
-.advert-details__content {
-    margin: 0 var(--space);
+.advert-details-content {
+	margin: 0 var(--space);
 }
 
-.advert-details__head {
-    text-align: center;
-    color: var(--accentColor);
-    margin: 1em 0 var(--space) 0;
+
+/* ===================== DESCRIPTION =================== */
+
+.content-description {
+	display: flex;
+	align-items: flex-end;
+
+	margin: var(--space) 0;
 }
 
-.advert-details__div > img {
-    width: 100%;
-    margin-bottom: var(--space);
+.content-description__text {
+	flex-grow: 2;
 }
 
-.advert-details__h5 {
-    color: var(--accentColor);
-    margin: 0;
+.content-description__price {
+	margin-top: 0;
+	padding-left: var(--space);
+
+	color: var(--accentColor);
+
+	font-size: 1.5em;
+	font-weight: 900;
 }
 
-.advert-details__description {
-    display: flex;
-    align-items: flex-end;
-    margin: var(--space) 0;
+
+/* ======================== CONTACTS =================== */
+
+.content-contacts {
+	margin: var(--space) 0;
 }
 
-.advert-details__description > div {
-    flex-grow: 2;
+.content-contacts-text {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.advert-details__price {
-    color: var(--accentColor);
-    font-size: 1.5em;
-    font-weight: 900;
-    margin-top: 0;
-    padding-left: var(--space);
+.contacts-text-p-item {
+	display: flex;
+	align-items: center;
+
+	padding-right: 2em;
 }
 
-.advert-details__contacts {
-    margin: var(--space) 0;
+.contacts-text-p-item__img {
+	height: 1.35em;
+	padding-right: 0.4em;
 }
 
-.advert-details__contacts-div {
-    display: flex;
+.contacts-text-p-item__username {
+	text-decoration: none;
+
+	color: black;
 }
 
-.advert-details__contacts-p {
-    padding-right: 2em;
-    display: flex;
-    align-items: center;
+.contacts-text-p-item__username:hover {
+	transition: var(--titleTransition);
+
+	color: var(--accentColor);
 }
 
-.advert-details__contacts-p > img {
-    height: 1.35em;
-    padding-right: 0.4em;
+
+/* ======================= ADDITIONALLY ================= */
+
+.content-additionally {
+	display: flex;
+	flex-wrap: wrap;
+
+	margin: var(--space) 0;
 }
 
-.advert-details__owner {
-    text-decoration: none;
-    color: black;
-}
-
-.advert-details__owner:hover {
-    color: var(--accentColor);
-    transition: 0.3s;
-}
-
-.advert-details__additionally {
-    display: flex;
-    margin: var(--space) 0;
-}
-
-.advert-details__additionally > div {
-    padding-right: 2em;
+.content-additionally__div-item {
+	padding-right: 2em;
 }
 
 /* =============== ADVERT-DETAILS__OPTIONS =============== */
 
-.advert-details__options {
-    display: flex;
-    justify-content: space-between;
+.content-options {
+	display: flex;
+	justify-content: space-between;
 }
 
-.advert-details__form {
-    display: inline;
-    padding: 0;
-}
+.content-options__delete-form {
+	display: inline;
 
-/* =============== ADVERT-DETAILS__BUTTON =============== */
-
-.advert-details__button {
-    padding: 0.5em 1em;
-
-    cursor: pointer;
-    transition: 0.3s;
-
-    color: white;
-    border: none;
-    border-radius: var(--borderRadius);
-    outline: var(--outline);
-    background-color: var(--accentColor);
-
-    font-family: var(--fontFamily);
-    font-size: 0.8em;
-    text-decoration: none;
-}
-
-.advert-details__button:active {
-    background-color: var(--buttonActive);
-    -webkit-box-shadow: var(--buttonShadow);
-    -moz-box-shadow: var(--buttonShadow);
-    box-shadow: var(--buttonShadow);
-}
-
-.advert-details__button-warning {
-    padding: 0.5em 1em;
-
-    cursor: pointer;
-    transition: 0.3s;
-
-    color: white;
-    border: none;
-    border-radius: var(--borderRadius);
-    outline: var(--outline);
-    background-color: var(--errorColor);
-
-    font-family: var(--fontFamily);
-    font-size: 0.8em
-}
-
-.advert-details__button-warning:active {
-    background-color: var(--buttonActive);
-    -webkit-box-shadow: var(--buttonShadow);
-    -moz-box-shadow: var(--buttonShadow);
-    box-shadow: var(--buttonShadow);
+	padding: 0;
 }

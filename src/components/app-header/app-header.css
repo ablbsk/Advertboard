@@ -1,7 +1,3 @@
-:root {
-    --accentColor: #2856B6;
-}
-
 .app-header {
 	height: 3em;
 
@@ -16,9 +12,11 @@
 	padding: 0 3em;
 }
 
-.app-header__logo {
+.logo {
 	flex-grow: 2;
+}
 
+.logo__title {
 	color: white;
 
 	font-family: Satisfy, cursive;

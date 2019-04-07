@@ -1,7 +1,5 @@
 import Joi from 'joi';
 
-// В description я добавил пробелы. По условию они запрещены
-
 export const advertValidation = (state) => {
   const schema = Joi.object().keys({
     title: Joi.string().regex(/^([a-zA-Z0-9-.\s]{10,50})+$/).required()
@@ -55,7 +53,8 @@ export const updateUserValidation = (state) => {
       .error(new Error('Last name should contain 2-20 letters.')),
     phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('The phone must be in the format +375 29|33 xxx xx xx.')),
-    validError: Joi.any().optional()
+    validError: Joi.any().optional(),
+    oldUsername: Joi.any().optional(),
   });
 
   const result = Joi.validate(state, schema);

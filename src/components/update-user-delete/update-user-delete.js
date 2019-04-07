@@ -31,26 +31,26 @@ class UpdateUserDelete extends Component {
     const { deleteUserError } = this.props;
     return (
       <form onSubmit={this.deleteAccount}>
-        <h4 className="update-user__h4-delete">DELETE ACCOUNT</h4>
-        <div className="update-user__data">
+        <h4 className="headline-h4_red">DELETE ACCOUNT</h4>
+        <div className="content">
           <label
-            className="update-user__label"
+            className="label"
             htmlFor="curPassDelAcc"
           >
             Confirm the password
           </label>
           <input
-            className="update-user__input"
+            className="input"
             type="password"
             id="curPassDelAcc"
             placeholder="Enter password ..."
             onChange={this.handleChange} />
         </div>
-        <button className="update-user__button-warning">
+        <button className="button_red">
           DELETE ACCOUNT
         </button>
         {deleteUserError ?
-          <p className="sign-up__error">{deleteUserError}</p> : null}
+          <p className="error">{deleteUserError}</p> : null}
       </form>
     );
   }

@@ -1,14 +1,14 @@
-.signed-out-links__ul {
+.auth-list {
 	display: inline;
 }
 
-.signed-out-links__ul > li {
+.auth-list__item {
 	display: inline;
 
 	padding: 1em;
 }
 
-.signed-out-links__a {
+.auth-list__link {
 	text-decoration: none;
 
 	color: whitesmoke;

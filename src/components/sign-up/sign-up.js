@@ -8,8 +8,6 @@ import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { signUpValidation } from '../../utils/validation/validation';
 import { signUp } from '../../actions/auth-actions';
 
-import './sign-up.css';
-
 class SignUp extends Component {
 
   state = {
@@ -70,25 +68,25 @@ class SignUp extends Component {
     return (
       <Fragment>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to="/sign-in"
         >
           Sign Up
         </BreadcrumbsItem>
         <form
-          className="sign-up__form"
+          className="block"
           onSubmit={this.handleSubmit}
         >
           { content.map((item) => (
-            <div className="sign-up__content" key={item.id}>
+            <div className="content" key={item.id}>
               <label
-                className="sign-up__label"
+                className="label"
                 htmlFor={item.id}
               >
                 {item.label}
               </label>
               <input
-                className="sign-up__input"
+                className="input"
                 id={item.id}
                 type={item.type}
                 placeholder={`Enter ${item.placeholder}`}
@@ -96,9 +94,9 @@ class SignUp extends Component {
               />
             </div>
           ))}
-          <button className="sign-up__button">CREATE USER</button>
-          {signUpError ? <p className="sign-up__error">{signUpError}</p> : null}
-          {validError ? <p className="sign-up__error">{validError}</p> : null}
+          <button className="button">CREATE USER</button>
+          {signUpError ? <p className="error">{signUpError}</p> : null}
+          {validError ? <p className="error">{validError}</p> : null}
         </form>
       </Fragment>
     )

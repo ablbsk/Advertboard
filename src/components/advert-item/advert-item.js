@@ -6,18 +6,21 @@ import './advert-item.css';
 
 const AdvertItem = ({ advert }) => {
   return (
-    <article
-      className="advert-item__article">
-      <img src="../public/img/no_image.jpg" alt="no photo" />
-      <div className="advert-item__content">
-        <div>
+    <article className="advert">
+      <img
+        className="advert_img"
+        src="../../../public/img/no_image.jpg"
+        alt="no photo"
+      />
+      <div className="advert-content">
+        <div className="advert-text">
           <Link
-            className="advert-item__title"
+            className="advert-text__title"
             to={`/advert/${ advert.id }`}
           >
             {advert.title}
           </Link>
-          <p className="advert-item__owner">
+          <p className="advert-text__owner">
             <span>Added </span>
             <span>{advert.username}</span>
             <span> in </span>
@@ -29,7 +32,7 @@ const AdvertItem = ({ advert }) => {
             </span>
           </p>
         </div>
-        <p className="advert-item__price">${advert.price}</p>
+        <p className="advert-content__price">${advert.price}</p>
       </div>
     </article>
   );

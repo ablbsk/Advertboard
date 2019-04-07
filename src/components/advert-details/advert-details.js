@@ -18,18 +18,18 @@ class AdvertDetails extends Component {
 
   viewOwnerOptions(id) {
     return (
-      <div className="advert-details__options">
+      <div className="content-options">
         <NavLink
-          className="advert-details__button"
+          className="button"
           to={`/advert/${id}/update-advert`}
         >
           UPDATE ADVERT
         </NavLink>
         <form
-          className="advert-details__form"
+          className="content-options__delete-form"
           onSubmit={this.removeAdvert}
         >
-          <button className="advert-details__button-warning">
+          <button className="button_red">
             REMOVE ADVERT
           </button>
         </form>
@@ -40,7 +40,7 @@ class AdvertDetails extends Component {
   static viewLastUpdate(modified) {
     return (
       <div>
-        <h5 className="advert-details__h5">Last update</h5>
+        <label className="label">Last update</label>
         <p>
           {moment(modified
             .toDate())
@@ -77,55 +77,68 @@ class AdvertDetails extends Component {
     return (
       <Fragment>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to={`/advert/${id}`}
         >
           {advert.title}
         </BreadcrumbsItem>
-        <div className="advert-details__div">
-          <h2 className="advert-details__head">{advert.title}</h2>
-          <img src="../public/img/no_image.jpg" alt="no photo"/>
-          <div className="advert-details__content">
-            <div className="advert-details__description">
-              <div>
-                <h5 className="advert-details__h5">Description</h5>
+        <div className="advert-details">
+          <h2 className="details-title">{advert.title}</h2>
+          <img
+            className="advert-details__img"
+            src="../../../public/img/no_image.jpg"
+            alt="no photo"
+          />
+          <div className="advert-details-content">
+            <div className="content-description">
+              <div className="content-description__text">
+                <label className="label">Description</label>
                 <p>{advert.description}</p>
               </div>
-              <p className="advert-details__price">${advert.price}</p>
+              <p className="content-description__price">${advert.price}</p>
             </div>
-            <div className="advert-details__contacts">
-              <h5 className="advert-details__h5">Contacts</h5>
-              <div className="advert-details__contacts-div">
-                <p className="advert-details__contacts-p">
-                  <img src="../../../public/img/owner.png" alt="Owner" />
+            <div className="content-contacts">
+              <label className="label">Contacts</label>
+              <div className="content-contacts-text">
+                <p className="contacts-text-p-item">
+                  <img
+                    className="contacts-text-p-item__img"
+                    src="../../../public/img/owner.png"
+                    alt="Owner" />
                   <NavLink
-                    className="advert-details__owner"
+                    className="contacts-text-p-item__username"
                     to={`/users/${advert.authorId}`}
                   >
                     {advert.username}
                   </NavLink>
                 </p>
-                <p className="advert-details__contacts-p">
-                  <img src="../../../public/img/email.png" alt="Email" />
+                <p className="contacts-text-p-item">
+                  <img
+                    className="contacts-text-p-item__img"
+                    src="../../../public/img/email.png"
+                    alt="Email" />
                   <span>{advert.email}</span>
                 </p>
-                <p className="advert-details__contacts-p">
-                  <img src="../../../public/img/phone.png" alt="Phone" />
+                <p className="contacts-text-p-item">
+                  <img
+                    className="contacts-text-p-item__img"
+                    src="../../../public/img/phone.png"
+                    alt="Phone" />
                   <span>{advert.phone}</span>
                 </p>
               </div>
             </div>
-            <div className="advert-details__additionally">
-              <div>
-                <h5 className="advert-details__h5">Category</h5>
+            <div className="content-additionally">
+              <div className="content-additionally__div-item">
+                <label className="label">Category</label>
                 <p>{advert.category}</p>
               </div>
-              <div>
-                <h5 className="advert-details__h5">Views</h5>
+              <div className="content-additionally__div-item">
+                <label className="label">Views</label>
                 <p>{advert.views}</p>
               </div>
-              <div>
-                <h5 className="advert-details__h5">Created at</h5>
+              <div className="content-additionally__div-item">
+                <label className="label">Created at</label>
                 <p>
                   {moment(advert.created
                     .toDate())

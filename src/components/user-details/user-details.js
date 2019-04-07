@@ -24,20 +24,22 @@ class UserDetails extends Component {
 
   viewUserAdverts(advertsList) {
     return (
-      <div>
-        <h4 className="user-details__head">Users adverts</h4>
-        <div className="user-details__advert-head">
-          <span>Title</span>
-          <ul className="user-details__advert-head-ul">
-            <li>Views</li>
-            <li>Created</li>
-          </ul>
-        </div>
+      <div className="user-advert-list">
+        <h4 className="headline-h4">USERS ADVERTS</h4>
+        <ul className="list-header">
+          <li className="list-header__title">
+            Title
+          </li>
+          <li className="list-header__view">
+            Views
+          </li>
+          <li>Created</li>
+        </ul>
         { advertsList && advertsList.map((id) => (
           <UserAdvertItem
             id={id}
             key={id}
-            properties={this.getProperties(id)}
+            data={this.getProperties(id)}
           />
         ))}
       </div>
@@ -57,10 +59,10 @@ class UserDetails extends Component {
 
     const link = (auth.uid && auth.uid === id) ? (
       <NavLink
-        className="user-details__button"
+        className="button"
         to={`/users/${id}/update`}
       >
-        Update
+        UPDATE
       </NavLink>
     ) : null;
 
@@ -70,17 +72,19 @@ class UserDetails extends Component {
     return (
       <Fragment>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to={`/users/${id}`}
         >
           {user.username}
         </BreadcrumbsItem>
-        <div className="user-details__div">
-          <h2 className="user-details__head">{user.username}</h2>
+        <div className="block">
+          <h2 className="details-title">{user.username}</h2>
           {data.map((item) => (
-            <div className="user-details__content" key={item.head}>
-              <h5 className="user-details__h5">{item.head}</h5>
-              <p className="user-details__p">{item.paragraph}</p>
+            <div className="user-details-content" key={item.head}>
+              <label className="label">{item.head}</label>
+              <p className="user-details-content__p-item">
+                {item.paragraph}
+              </p>
             </div>
           ))}
           {link}
@@ -88,7 +92,7 @@ class UserDetails extends Component {
         </div>
       </Fragment>
     );
-  };
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {

@@ -6,6 +6,10 @@ import './search.css';
 
 class Search extends Component {
 
+  state = {
+    search: ''
+  };
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -20,21 +24,27 @@ class Search extends Component {
 
   render() {
     return (
-      <form
-        className="search__form"
-        onSubmit={this.handleSubmit}
-      >
-        <input
-          className="search__input"
-          type="text"
-          id="search"
-          placeholder="Enter advert title ..."
-          onChange={this.handleChange}
-        />
-        <button className="search__button">
-          <img src="../../../public/img/search.png" alt="search"/>
-        </button>
-      </form>
+      <div className="search">
+        <form
+          className="search-form"
+          onSubmit={this.handleSubmit}
+        >
+          <input
+            className="input"
+            type="text"
+            id="search"
+            placeholder="Enter advert title ..."
+            onChange={this.handleChange}
+          />
+          <button className="search-form__button">
+            <img
+              className="search-form__img"
+              src="../../../public/img/search.png"
+              alt="search"
+            />
+          </button>
+        </form>
+      </div>
     );
   };
 }

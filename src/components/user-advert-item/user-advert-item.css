@@ -1,13 +1,11 @@
-:root {
-    --accentColor: #2856B6;
-}
-
-.user-advert-item__content {
+.user-advert-item {
 	display: flex;
 	align-items: center;
+
+	font-family: var(--fontFamily);
 }
 
-.user-advert-item__li {
+.user-advert-item-info__item {
 	display: inline;
 
 	padding-left: 1.5em;
@@ -16,7 +14,7 @@
 }
 
 
-.user-advert-item__content > a {
+.user-advert-item__link {
 	flex-grow: 2;
 
 	text-decoration: none;
@@ -24,8 +22,8 @@
 	color: black;
 }
 
-.user-advert-item__content > a:hover {
-	transition: 0.5s;
+.user-advert-item__link:hover {
+	transition: var(--titleTransition);
 
 	color: var(--accentColor);
 }

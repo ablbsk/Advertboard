@@ -6,8 +6,6 @@ import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { createAdvert } from '../../actions/advert-actions';
 import { advertValidation } from '../../utils/validation/validation';
 
-import './create-advert.css';
-
 class CreateAdvert extends Component {
 
   state = {
@@ -49,52 +47,52 @@ class CreateAdvert extends Component {
     return (
       <Fragment>
         <BreadcrumbsItem
-          className="breadcrumbs-item"
+          className="breadcrumbs__item"
           to="/create-advert"
         >
           Create Advert
         </BreadcrumbsItem>
         <form
-          className="create-advert__form"
+          className="block"
           onSubmit={this.handleSubmit}
         >
-          <div className="create-advert__content">
+          <div className="content">
             <label
-              className="create-advert__label"
+              className="label"
               htmlFor="title"
             >
               Title
             </label>
             <input
-              className="create-advert__input"
+              className="input"
               id="title"
               type="text"
               placeholder="Enter title ..."
               onChange={this.handleChange} />
           </div>
-          <div className="create-advert__content">
+          <div className="content">
             <label
-              className="create-advert__label"
+              className="label"
               htmlFor="description"
             >
               Description
             </label>
             <textarea
-              className="create-advert__textarea"
+              className="textarea"
               id="description"
               placeholder="Enter description ..."
               onChange={this.handleChange}
             />
           </div>
-          <div className="create-advert__content">
+          <div className="content">
             <label
-              className="create-advert__label"
+              className="label"
               htmlFor="category"
             >
               Category
             </label>
             <select
-              className="create-advert__select"
+              className="select"
               id="category"
               defaultValue="none"
               onChange={this.handleChange}>
@@ -104,22 +102,22 @@ class CreateAdvert extends Component {
               ))}
             </select>
           </div>
-          <div className="create-advert__content">
+          <div className="content">
             <label
-              className="create-advert__label"
+              className="label"
               htmlFor="price"
             >
               Price
             </label>
             <input
-              className="create-advert__input"
+              className="input"
               id="price"
               type="text"
               placeholder="Enter price ..."
               onChange={this.handleChange} />
           </div>
-          <button className="create-advert__button">Create</button>
-          { validError ? <p className="create-advert__error">{validError}</p> : null }
+          <button className="button">Create</button>
+          { validError ? <p className="error">{validError}</p> : null }
         </form>
       </Fragment>
     )

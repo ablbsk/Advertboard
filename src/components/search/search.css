@@ -1,26 +1,4 @@
-:root {
-    --borderColor: #ABABAB;
-    --accentColor: #2856B6;
-    --placeholderColor: silver;
-    --buttonActive: #e5e5e5;
-
-    --inputFontSize: 1em;
-    --inputPadding: 0.25em;
-
-    --outline: none;
-
-    --fontFamily: Poppins, serif;
-
-    --border: 2px solid var(--borderColor);
-    --borderActive: 2px solid var(--accentColor);
-
-    --placeholderOpacity: 0;
-    --placeholderTransition: opacity 0.75s ease;
-
-    --buttonShadow: inset 0 0 0.25em #c1c1c1;
-}
-
-.search__form {
+.search-form {
 	margin-bottom: 2em;
 
 	text-align: center;
@@ -28,59 +6,15 @@
 	font-family: var(--fontFamily);
 }
 
-/* =============== SEARCH__INPUT =============== */
-
-.search__input {
-	height: 2em;
-
-	border: none;
-	border-bottom: var(--border);
-	outline: var(--outline);
-	background-color: transparent;
-
-	font-family: var(--fontFamily);
-	font-size: var(--inputFontSize);
-}
-
-.search__input:focus {
-	border: none;
-	border-bottom: var(--borderActive);
-}
-
-.search__input:focus::-webkit-input-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.search__input:focus::-moz-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.search__input:focus:-moz-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.search__input:focus:-ms-input-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
 /* =============== SEARCH__BUTTON =============== */
 
-.search__button {
-	padding: 0.25em 0.6em;
+.search-form__button {
+	padding: 0.45em 0.6em;
 
 	cursor: pointer;
 	transition: 0.3s;
 	vertical-align: middle;
 
-	color: white;
 	border: none;
 	border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
 	outline: var(--outline);
@@ -90,13 +24,14 @@
 	font-size: 0.95em;
 }
 
-.search__button:active {
+.search-form__button:active {
 	background-color: var(--buttonActive);
 	-webkit-box-shadow: var(--buttonShadow);
 	-moz-box-shadow: var(--buttonShadow);
 	box-shadow: var(--buttonShadow);
 }
 
-.search__button > img {
-	width: 1.5em;
+.search-form__img {
+	width: 1.85em;
+	vertical-align: middle;
 }

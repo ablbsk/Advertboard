@@ -6,52 +6,42 @@ import { signOut } from '../../actions/auth-actions';
 import './signed-in-links.css';
 
 const SignedInLinks = (props) => {
+  const { uid } = props;
+  const content = [
+    { title: 'Create advert', link: 'create-advert', key: 'create-advert' },
+    { title: 'Users', link: 'users', key: 'users' },
+    { title: 'Profile', link: `users/${uid}`, key: 'profile' },
+  ];
   return (
-    <ul className="signed-in-links__ul">
-      <li>
-        <NavLink to="/create-advert" title="Create advert">
-          <img
-            className="signed-in-links__img"
-            src="../../../public/img/create-advert_icon.png"
-            alt="Create advert"
-          />
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/users" title="Users">
-          <img
-            className="signed-in-links__img"
-            src="../../../public/img/users.png"
-            alt="Users"
-          />
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={`/users/${props.uid}`} title="Profile">
-          <img
-            className="signed-in-links__img"
-            src="../../../public/img/profile.png"
-            alt="Profile"
-          />
-        </NavLink>
-      </li>
-      <li>
-        <NavLink onClick={props.signOut} to="/" title="Logout">
-        <img
-          className="signed-in-links__img"
-          src="../../../public/img/logout.png"
-          alt="Logout"
-        />
-        </NavLink>
-      </li>
-    </ul>
+    <div className="navigation">
+      <ul className="navigation-list">
+        {content.map(item => (
+          <li className="navigation-list__li" key={item.key}>
+            <NavLink to={`/${item.link}`} title={item.title}>
+              <img
+                className="navigation-list__img"
+                src={`../../../public/img/${item.key}.png`}
+                alt={item.title}
+              />
+            </NavLink>
+          </li>
+        ))}
+        <li className="navigation-list__li">
+          <NavLink onClick={props.signOut} to="/" title="Logout">
+            <img
+              className="navigation-list__img"
+              src="../../../public/img/logout.png"
+              alt="Logout"
+            />
+          </NavLink>
+        </li>
+      </ul>
+    </div>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signOut: () => dispatch(signOut()),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOut()),
+});
 
 export default connect(null, mapDispatchToProps)(SignedInLinks);

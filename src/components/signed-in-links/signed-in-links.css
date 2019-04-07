@@ -1,15 +1,14 @@
-.signed-in-links__ul {
+.navigation-list {
 	display: inline;
 }
 
-.signed-in-links__ul > li {
+.navigation-list__li {
 	display: inline;
 
-	height: 2em;
 	padding: 1em;
 }
 
-.signed-in-links__img {
+.navigation-list__img {
 	display: inline;
 
 	width: 1.5em;

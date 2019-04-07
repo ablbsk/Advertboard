@@ -1,25 +1,24 @@
-:root {
-    --accentColor: #2856B6;
+/* ======================== ADVERT ===================== */
 
-    --fontFamily: Poppins, serif;
-}
-
-.advert-item__article {
+.advert {
 	width: 20em;
 	margin: 1em;
 
 	border-radius: 0.5em;
 	background-color: white;
-	box-shadow: 0 0.8em 2em rgba(0,0,0,0.25), 0 0.5em 0.75em rgba(0,0,0,0.22);
+	box-shadow: var(--boxShadow);
 }
 
-.advert-item__article > img {
+.advert_img {
 	width: 100%;
 
 	border-radius: 0.5em 0.5em 0 0;
 }
 
-.advert-item__content {
+
+/* ===================== ADVERT-CONTENT ================ */
+
+.advert-content {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -30,7 +29,21 @@
 	font-family: var(--fontFamily);
 }
 
-.advert-item__title {
+.advert-content__price {
+    margin-left: 2em;
+
+    cursor: default;
+
+    color: var(--accentColor);
+
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+
+/* ====================== ADVERT-TEXT ================== */
+
+.advert-text__title {
 	margin: 0;
 
 	text-decoration: none;
@@ -41,27 +54,19 @@
 	font-weight: 600;
 }
 
-.advert-item__title:hover {
-	transition: 0.3s;
+.advert-text__title:hover {
+	transition: var(--titleTransition);
 
 	color: var(--accentColor);
 }
 
-.advert-item__owner {
+.advert-text__owner {
 	overflow: hidden;
 
 	margin: 0.25em 0;
 
+	cursor: default;
 	text-overflow: ellipsis;
 
 	font-size: 0.75em;
-}
-
-.advert-item__price {
-	margin: 0 0 0 2em;
-
-	color: #2856b6;
-
-	font-size: 1.4em;
-	font-weight: 600;
 }
