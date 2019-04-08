@@ -22,6 +22,7 @@ class UpdateUserEmail extends Component {
     const resultValid = changeUserEmailValidation(this.state);
     if (resultValid) {
       delete this.state.curPassUserEmail;
+      delete this.state.validError;
       this.props.changeEmail(curPassUserEmail, email)
     } else {
       this.setValidError(resultValid);
@@ -66,6 +67,8 @@ class UpdateUserEmail extends Component {
             className="input"
             type="email"
             id="email"
+            minLength="6"
+            maxLength="30"
             placeholder="Enter new email ..."
             onChange={this.handleChange}
           />

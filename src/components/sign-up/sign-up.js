@@ -25,8 +25,12 @@ class SignUp extends Component {
     const resultValid = signUpValidation(this.state);
     const resultUsername = this.uniqueCheck();
     if (resultUsername) {
-      resultValid === 'good' ?
-        this.props.signUp(this.state) : this.setValidError(resultValid);
+      if (resultValid === 'good') {
+        delete this.state.validError;
+        this.props.signUp(this.state)
+      } else {
+      this.setValidError(resultValid);
+    }
     }
   };
 

@@ -26,6 +26,7 @@ class UpdateAdvert extends Component {
     const { id } = this.props.match.params;
     const result = advertValidation(this.state);
     if (result === 'good') {
+      delete this.state.validError;
       this.props.updateAdvert(this.state, id);
       this.props.history.push('/');
     } else {

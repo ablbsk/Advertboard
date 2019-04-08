@@ -6,9 +6,10 @@ export const advertValidation = (state) => {
       .error(new Error('Title should contain 10-50 symbols. Spaces are not allowed.')),
     description: Joi.string().regex(/^[a-zA-Z0-9-.\s]+$/).required()
       .error(new Error('The description may contain letters, numbers or symbols "." , "-".')),
+    category: Joi.string().required()
+      .error(new Error('Choose category.')),
     price: Joi.string().regex(/^\d*\.?\d+$/).required()
       .error(new Error('The price can only be a positive numeric value.')),
-    category: Joi.any().optional(),
     validError: Joi.any().optional()
   });
 
@@ -23,7 +24,7 @@ export const signUpValidation = (state) => {
   const schema = Joi.object().keys({
     username: Joi.string().regex(/^([a-zA-Z0-9.-]{4,20})+$/).required()
       .error(new Error('Username should contain 4-20 letters, numbers or symbols "." , "-".')),
-    email: Joi.string().email().min(3).max(30).required()
+    email: Joi.string().email().required()
       .error(new Error('Email must contain at least 6 symbols.')),
     password: Joi.string().min(6).required()
       .error(new Error('Password must contain at least 6 symbols.')),

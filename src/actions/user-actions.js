@@ -73,7 +73,7 @@ export const changeEmail = (currentPassword, newEmail) => {
         user.updateEmail(newEmail)
           .then(() => {
             firestore.collection('users').doc(user.uid).update({
-              newEmail,
+              email: newEmail,
             });
             dispatch({ type: 'UPDATE_USER_EMAIL' });
           })

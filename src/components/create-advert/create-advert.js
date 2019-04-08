@@ -9,7 +9,7 @@ import { advertValidation } from '../../utils/validation/validation';
 class CreateAdvert extends Component {
 
   state = {
-    validError: null,
+    validError: null
   };
 
   handleChange = (e) => {
@@ -22,6 +22,7 @@ class CreateAdvert extends Component {
     e.preventDefault();
     const result = advertValidation(this.state);
     if (result === 'good') {
+      delete this.state.validError;
       this.props.createAdvert(this.state);
       this.props.history.push('/');
     } else {
@@ -43,7 +44,6 @@ class CreateAdvert extends Component {
     if (!auth.uid) {
       return <Redirect to='/sign-in' />
     }
-
     return (
       <Fragment>
         <BreadcrumbsItem

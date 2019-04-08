@@ -45,6 +45,8 @@ class SignIn extends Component {
               className="input"
               type="email"
               id="email"
+              minLength="6"
+              maxLength="30"
               placeholder="Enter email"
               onChange={this.handleChange} />
           </div>

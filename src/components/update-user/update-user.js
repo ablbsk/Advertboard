@@ -31,7 +31,12 @@ class UpdateUser extends Component {
     const result = updateUserValidation(this.state);
     const resultUsername = this.uniqueCheck();
     if (resultUsername) {
-      result === 'good' ? this.props.updateUser(this.state, uid) : this.setValidError(result);
+      if (result === 'good') {
+        delete this.state.validError;
+        this.props.updateUser(this.state, uid);
+      } else {
+        this.setValidError(result);
+      }
     }
   };
 
@@ -40,6 +45,7 @@ class UpdateUser extends Component {
     const { users } = this.props;
 
     if (username === oldUsername) {
+      delete this.state.oldUsername;
       return true;
     }
 
@@ -75,7 +81,6 @@ class UpdateUser extends Component {
       {head: 'Last name', id: 'lastName', placeholder: 'last name', defaultValue: user.lastName},
       {head: 'Phone', id: 'phone', placeholder: 'phone', defaultValue: user.phone}
     ];
-    console.log(this.state);
     if (!auth.uid) {
       return <Redirect to='/' />
     }
