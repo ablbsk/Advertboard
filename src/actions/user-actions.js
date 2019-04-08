@@ -1,3 +1,16 @@
+import {
+  UPDATE_USER,
+  UPDATE_USER_ERROR,
+  DELETE_USER,
+  DELETE_USER_ERROR,
+  DELETE_USER_DB,
+  DELETE_USER_DB_ERROR,
+  UPDATE_USER_PASSWORD,
+  UPDATE_USER_PASSWORD_ERROR,
+  UPDATE_USER_EMAIL,
+  UPDATE_USER_EMAIL_ERROR,
+} from '../constants/action-types';
+
 export const updateUser = (user, id) => {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
@@ -5,10 +18,10 @@ export const updateUser = (user, id) => {
       ...user,
     })
       .then(() => {
-        dispatch({ type: 'UPDATE_USER', id });
+        dispatch({ type: UPDATE_USER });
       })
       .catch((err) => {
-        dispatch({ type: 'UPDATE_USER_ERROR', err });
+        dispatch({ type: UPDATE_USER_ERROR, err });
       });
   };
 };
@@ -29,16 +42,16 @@ export const deleteUser = (currentPassword, uid) => {
         .then(() => {
           firestore.collection('users').doc(uid).delete()
             .then(() => {
-              dispatch({ type: 'DELETE_USER_DB' });
+              dispatch({ type: DELETE_USER_DB });
             })
             .catch((err) => {
-              dispatch({ type: 'DELETE_USER_DB_ERROR', err });
+              dispatch({ type: DELETE_USER_DB_ERROR, err });
             });
-          dispatch({ type: 'DELETE_USER' });
+          dispatch({ type: DELETE_USER });
         });
     })
       .catch((err) => {
-        dispatch({ type: 'DELETE_USER_ERROR', err });
+        dispatch({ type: DELETE_USER_ERROR, err });
       });
   };
 };
@@ -51,14 +64,14 @@ export const changePassword = (currentPassword, newPassword) => {
       .then(() => {
         user.updatePassword(newPassword)
           .then(() => {
-            dispatch({ type: 'UPDATE_USER_PASSWORD' });
+            dispatch({ type: UPDATE_USER_PASSWORD });
           })
           .catch((err) => {
-            dispatch({ type: 'UPDATE_USER_PASSWORD_ERROR', err });
+            dispatch({ type: UPDATE_USER_PASSWORD_ERROR, err });
           });
       })
       .catch((err) => {
-        dispatch({ type: 'UPDATE_USER_PASSWORD_ERROR', err });
+        dispatch({ type: UPDATE_USER_PASSWORD_ERROR, err });
       });
   };
 };
@@ -75,14 +88,14 @@ export const changeEmail = (currentPassword, newEmail) => {
             firestore.collection('users').doc(user.uid).update({
               email: newEmail,
             });
-            dispatch({ type: 'UPDATE_USER_EMAIL' });
+            dispatch({ type: UPDATE_USER_EMAIL });
           })
           .catch((err) => {
-            dispatch({ type: 'UPDATE_USER_EMAIL_ERROR', err });
+            dispatch({ type: UPDATE_USER_EMAIL_ERROR, err });
           });
       })
       .catch((err) => {
-        dispatch({ type: 'UPDATE_USER_EMAIL_ERROR', err });
+        dispatch({ type: UPDATE_USER_EMAIL_ERROR, err });
       });
   };
 };
