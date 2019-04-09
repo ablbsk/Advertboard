@@ -20,7 +20,7 @@ const SignedInLinks = (props) => {
             <NavLink to={`/${item.link}`} title={item.title}>
               <img
                 className="navigation-list__img"
-                src={`../../../public/img/${item.key}.png`}
+                src={`/assets/img/${item.key}.png`}
                 alt={item.title}
               />
             </NavLink>
@@ -30,7 +30,7 @@ const SignedInLinks = (props) => {
           <NavLink onClick={props.signOut} to="/" title="Logout">
             <img
               className="navigation-list__img"
-              src="../../../public/img/logout.png"
+              src="/assets/img/logout.png"
               alt="Logout"
             />
           </NavLink>

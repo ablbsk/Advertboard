@@ -12,6 +12,8 @@ import fbConfig from './config/firebase-config';
 import App from './components/app';
 import rootReducer from './reducers/root-reducer';
 
+import './style.css';
+
 const store = createStore(rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),

@@ -39,7 +39,7 @@ class Search extends Component {
           <button className="search-form__button">
             <img
               className="search-form__img"
-              src="../../../public/img/search.png"
+              src="/assets/img/search.png"
               alt="search"
             />
           </button>

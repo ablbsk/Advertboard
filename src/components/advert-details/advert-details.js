@@ -86,7 +86,7 @@ class AdvertDetails extends Component {
           <h2 className="details-title">{advert.title}</h2>
           <img
             className="advert-details__img"
-            src="../../../public/img/no_image.jpg"
+            src="/assets/img/no_image.jpg"
             alt="no photo"
           />
           <div className="advert-details-content">
@@ -103,7 +103,7 @@ class AdvertDetails extends Component {
                 <p className="contacts-text-p-item">
                   <img
                     className="contacts-text-p-item__img"
-                    src="../../../public/img/owner.png"
+                    src="/assets/img/owner.png"
                     alt="Owner" />
                   <NavLink
                     className="contacts-text-p-item__username"
@@ -115,14 +115,14 @@ class AdvertDetails extends Component {
                 <p className="contacts-text-p-item">
                   <img
                     className="contacts-text-p-item__img"
-                    src="../../../public/img/email.png"
+                    src="/assets/img/email.png"
                     alt="Email" />
                   <span>{advert.email}</span>
                 </p>
                 <p className="contacts-text-p-item">
                   <img
                     className="contacts-text-p-item__img"
-                    src="../../../public/img/phone.png"
+                    src="/assets/img/phone.png"
                     alt="Phone" />
                   <span>{advert.phone}</span>
                 </p>

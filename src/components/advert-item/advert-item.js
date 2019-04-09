@@ -9,7 +9,7 @@ const AdvertItem = ({ advert }) => {
     <article className="advert">
       <img
         className="advert_img"
-        src="../../../public/img/no_image.jpg"
+        src="/assets/img/no_image.jpg"
         alt="no photo"
       />
       <div className="advert-content">
