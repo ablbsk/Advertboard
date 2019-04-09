@@ -18,12 +18,13 @@ class UpdateUserEmail extends Component {
 
   changeEmail = (e) => {
     e.preventDefault();
+    const { advertsList } = this.props.user;
     const {curPassUserEmail, email} = this.state;
     const resultValid = changeUserEmailValidation(this.state);
     if (resultValid) {
       delete this.state.curPassUserEmail;
       delete this.state.validError;
-      this.props.changeEmail(curPassUserEmail, email)
+      this.props.changeEmail(curPassUserEmail, email, advertsList);
     } else {
       this.setValidError(resultValid);
     }
@@ -89,7 +90,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  changeEmail: (curPassword, newEmail) => dispatch(changeEmail(curPassword, newEmail)),
+  changeEmail: (curPassword, newEmail, advertsList) => dispatch(changeEmail(curPassword, newEmail, advertsList)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserEmail);

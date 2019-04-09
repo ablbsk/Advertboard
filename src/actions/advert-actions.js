@@ -6,6 +6,10 @@ import {
   UPDATE_ADVERT,
   UPDATE_ADVERT_ERROR,
   UPDATE_VIEWS_ADVERT,
+  UPDATE_ADVERT_USERNAME,
+  UPDATE_ADVERT_USERNAME_ERROR,
+  UPDATE_ADVERT_PHONE,
+  UPDATE_ADVERT_PHONE_ERROR,
 } from '../constants/action-types';
 
 export const createAdvert = advert => (dispatch, getState, { getFirestore }) => {
@@ -78,6 +82,30 @@ export const updateAdvert = (advert, id) => (dispatch, getState, { getFirestore 
   })
     .catch((err) => {
       dispatch({ type: UPDATE_ADVERT_ERROR, err });
+    });
+};
+
+export const updateUsernamelnAdvert = (username, id) => (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  firestore.collection('adverts').doc(id).update({
+    username,
+  }).then(() => {
+    dispatch({ type: UPDATE_ADVERT_USERNAME });
+  })
+    .catch((err) => {
+      dispatch({ type: UPDATE_ADVERT_USERNAME_ERROR, err });
+    });
+};
+
+export const updatePhonelnAdvert = (phone, id) => (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  firestore.collection('adverts').doc(id).update({
+    phone,
+  }).then(() => {
+    dispatch({ type: UPDATE_ADVERT_PHONE });
+  })
+    .catch((err) => {
+      dispatch({ type: UPDATE_ADVERT_PHONE_ERROR, err });
     });
 };
 

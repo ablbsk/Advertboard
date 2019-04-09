@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { updateUser } from '../../actions/user-actions';
+import { updateUsernamelnAdvert,
+  updatePhonelnAdvert
+  } from '../../actions/advert-actions';
 import { updateUserValidation } from '../../utils/validation/validation';
 
 import UpdateUserEmail from '../update-user-email';
@@ -27,16 +30,11 @@ class UpdateUser extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { uid } = this.props.auth;
     const result = updateUserValidation(this.state);
     const resultUsername = this.uniqueCheck();
+
     if (resultUsername) {
-      if (result === 'good') {
-        delete this.state.validError;
-        this.props.updateUser(this.state, uid);
-      } else {
-        this.setValidError(result);
-      }
+      result === 'good' ? this.setData() : this.setValidError(result);
     }
   };
 
@@ -45,7 +43,6 @@ class UpdateUser extends Component {
     const { users } = this.props;
 
     if (username === oldUsername) {
-      delete this.state.oldUsername;
       return true;
     }
 
@@ -59,6 +56,44 @@ class UpdateUser extends Component {
     return true;
   }
 
+  setData() {
+    const { uid } = this.props.auth;
+    const { oldUsername, oldPhone, username, phone } = this.state;
+
+    if (oldUsername !== username) {
+      const type = 'username';
+      this.updateContactsInAdvert(username, type);
+    }
+
+    if (oldPhone !== phone) {
+      const type = 'phone';
+      this.updateContactsInAdvert(phone, type);
+    }
+
+    this.cleanState();
+    this.props.updateUser(this.state, uid);
+    this.props.history.push('/');
+  }
+
+  updateContactsInAdvert(newValue, type) {
+    const { advertsList } = this.props.user;
+    for (let i = 0; i < advertsList.length; i++) {
+      const id = advertsList[i];
+      if (type === 'username') {
+        this.props.updateUsernamelnAdvert(newValue, id);
+      }
+      if (type === 'phone') {
+        this.props.updatePhonelnAdvert(newValue, id);
+      }
+    }
+  }
+
+  cleanState() {
+    delete this.state.validError;
+    delete this.state.oldUsername;
+    delete this.state.oldPhone;
+  }
+
   setValidError(result) {
     this.setState( {
       validError: result
@@ -66,9 +101,10 @@ class UpdateUser extends Component {
   }
 
   componentDidMount() {
-    const { username } = this.state;
+    const { username, phone } = this.state;
     this.setState( {
-      oldUsername: username
+      oldUsername: username,
+      oldPhone: phone
     });
   }
 
@@ -84,7 +120,6 @@ class UpdateUser extends Component {
     if (!auth.uid) {
       return <Redirect to='/' />
     }
-
     return (
       <Fragment>
         <BreadcrumbsItem
@@ -116,16 +151,17 @@ class UpdateUser extends Component {
                   id={item.id}
                   placeholder={item.placeholder}
                   defaultValue={item.defaultValue}
-                  onChange={this.handleChange}/>
+                  onChange={this.handleChange}
+                />
               </div>
             ))}
             <button className="button">ACCEPT</button>
           </form>
           {validError ? <p className="error">{validError}</p> : null}
           {successMsg ? <p className="error">{successMsg}</p> : null}
-          <UpdateUserEmail auth={auth}/>
-          <UpdateUserPassword auth={auth}/>
-          <UpdateUserDelete user={user} auth={auth}/>
+          <UpdateUserEmail user={user} auth={auth} />
+          <UpdateUserPassword auth={auth} />
+          <UpdateUserDelete user={user} auth={auth} />
         </div>
       </Fragment>
     );
@@ -146,6 +182,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     updateUser: (user, id) => dispatch(updateUser(user, id)),
+    updateUsernamelnAdvert: (username, advertId) => dispatch(updateUsernamelnAdvert(username, advertId)),
+    updatePhonelnAdvert: (phone, advertId) => dispatch(updatePhonelnAdvert(phone, advertId)),
   }
 };
 

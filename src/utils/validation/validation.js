@@ -56,6 +56,7 @@ export const updateUserValidation = (state) => {
       .error(new Error('The phone must be in the format +375 29|33 xxx xx xx.')),
     validError: Joi.any().optional(),
     oldUsername: Joi.any().optional(),
+    oldPhone: Joi.any().optional(),
   });
 
   const result = Joi.validate(state, schema);

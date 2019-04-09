@@ -9,6 +9,9 @@ import {
   UPDATE_USER_PASSWORD_ERROR,
   UPDATE_USER_EMAIL,
   UPDATE_USER_EMAIL_ERROR,
+
+  UPDATE_ADVERT_EMAIL,
+  UPDATE_ADVERT_EMAIL_ERROR,
 } from '../constants/action-types';
 
 export const updateUser = (user, id) => {
@@ -76,7 +79,7 @@ export const changePassword = (currentPassword, newPassword) => {
   };
 };
 
-export const changeEmail = (currentPassword, newEmail) => {
+export const changeEmail = (currentPassword, newEmail, advertsList) => {
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
@@ -89,6 +92,20 @@ export const changeEmail = (currentPassword, newEmail) => {
               email: newEmail,
             });
             dispatch({ type: UPDATE_USER_EMAIL });
+          })
+          .then(() => {
+            for (let i = 0; i < advertsList.length; i++) {
+              const id = advertsList[i];
+              firestore.collection('adverts').doc(id).update({
+                email: newEmail,
+              })
+                .then(() => {
+                  dispatch({ type: UPDATE_ADVERT_EMAIL });
+                })
+                .catch((err) => {
+                  dispatch({ type: UPDATE_ADVERT_EMAIL_ERROR, err });
+                });
+            }
           })
           .catch((err) => {
             dispatch({ type: UPDATE_USER_EMAIL_ERROR, err });
