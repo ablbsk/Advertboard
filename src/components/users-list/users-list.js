@@ -8,6 +8,8 @@ import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import UserItem from '../user-item';
 import Spinner from '../spinner';
 
+import './users-list.css';
+
 const UsersList = (props) => {
   const { users } = props;
 
@@ -26,9 +28,11 @@ const UsersList = (props) => {
       >
         Users
       </BreadcrumbsItem>
-      {users && users.map(user => (
-        <UserItem user={user} key={user.id} />
-      ))}
+      <section className="users-list">
+        {users && users.map(user => (
+          <UserItem user={user} key={user.id} />
+        ))}
+      </section>
     </Fragment>
   );
 };

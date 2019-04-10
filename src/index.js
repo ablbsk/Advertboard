@@ -13,6 +13,7 @@ import App from './components/app';
 import rootReducer from './reducers/root-reducer';
 
 import './style.css';
+import './media-queries.css';
 
 const store = createStore(rootReducer,
   compose(

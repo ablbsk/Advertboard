@@ -1,0 +1,71 @@
+@media (min-width: 1440px) {
+    .advert-list {
+        width: 88em;
+    }
+
+    .users-list {
+        width: 80em;
+    }
+}
+
+@media (min-width: 1100px) and (max-width: 1439px) {
+    main {
+        font-size: 16px;
+    }
+
+    .advert-list {
+        width: 66em;
+    }
+
+    .users-list {
+        width: 60em;
+    }
+
+}
+
+@media (min-width: 700px) and (max-width: 1099px) {
+    main {
+        font-size: 15px;
+    }
+
+    .advert-list {
+        width: 44em;
+    }
+
+    .users-list {
+        width: 40em;
+    }
+
+    .block {
+        width: 35em;
+    }
+}
+
+@media (max-width: 699px) {
+    main {
+        font-size: 14px;
+    }
+
+    .advert-list {
+        justify-content: center;
+        width: 25em;
+    }
+
+    .advert {
+        width: 25em;
+    }
+
+    .users-list {
+        justify-content: center;
+        width: 25em;
+    }
+
+    .user-item {
+        justify-content: center;
+        width: 25em;
+    }
+
+    .block {
+        width: 30em;
+    }
+}

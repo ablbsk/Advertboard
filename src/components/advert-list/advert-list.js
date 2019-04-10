@@ -21,10 +21,10 @@ const AdvertList = (props) => {
 
   return (
     <section className="advert-list">
-      { adverts && adverts
-        .filter(advert => advert.title.indexOf(search) > -1)
-        .map(advert => (
-          <AdvertItem advert={advert} key={advert.id} />))}
+        { adverts && adverts
+          .filter(advert => advert.title.indexOf(search) > -1)
+          .map(advert => (
+            <AdvertItem advert={advert} key={advert.id} />))}
     </section>
   );
 };

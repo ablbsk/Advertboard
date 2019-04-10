@@ -4,7 +4,7 @@
 	padding: 1em;
 
 	border-radius: var(--blockBorderRadius);
-	background-color: white;
+	background-color: var(--blockBgColor);
 	box-shadow: var(--boxShadow);
 
 	font-family: var(--fontFamily);

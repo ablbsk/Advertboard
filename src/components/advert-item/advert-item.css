@@ -4,15 +4,15 @@
 	width: 20em;
 	margin: 1em;
 
-	border-radius: 0.5em;
-	background-color: white;
+	border-radius: var(--blockBorderRadius);
+	background-color: var(--blockBgColor);
 	box-shadow: var(--boxShadow);
 }
 
 .advert_img {
 	width: 100%;
 
-	border-radius: 0.5em 0.5em 0 0;
+	border-radius: var(--blockBorderRadius) var(--blockBorderRadius) 0 0;
 }
 
 

@@ -5,7 +5,7 @@
 	padding: 1.5em 0;
 
 	border-radius: var(--blockBorderRadius);
-	background-color: white;
+	background-color: var(--blockBgColor);
 	box-shadow: var(--boxShadow);
 
 	font-family: var(--fontFamily);
@@ -32,6 +32,8 @@
 
 .content-description__text {
 	flex-grow: 2;
+
+	text-align: justify;
 }
 
 .content-description__price {
