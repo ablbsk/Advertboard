@@ -1,3 +1,4 @@
+import { toastr } from 'react-redux-toastr';
 import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
@@ -18,6 +19,7 @@ export const signIn = credentials => (dispatch, getState, { getFirebase }) => {
     })
     .catch((err) => {
       dispatch({ type: LOGIN_ERROR, err });
+      toastr.error('Error', err.message);
     });
 };
 
@@ -49,5 +51,6 @@ export const signUp = newUser => (dispatch, getState, { getFirebase, getFirestor
     })
     .catch((err) => {
       dispatch({ type: SIGNUP_ERROR, err });
+      toastr.error('Error', err.message);
     });
 };

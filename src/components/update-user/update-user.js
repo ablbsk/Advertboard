@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { toastr } from 'react-redux-toastr';
+
 import { updateUser } from '../../actions/user-actions';
 import { updateUsernamelnAdvert,
   updatePhonelnAdvert
@@ -19,7 +21,6 @@ class UpdateUser extends Component {
     firstName: this.props.user.firstName,
     lastName: this.props.user.lastName,
     phone: this.props.user.phone,
-    validError: null
   };
 
   handleChange = (e) => {
@@ -32,9 +33,8 @@ class UpdateUser extends Component {
     e.preventDefault();
     const result = updateUserValidation(this.state);
     const resultUsername = this.uniqueCheck();
-
     if (resultUsername) {
-      result === 'good' ? this.setData() : this.setValidError(result);
+      result === 'good' ? this.setData() : toastr.error('Error', result);
     }
   };
 
@@ -48,8 +48,7 @@ class UpdateUser extends Component {
 
     for (let i = 0; i < users.length; i++) {
       if (username === users[i].username) {
-        const result = 'Such username already exists.';
-        this.setValidError(result);
+        toastr.error('Error', 'Such username already exists.');
         return false;
       }
     }
@@ -57,7 +56,6 @@ class UpdateUser extends Component {
   }
 
   setData() {
-    const { uid } = this.props.auth;
     const { oldUsername, oldPhone, username, phone } = this.state;
 
     if (oldUsername !== username) {
@@ -71,7 +69,7 @@ class UpdateUser extends Component {
     }
 
     this.cleanState();
-    this.props.updateUser(this.state, uid);
+    this.props.updateUser(this.state);
     this.props.history.push('/');
   }
 
@@ -89,15 +87,8 @@ class UpdateUser extends Component {
   }
 
   cleanState() {
-    delete this.state.validError;
     delete this.state.oldUsername;
     delete this.state.oldPhone;
-  }
-
-  setValidError(result) {
-    this.setState( {
-      validError: result
-    });
   }
 
   componentDidMount() {
@@ -110,7 +101,6 @@ class UpdateUser extends Component {
 
   render() {
     const { user, auth } = this.props;
-    const { validError, successMsg } = this.state;
     const content = [
       {head: 'Username', id: 'username', placeholder: 'username', defaultValue: user.username},
       {head: 'First name', id: 'firstName', placeholder: 'first name', defaultValue: user.firstName},
@@ -157,8 +147,6 @@ class UpdateUser extends Component {
             ))}
             <button className="button">ACCEPT</button>
           </form>
-          {validError ? <p className="error">{validError}</p> : null}
-          {successMsg ? <p className="error">{successMsg}</p> : null}
           <UpdateUserEmail user={user} auth={auth} />
           <UpdateUserPassword auth={auth} />
           <UpdateUserDelete user={user} auth={auth} />
@@ -181,7 +169,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateUser: (user, id) => dispatch(updateUser(user, id)),
+    updateUser: (user) => dispatch(updateUser(user)),
     updateUsernamelnAdvert: (username, advertId) => dispatch(updateUsernamelnAdvert(username, advertId)),
     updatePhonelnAdvert: (phone, advertId) => dispatch(updatePhonelnAdvert(phone, advertId)),
   }

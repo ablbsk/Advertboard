@@ -17,7 +17,7 @@ import {
 const advertReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_ADVERT:
-      console.log('Create advert', action.advert);
+      console.log('Create advert');
       return state;
     case CREATE_ADVERT_ERROR:
       console.log('Create advert error', action.err);
@@ -31,21 +31,21 @@ const advertReducer = (state = {}, action) => {
       return state;
 
     case UPDATE_ADVERT:
-      console.log('Update advert', action.advert);
+      console.log('Update advert');
       return state;
     case UPDATE_ADVERT_ERROR:
       console.log('Update advert error', action.err);
       return state;
 
     case UPDATE_ADVERT_USERNAME:
-      console.log('Update username in advert', action.advert);
+      console.log('Update username in advert');
       return state;
     case UPDATE_ADVERT_USERNAME_ERROR:
       console.log('Update username in advert error', action.err);
       return state;
 
     case UPDATE_ADVERT_PHONE:
-      console.log('Update phone in advert', action.advert);
+      console.log('Update phone in advert');
       return state;
     case UPDATE_ADVERT_PHONE_ERROR:
       console.log('Update phone in advert error', action.err);

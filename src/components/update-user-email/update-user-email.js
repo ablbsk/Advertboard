@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { toastr } from 'react-redux-toastr';
 
 import { changeEmail } from '../../actions/user-actions';
 import { changeUserEmailValidation } from '../../utils/validation/validation';
 
 class UpdateUserEmail extends Component {
-
-  state = {
-    validError: null
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -23,22 +20,13 @@ class UpdateUserEmail extends Component {
     const resultValid = changeUserEmailValidation(this.state);
     if (resultValid) {
       delete this.state.curPassUserEmail;
-      delete this.state.validError;
       this.props.changeEmail(curPassUserEmail, email, advertsList);
     } else {
-      this.setValidError(resultValid);
+      toastr.error('Error', resultValid);
     }
   };
 
-  setValidError(result) {
-    this.setState( {
-      validError: result
-    });
-  }
-
   render() {
-    const { changeEmailError } = this.props;
-    const { validError } = this.state;
     return (
       <form onSubmit={this.changeEmail}>
         <h4 className="headline-h4">CHANGE EMAIL</h4>
@@ -75,22 +63,13 @@ class UpdateUserEmail extends Component {
           />
         </div>
         <button className="button">UPDATE EMAIL</button>
-        {changeEmailError ?
-          <p className="error">{changeEmailError}</p> : null}
-        {validError ? <p className="error">{validError}</p> : null}
       </form>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    changeEmailError: state.user.changeEmailError
-  }
-};
-
 const mapDispatchToProps = dispatch => ({
   changeEmail: (curPassword, newEmail, advertsList) => dispatch(changeEmail(curPassword, newEmail, advertsList)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserEmail);
+export default connect(null, mapDispatchToProps)(UpdateUserEmail);

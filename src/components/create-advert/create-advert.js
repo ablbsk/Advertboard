@@ -2,15 +2,12 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { toastr } from 'react-redux-toastr';
 
 import { createAdvert } from '../../actions/advert-actions';
 import { advertValidation } from '../../utils/validation/validation';
 
 class CreateAdvert extends Component {
-
-  state = {
-    validError: null
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -22,23 +19,15 @@ class CreateAdvert extends Component {
     e.preventDefault();
     const result = advertValidation(this.state);
     if (result === 'good') {
-      delete this.state.validError;
       this.props.createAdvert(this.state);
       this.props.history.push('/');
     } else {
-      this.setValidError(result);
+      toastr.error('Error', result);
     }
   };
 
-  setValidError(result) {
-    this.setState( {
-      validError: result
-    });
-  }
-
   render() {
     const { auth } = this.props;
-    const { validError } = this.state;
     const options = ['Transport', 'Equipment', 'Fashion', 'For kids', 'For home', 'Hobbies & sports', 'Work & study', 'Animals'];
 
     if (!auth.uid) {
@@ -117,7 +106,6 @@ class CreateAdvert extends Component {
               onChange={this.handleChange} />
           </div>
           <button className="button">Create</button>
-          { validError ? <p className="error">{validError}</p> : null }
         </form>
       </Fragment>
     )

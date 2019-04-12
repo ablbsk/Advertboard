@@ -1,3 +1,4 @@
+import { toastr } from 'react-redux-toastr';
 import {
   CREATE_ADVERT,
   CREATE_ADVERT_ERROR,
@@ -25,11 +26,15 @@ export const createAdvert = advert => (dispatch, getState, { getFirestore }) => 
     username: profile.username,
     views: 0,
     created: new Date(),
-  }).then(() => {
-    dispatch({ type: CREATE_ADVERT, advert });
-  }).catch((err) => {
-    dispatch({ type: CREATE_ADVERT_ERROR, err });
-  });
+  })
+    .then(() => {
+      dispatch({ type: CREATE_ADVERT });
+      toastr.success('Success', 'Advert has been created');
+    })
+    .catch((err) => {
+      dispatch({ type: CREATE_ADVERT_ERROR, err });
+      toastr.error('Error', 'Something went wrong');
+    });
 
   firestore.collection('adverts').orderBy('created', 'desc').limit(1).get()
     .then((querySnapshot) => {
@@ -49,9 +54,11 @@ export const removeAdvert = id => (dispatch, getState, { getFirestore }) => {
   firestore.collection('adverts').doc(id).delete()
     .then(() => {
       dispatch({ type: REMOVE_ADVERT });
+      toastr.success('Success', 'Advert has been removed');
     })
     .catch((err) => {
       dispatch({ type: REMOVE_ADVERT_ERROR, err });
+      toastr.error('Error', 'Something went wrong');
     });
 
   usersRef.update({
@@ -78,10 +85,12 @@ export const updateAdvert = (advert, id) => (dispatch, getState, { getFirestore 
     ...advert,
     modified: new Date(),
   }).then(() => {
-    dispatch({ type: UPDATE_ADVERT, advert });
+    dispatch({ type: UPDATE_ADVERT });
+    toastr.success('Success', 'Advert has been updated');
   })
     .catch((err) => {
       dispatch({ type: UPDATE_ADVERT_ERROR, err });
+      toastr.error('Error', 'Something went wrong');
     });
 };
 

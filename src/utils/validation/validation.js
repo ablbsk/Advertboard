@@ -10,7 +10,6 @@ export const advertValidation = (state) => {
       .error(new Error('Choose category.')),
     price: Joi.string().regex(/^\d*\.?\d+$/).required()
       .error(new Error('The price can only be a positive numeric value.')),
-    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);
@@ -34,7 +33,6 @@ export const signUpValidation = (state) => {
       .error(new Error('Last name should contain 2-20 letters.')),
     phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('The phone must be in the format +375 29|33 xxx xx xx.')),
-    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);
@@ -54,7 +52,6 @@ export const updateUserValidation = (state) => {
       .error(new Error('Last name should contain 2-20 letters.')),
     phone: Joi.string().regex(/^((\+375)+(29|33)+([0-9]){7})+$/).required()
       .error(new Error('The phone must be in the format +375 29|33 xxx xx xx.')),
-    validError: Joi.any().optional(),
     oldUsername: Joi.any().optional(),
     oldPhone: Joi.any().optional(),
   });
@@ -70,9 +67,9 @@ export const changeUserEmailValidation = (state) => {
   const schema = Joi.object().keys({
     curPassUserEmail: Joi.string().required()
       .error(new Error('Password must contain at least 6 symbols.')),
-    email: Joi.string().email().min(3).max(30).required()
+    email: Joi.string().email().min(3).max(30)
+      .required()
       .error(new Error('Email must contain at least 6 symbols.')),
-    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);
@@ -88,7 +85,6 @@ export const changePasswordValidation = (state) => {
       .error(new Error('Password must contain at least 6 symbols.')),
     newPassword: Joi.string().min(6).required()
       .error(new Error('Password must contain at least 6 symbols.')),
-    validError: Joi.any().optional()
   });
 
   const result = Joi.validate(state, schema);

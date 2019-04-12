@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {toastr} from 'react-redux-toastr';
 
 import { changePasswordValidation } from '../../utils/validation/validation';
 import {changePassword} from '../../actions/user-actions';
 
 class UpdateUserPassword extends Component {
-
-  state = {
-    validError: null
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -23,18 +20,10 @@ class UpdateUserPassword extends Component {
 
     resultValid === 'good' ?
       this.props.changePassword(curPassUserPass, newPassword)
-      : this.setValidError(resultValid);
+      : toastr.error('Error', result);
   };
 
-  setValidError(result) {
-    this.setState( {
-      validError: result
-    });
-  }
-
   render() {
-    const { changePassError } = this.props;
-    const { validError } = this.state;
     return (
       <form onSubmit={this.changePassword}>
         <h4 className="headline-h4">CHANGE PASSWORD</h4>
@@ -67,22 +56,13 @@ class UpdateUserPassword extends Component {
             onChange={this.handleChange} />
         </div>
         <button className="button">CHANGE PASSWORD</button>
-        {changePassError ?
-          <p className="error">{changePassError}</p> : null}
-        {validError ? <p className="error">{validError}</p> : null}
       </form>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    changePassError: state.user.changePassError
-  }
-};
-
 const mapDispatchToProps = dispatch => ({
   changePassword: (curPassword, newPassword) => dispatch(changePassword(curPassword, newPassword)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserPassword);
+export default connect(null, mapDispatchToProps)(UpdateUserPassword);

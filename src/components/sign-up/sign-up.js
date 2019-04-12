@@ -4,15 +4,12 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { toastr } from 'react-redux-toastr';
 
 import { signUpValidation } from '../../utils/validation/validation';
 import { signUp } from '../../actions/auth-actions';
 
 class SignUp extends Component {
-
-  state = {
-    validError: null
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -25,12 +22,7 @@ class SignUp extends Component {
     const resultValid = signUpValidation(this.state);
     const resultUsername = this.uniqueCheck();
     if (resultUsername) {
-      if (resultValid === 'good') {
-        delete this.state.validError;
-        this.props.signUp(this.state)
-      } else {
-      this.setValidError(resultValid);
-    }
+      resultValid === 'good' ? this.props.signUp(this.state) : toastr.error('Error', resultValid);
     }
   };
 
@@ -39,23 +31,15 @@ class SignUp extends Component {
   const { users } = this.props;
   for (let i = 0; i < users.length; i++) {
     if (username === users[i].username) {
-      const result = 'Such username already exists';
-      this.setValidError(result);
+      toastr.error('Error', 'Such username already exists');
       return false;
       }
     }
   return true;
   }
 
-  setValidError(result) {
-    this.setState( {
-      validError: result
-    });
-  }
-
   render() {
-    const { auth, signUpError } = this.props;
-    const { validError } = this.state;
+    const { auth } = this.props;
     const content = [
       {id: 'username', label: 'Username', type: 'text', placeholder: 'username'},
       {id: 'email', label: 'Email', type: 'email', placeholder: 'email'},
@@ -99,8 +83,6 @@ class SignUp extends Component {
             </div>
           ))}
           <button className="button">CREATE USER</button>
-          {signUpError ? <p className="error">{signUpError}</p> : null}
-          {validError ? <p className="error">{validError}</p> : null}
         </form>
       </Fragment>
     )
@@ -111,7 +93,6 @@ const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
     users: state.firestore.ordered.users,
-    signUpError: state.auth.signUpError
   }
 };
 

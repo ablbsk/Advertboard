@@ -6,38 +6,25 @@ import {
   SIGNUP_ERROR,
 } from '../constants/action-types';
 
-const initState = {
-  signInError: null,
-  signUpError: null,
-};
-
-const authReducer = (state = initState, action) => {
+const authReducer = (state = {}, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       console.log('Login success');
       return state;
     case LOGIN_ERROR:
       console.log('Login failed', action.err);
-      return {
-        ...state,
-        signInError: action.err.message,
-        signUpError: null,
-      };
+      return state;
 
     case SIGNOUT_SUCCESS:
-      console.log('Signout success');
+      console.log('Sign out success');
       return state;
 
     case SIGNUP_SUCCESS:
-      console.log('Signup success');
+      console.log('Sign up success');
       return state;
     case SIGNUP_ERROR:
-      console.log('Signup error', action.err);
-      return {
-        ...state,
-        signInError: null,
-        signUpError: action.err.message,
-      };
+      console.log('Sign up error', action.err);
+      return state;
 
     default:
       return state;

@@ -15,7 +15,6 @@ class UpdateUserDelete extends Component {
   deleteAccount = (e) => {
     e.preventDefault();
     const { advertsList } = this.props.user;
-    const { uid } = this.props.auth;
     const { curPassDelAcc } = this.state;
 
     if (typeof(advertsList) !== 'undefined') {
@@ -24,11 +23,10 @@ class UpdateUserDelete extends Component {
         this.props.removeAdvert(id);
       }
     }
-    this.props.deleteUser(curPassDelAcc, uid);
+    this.props.deleteUser(curPassDelAcc);
   };
 
   render() {
-    const { deleteUserError } = this.props;
     return (
       <form onSubmit={this.deleteAccount}>
         <h4 className="headline-h4_red">DELETE ACCOUNT</h4>
@@ -49,23 +47,15 @@ class UpdateUserDelete extends Component {
         <button className="button_red">
           DELETE ACCOUNT
         </button>
-        {deleteUserError ?
-          <p className="error">{deleteUserError}</p> : null}
       </form>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    deleteUserError: state.user.deleteUserError
-  }
-};
-
 
 const mapDispatchToProps = dispatch => ({
-  deleteUser: (currentPassword, uid) => dispatch(deleteUser(currentPassword, uid)),
+  deleteUser: (currentPassword) => dispatch(deleteUser(currentPassword)),
   removeAdvert: (id) => dispatch(removeAdvert(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserDelete);
+export default connect(null, mapDispatchToProps)(UpdateUserDelete);

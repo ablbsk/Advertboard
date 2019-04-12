@@ -18,7 +18,7 @@ class SignIn extends Component {
   };
 
   render() {
-    const { signInError, auth } = this.props;
+    const { auth } = this.props;
 
     if (auth.uid) {
       return <Redirect to='/' />
@@ -65,7 +65,6 @@ class SignIn extends Component {
               onChange={this.handleChange} />
           </div>
           <button className="button">Login</button>
-          { signInError ? <p className="error">{ signInError }</p> : null }
         </form>
       </Fragment>
     );
@@ -74,7 +73,6 @@ class SignIn extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    signInError: state.auth.signInError,
     auth: state.firebase.auth
   }
 };

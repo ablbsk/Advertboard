@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
+import { toastr } from 'react-redux-toastr';
 
 import { updateAdvert } from '../../actions/advert-actions';
 import { advertValidation } from '../../utils/validation/validation';
@@ -12,7 +13,6 @@ class UpdateAdvert extends Component {
     description: this.props.advert.description,
     category: this.props.advert.category,
     price: this.props.advert.price,
-    validError: null
   };
 
   handleChange = (e) => {
@@ -30,15 +30,9 @@ class UpdateAdvert extends Component {
       this.props.updateAdvert(this.state, id);
       this.props.history.push('/');
     } else {
-      this.setValidError(result);
+      toastr.error('Error', result);
     }
   };
-
-  setValidError(result) {
-    this.setState( {
-      validError: result
-    });
-  }
 
   render() {
     const { advert } = this.props;
