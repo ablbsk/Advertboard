@@ -23,7 +23,7 @@
 
 }
 
-@media (min-width: 700px) and (max-width: 1099px) {
+@media (min-width: 900px) and (max-width: 1099px) {
     main {
         font-size: 15px;
     }
@@ -37,22 +37,48 @@
     }
 
     .block {
-        width: 35em;
+        width: 45em;
+    }
+
+    .advert-details {
+        width: 45em;
     }
 }
 
-@media (max-width: 699px) {
+@media (min-width: 700px) and (max-width: 899px) {
+    main {
+        font-size: 15px;
+    }
+
+    .advert-list {
+        width: 44em;
+    }
+
+    .users-list {
+        width: 40em;
+    }
+
+    .block {
+        width: 37.5em;
+    }
+
+    .advert-details {
+        width: 37.5em;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 699px) {
     main {
         font-size: 14px;
     }
 
     .advert-list {
         justify-content: center;
-        width: 25em;
+        width: 32.5em;
     }
 
     .advert {
-        width: 25em;
+        width: 32.5em;
     }
 
     .users-list {
@@ -66,6 +92,43 @@
     }
 
     .block {
-        width: 30em;
+        width: 35em;
+    }
+
+    .advert-details {
+        width: 35em;
+    }
+}
+
+@media (max-width: 599px) {
+    main {
+        font-size: 14px;
+    }
+
+    .advert-list {
+        justify-content: center;
+        width: 27.5em;
+    }
+
+    .advert {
+        width: 27.5em;
+    }
+
+    .users-list {
+        justify-content: center;
+        width: 25em;
+    }
+
+    .user-item {
+        justify-content: center;
+        width: 25em;
+    }
+
+    .block {
+        width: 32.5em;
+    }
+
+    .advert-details {
+        width: 32.5em;
     }
 }

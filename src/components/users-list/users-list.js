@@ -7,6 +7,7 @@ import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
 import UserItem from '../user-item';
 import Spinner from '../spinner';
+import EmptyMessage from '../empty-message';
 
 import './users-list.css';
 
@@ -16,8 +17,9 @@ const UsersList = (props) => {
   if (!isLoaded(users)) {
     return <Spinner />;
   }
+
   if (isEmpty(users)) {
-    return <div>Oooops.... nothing =(</div>;
+    return <EmptyMessage />;
   }
 
   return (

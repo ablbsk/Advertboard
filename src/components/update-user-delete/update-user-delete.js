@@ -29,7 +29,7 @@ class UpdateUserDelete extends Component {
   render() {
     return (
       <form onSubmit={this.deleteAccount}>
-        <h4 className="headline-h4_red">DELETE ACCOUNT</h4>
+        <h4 className="headline-h4_red">delete account</h4>
         <div className="content">
           <label
             className="label"
@@ -45,7 +45,7 @@ class UpdateUserDelete extends Component {
             onChange={this.handleChange} />
         </div>
         <button className="button_red">
-          DELETE ACCOUNT
+          delete profile
         </button>
       </form>
     );

@@ -82,7 +82,7 @@ class SignUp extends Component {
               />
             </div>
           ))}
-          <button className="button">CREATE USER</button>
+          <button className="button">create user</button>
         </form>
       </Fragment>
     )

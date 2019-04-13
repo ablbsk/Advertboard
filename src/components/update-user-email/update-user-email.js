@@ -29,7 +29,7 @@ class UpdateUserEmail extends Component {
   render() {
     return (
       <form onSubmit={this.changeEmail}>
-        <h4 className="headline-h4">CHANGE EMAIL</h4>
+        <h4 className="headline-h4">change email</h4>
         <div className="content">
           <label
             className="label"
@@ -62,7 +62,7 @@ class UpdateUserEmail extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button className="button">UPDATE EMAIL</button>
+        <button className="button">update email</button>
       </form>
     );
   }

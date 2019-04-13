@@ -25,7 +25,7 @@ class UserDetails extends Component {
   viewUserAdverts(advertsList) {
     return (
       <div className="user-advert-list">
-        <h4 className="headline-h4">USERS ADVERTS</h4>
+        <h4 className="headline-h4">user's adverts</h4>
         <ul className="list-header">
           <li className="list-header__title">
             Title
@@ -62,7 +62,7 @@ class UserDetails extends Component {
         className="button"
         to={`/users/${id}/update`}
       >
-        UPDATE
+        update profile
       </NavLink>
     ) : null;
 

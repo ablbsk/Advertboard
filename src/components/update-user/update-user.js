@@ -125,7 +125,7 @@ class UpdateUser extends Component {
           Update
         </BreadcrumbsItem>
         <div className="block">
-          <h4 className="headline-h4">UPDATE USER</h4>
+          <h4 className="headline-h4">update profile</h4>
           <form onSubmit={this.handleSubmit}>
             {content.map((item) => (
               <div className="content" key={item.id}>
@@ -145,7 +145,7 @@ class UpdateUser extends Component {
                 />
               </div>
             ))}
-            <button className="button">ACCEPT</button>
+            <button className="button">accept</button>
           </form>
           <UpdateUserEmail user={user} auth={auth} />
           <UpdateUserPassword auth={auth} />

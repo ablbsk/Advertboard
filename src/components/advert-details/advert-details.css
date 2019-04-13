@@ -1,7 +1,7 @@
 /* =================== ADVERT-DETAILS ================= */
 
 .advert-details {
-	width: 50%;
+	width: 55em;
 	padding: 1.5em 0;
 
 	border-radius: var(--blockBorderRadius);

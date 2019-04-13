@@ -23,14 +23,14 @@ class AdvertDetails extends Component {
           className="button"
           to={`/advert/${id}/update-advert`}
         >
-          UPDATE ADVERT
+          update advert
         </NavLink>
         <form
           className="content-options__delete-form"
           onSubmit={this.removeAdvert}
         >
           <button className="button_red">
-            REMOVE ADVERT
+            remove advert
           </button>
         </form>
       </div>

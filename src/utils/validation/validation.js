@@ -3,7 +3,7 @@ import Joi from 'joi';
 export const advertValidation = (state) => {
   const schema = Joi.object().keys({
     title: Joi.string().regex(/^([a-zA-Z0-9-.\s]{10,50})+$/).required()
-      .error(new Error('Title should contain 10-50 symbols. Spaces are not allowed.')),
+      .error(new Error('Title should contain 10-50 symbols.')),
     description: Joi.string().regex(/^[a-zA-Z0-9-.\s]+$/).required()
       .error(new Error('The description may contain letters, numbers or symbols "." , "-".')),
     category: Joi.string().required()

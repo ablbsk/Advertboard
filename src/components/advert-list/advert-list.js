@@ -8,6 +8,7 @@ import AdvertItem from '../advert-item';
 import Spinner from '../spinner';
 
 import './advert-list.css';
+import EmptyMessage from '../empty-message';
 
 const AdvertList = (props) => {
   const { adverts, search } = props;
@@ -15,16 +16,21 @@ const AdvertList = (props) => {
   if (!isLoaded(adverts)) {
     return <Spinner />;
   }
+
   if (isEmpty(adverts)) {
-    return <div>Oooops.... nothing =(</div>;
+    return <EmptyMessage />;
   }
 
   return (
     <section className="advert-list">
-        { adverts && adverts
-          .filter(advert => advert.title.indexOf(search) > -1)
-          .map(advert => (
-            <AdvertItem advert={advert} key={advert.id} />))}
+      { adverts && adverts
+        .filter((advert) => {
+          const title = advert.title.toLowerCase();
+          const searchLower = search.toLowerCase();
+          return title.indexOf(searchLower) > -1;
+        })
+        .map(advert => (
+          <AdvertItem advert={advert} key={advert.id} />))}
     </section>
   );
 };

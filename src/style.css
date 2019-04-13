@@ -98,7 +98,7 @@ footer {
 /* ======================== BLOCK ====================== */
 
 .block {
-	width: 50em;
+	width: 55em;
 	padding: 1.5em 2em;
 
 	border-radius: var(--blockBorderRadius);
@@ -113,6 +113,7 @@ footer {
 	margin: 1em 0 var(--space) 0;
 
 	text-align: center;
+	text-transform: uppercase;
 
 	color: var(--accentColor);
 
@@ -123,6 +124,7 @@ footer {
 	margin: 1em 0 2em 0;
 
 	text-align: center;
+	text-transform: uppercase;
 
 	color: var(--accentColor);
 }
@@ -131,6 +133,7 @@ footer {
 	margin: 1em 0 2em 0;
 
 	text-align: center;
+	text-transform: uppercase;
 
 	color: var(--errorColor);
 }
@@ -275,6 +278,7 @@ footer {
 
 	transition: var(--buttonTransition);
 	text-decoration: none;
+	text-transform: uppercase;
 
 	color: white;
 	border: none;
@@ -299,6 +303,7 @@ footer {
 
 	cursor: pointer;
 	transition: 0.3s;
+	text-transform: uppercase;
 
 	color: white;
 	border: none;
@@ -315,18 +320,4 @@ footer {
 	-webkit-box-shadow: var(--buttonShadow);
 	-moz-box-shadow: var(--buttonShadow);
 	box-shadow: var(--buttonShadow);
-}
-
-
-/* ======================== MESSAGE ==================== */
-
-.error {
-	margin-bottom: 0;
-
-	text-align: center;
-
-	color: var(--errorColor);
-
-	font-family: var(--fontFamily);
-	font-size: 1em;
 }

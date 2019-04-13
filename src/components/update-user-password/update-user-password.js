@@ -26,7 +26,7 @@ class UpdateUserPassword extends Component {
   render() {
     return (
       <form onSubmit={this.changePassword}>
-        <h4 className="headline-h4">CHANGE PASSWORD</h4>
+        <h4 className="headline-h4">change password</h4>
         <div className="content">
           <label
             className="label"
@@ -55,7 +55,7 @@ class UpdateUserPassword extends Component {
             placeholder="Enter new password ..."
             onChange={this.handleChange} />
         </div>
-        <button className="button">CHANGE PASSWORD</button>
+        <button className="button">change password</button>
       </form>
     );
   }

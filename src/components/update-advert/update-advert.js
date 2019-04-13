@@ -26,7 +26,6 @@ class UpdateAdvert extends Component {
     const { id } = this.props.match.params;
     const result = advertValidation(this.state);
     if (result === 'good') {
-      delete this.state.validError;
       this.props.updateAdvert(this.state, id);
       this.props.history.push('/');
     } else {
@@ -120,9 +119,7 @@ class UpdateAdvert extends Component {
                 onChange={this.handleChange} />
           </div>
 
-          <button className="button">CHANGE ADVERT</button>
-          { validError ?
-            <p className="error">{validError}</p> : null }
+          <button className="button">change advert</button>
           </form>
       </Fragment>
     );
