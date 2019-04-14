@@ -3,12 +3,12 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: 'AIzaSyAi3I2xj1XBXMSUp-wj8BDobGL6CS3YnV8',
-  authDomain: 'callboard-a12345.firebaseapp.com',
-  databaseURL: 'https://callboard-a12345.firebaseio.com',
-  projectId: 'callboard-a12345',
-  storageBucket: 'callboard-a12345.appspot.com',
-  messagingSenderId: '479822630994',
+  apiKey: 'AIzaSyCYA5cFTIG3-RN-1Bp6rI7XURlZh_rdSOs',
+  authDomain: 'advertboard-test.firebaseapp.com',
+  databaseURL: 'https://advertboard-test.firebaseio.com',
+  projectId: 'advertboard-test',
+  storageBucket: 'advertboard-test.appspot.com',
+  messagingSenderId: '108551502202',
 };
 
 firebase.initializeApp(config);
