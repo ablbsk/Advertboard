@@ -18,7 +18,8 @@ class UpdateUserEmail extends Component {
     const { advertsList } = this.props.user;
     const {curPassUserEmail, email} = this.state;
     const resultValid = changeUserEmailValidation(this.state);
-    if (resultValid) {
+    console.log(resultValid);
+    if (resultValid === 'good') {
       delete this.state.curPassUserEmail;
       this.props.changeEmail(curPassUserEmail, email, advertsList);
     } else {

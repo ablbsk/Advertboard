@@ -56,16 +56,18 @@ class UpdateUser extends Component {
 
   setData() {
     const { oldUsername, oldPhone, username, phone } = this.state;
-    if (oldUsername !== username) {
-      const type = 'username';
-      this.updateContactsInAdvert(username, type);
-    }
+    const { advertsList } = this.props.user;
+    if (typeof(advertsList) === 'object') {
+      if (oldUsername !== username) {
+        const type = 'username';
+        this.updateContactsInAdvert(username, type);
+      }
 
-    if (oldPhone !== phone) {
-      const type = 'phone';
-      this.updateContactsInAdvert(phone, type);
+      if (oldPhone !== phone) {
+        const type = 'phone';
+        this.updateContactsInAdvert(phone, type);
+      }
     }
-
     this.cleanState();
     this.props.updateUser(this.state);
   }

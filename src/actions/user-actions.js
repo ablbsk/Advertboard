@@ -98,17 +98,19 @@ export const changeEmail = (currentPassword, newEmail, advertsList) => (dispatch
           toastr.success('Success', 'Email has been updated');
         })
         .then(() => {
-          for (let i = 0; i < advertsList.length; i++) {
-            const id = advertsList[i];
-            firestore.collection('adverts').doc(id).update({
-              email: newEmail,
-            })
-              .then(() => {
-                dispatch({ type: UPDATE_ADVERT_EMAIL });
+          if (typeof(advertsList) !== 'undefined') {
+            for (let i = 0; i < advertsList.length; i++) {
+              const id = advertsList[i];
+              firestore.collection('adverts').doc(id).update({
+                email: newEmail,
               })
-              .catch((err) => {
-                dispatch({ type: UPDATE_ADVERT_EMAIL_ERROR, err });
-              });
+                .then(() => {
+                  dispatch({type: UPDATE_ADVERT_EMAIL});
+                })
+                .catch((err) => {
+                  dispatch({type: UPDATE_ADVERT_EMAIL_ERROR, err});
+                });
+            }
           }
         })
         .catch((err) => {
