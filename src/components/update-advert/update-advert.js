@@ -27,7 +27,7 @@ class UpdateAdvert extends Component {
     const result = advertValidation(this.state);
     if (result === 'good') {
       this.props.updateAdvert(this.state, id);
-      this.props.history.push('/');
+      this.props.history.push(`/advert/${id}`);
     } else {
       toastr.error('Error', result);
     }
@@ -36,7 +36,6 @@ class UpdateAdvert extends Component {
   render() {
     const { advert } = this.props;
     const { id } = this.props.match.params;
-    const { validError } = this.state;
     const options = ['Transport', 'Equipment', 'Fashion', 'For kids', 'For home', 'Hobbies & sports', 'Work & study', 'Animals'];
     return (
       <Fragment>
@@ -118,7 +117,6 @@ class UpdateAdvert extends Component {
                 defaultValue={advert.price}
                 onChange={this.handleChange} />
           </div>
-
           <button className="button">change advert</button>
           </form>
       </Fragment>

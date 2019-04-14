@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { toastr } from 'react-redux-toastr';
 
@@ -57,7 +56,6 @@ class UpdateUser extends Component {
 
   setData() {
     const { oldUsername, oldPhone, username, phone } = this.state;
-
     if (oldUsername !== username) {
       const type = 'username';
       this.updateContactsInAdvert(username, type);
@@ -70,7 +68,6 @@ class UpdateUser extends Component {
 
     this.cleanState();
     this.props.updateUser(this.state);
-    this.props.history.push('/');
   }
 
   updateContactsInAdvert(newValue, type) {
@@ -162,7 +159,6 @@ const mapStateToProps = (state, ownProps) => {
   const user = users ? users[id] : null;
   return {
     user,
-    users: state.firestore.ordered.users,
     auth: state.firebase.auth
   }
 };

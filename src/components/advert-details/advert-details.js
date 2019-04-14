@@ -1,9 +1,14 @@
 import React, { Component, Fragment } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import firestoreConnect from 'react-redux-firebase/lib/firestoreConnect';
+import { isEmpty } from 'react-redux-firebase/lib/helpers';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 import { removeAdvert, viewsAdvert } from '../../actions/advert-actions';
+
+import Spinner from '../spinner';
 
 import './advert-details.css';
 
@@ -52,10 +57,12 @@ class AdvertDetails extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-    let { views } = this.props.advert;
-    views++;
-    this.props.viewsAdvert(this.state, id, views)
+    setTimeout(() => {
+      const {id} = this.props.match.params;
+      let {views} = this.props.advert;
+      views++;
+      this.props.viewsAdvert(this.state, id, views)
+    }, 2000);
   }
 
   componentDidCatch(error, info) {
@@ -64,6 +71,11 @@ class AdvertDetails extends Component {
 
   render() {
     const { advert, auth } = this.props;
+
+    if (isEmpty(advert)) {
+      return <Spinner />;
+    }
+
     const { authorId } = advert;
     const { id } = this.props.match.params;
 
@@ -163,7 +175,6 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     advert,
-    removeStatus: state.advert.removeStatus,
     auth: state.firebase.auth
   };
 };
@@ -175,4 +186,9 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdvertDetails);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    { collection: 'adverts' },
+  ]),
+)(AdvertDetails);

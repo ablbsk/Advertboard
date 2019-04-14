@@ -6,9 +6,9 @@ import { isLoaded, isEmpty } from 'react-redux-firebase/lib/helpers';
 
 import AdvertItem from '../advert-item';
 import Spinner from '../spinner';
+import EmptyMessage from '../empty-message';
 
 import './advert-list.css';
-import EmptyMessage from '../empty-message';
 
 const AdvertList = (props) => {
   const { adverts, search } = props;
@@ -43,7 +43,6 @@ const mapStateToProps = state => ({
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'adverts', orderBy: ['created', 'desc'] },
-    { collection: 'users', orderBy: ['username'] },
+    { collection: 'adverts', orderBy: ['created', 'desc'] }
   ]),
 )(AdvertList);

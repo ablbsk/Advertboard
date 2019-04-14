@@ -1,62 +1,31 @@
 import React, { Component, Fragment } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import firestoreConnect from 'react-redux-firebase/lib/firestoreConnect';
+import { isEmpty } from 'react-redux-firebase/lib/helpers';
 import { NavLink } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
-import UserAdvertItem from '../user-advert-item';
+import UserAdvertsList from '../user-adverts-list';
+import Spinner from '../spinner';
 
 import './user-details.css';
 
 class UserDetails extends Component {
-
-  getProperties(curAdvertId) {
-    const { adverts } = this.props;
-    for (let i = 0; i < adverts.length; i++) {
-      if (curAdvertId === adverts[i].id) {
-        return {
-          title: adverts[i].title,
-          views: adverts[i].views,
-          created: adverts[i].created
-        };
-      }
-    }
-  }
-
-  viewUserAdverts(advertsList) {
-    return (
-      <div className="user-advert-list">
-        <h4 className="headline-h4">user's adverts</h4>
-        <ul className="list-header">
-          <li className="list-header__title">
-            Title
-          </li>
-          <li className="list-header__view">
-            Views
-          </li>
-          <li>Created</li>
-        </ul>
-        { advertsList && advertsList.map((id) => (
-          <UserAdvertItem
-            id={id}
-            key={id}
-            data={this.getProperties(id)}
-          />
-        ))}
-      </div>
-    );
-  }
-
   render() {
-    const { user, auth } = this.props;
+    const { adverts, auth, user } = this.props;
     const { id } = this.props.match.params;
-    const { advertsList } = user;
+
+    if (isEmpty(user)) {
+      return <Spinner />;
+    }
+
     const data = [
       { head: 'Email', paragraph: user.email },
       { head: 'Phone', paragraph: user.phone },
       { head: 'First name', paragraph: user.firstName },
-      { head: 'Last name', paragraph: user.lastName }
+      { head: 'Last name', paragraph: user.lastName },
     ];
-
     const link = (auth.uid && auth.uid === id) ? (
       <NavLink
         className="button"
@@ -66,8 +35,8 @@ class UserDetails extends Component {
       </NavLink>
     ) : null;
 
-    const advertList = (typeof(advertsList) === 'object') ?
-      this.viewUserAdverts(advertsList) : null;
+    const advertsList = (typeof (adverts) === 'object')
+      ? <UserAdvertsList adverts={adverts} /> : null;
 
     return (
       <Fragment>
@@ -79,7 +48,7 @@ class UserDetails extends Component {
         </BreadcrumbsItem>
         <div className="block">
           <h2 className="details-title">{user.username}</h2>
-          {data.map((item) => (
+          {data.map(item => (
             <div className="user-details-content" key={item.head}>
               <label className="label">{item.head}</label>
               <p className="user-details-content__p-item">
@@ -88,7 +57,7 @@ class UserDetails extends Component {
             </div>
           ))}
           {link}
-          {advertList}
+          {advertsList}
         </div>
       </Fragment>
     );
@@ -100,10 +69,17 @@ const mapStateToProps = (state, ownProps) => {
   const { users } = state.firestore.data;
   const user = users ? users[id] : null;
   return {
+    id,
     user,
     adverts: state.firestore.ordered.adverts,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
   };
 };
 
-export default connect(mapStateToProps)(UserDetails);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(props => [
+    { collection: 'adverts', where: [['authorId', '==', props.id]] },
+    { collection: 'users' },
+  ]),
+)(UserDetails);

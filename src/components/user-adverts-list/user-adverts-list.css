@@ -1,0 +1,25 @@
+.user-advert-list {
+    font-family: var(--fontFamily);
+}
+
+.list-header {
+    display: flex;
+
+    margin: 1em 0;
+    padding: 0;
+
+    list-style-type: none;
+
+    font-family: var(--fontFamily);
+    font-size: 0.85em;
+    font-weight: 900;
+}
+
+.list-header__title {
+    display: inline;
+    flex-grow: 2;
+}
+
+.list-header__view {
+    padding-right: 3em;
+}
