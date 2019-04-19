@@ -2,18 +2,18 @@ import React, { Fragment } from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import { Breadcrumbs, BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
 
-import AppHeader from '../app-header';
-import CreateAdvert from '../create-advert';
-import SignIn from '../sign-in';
-import SignUp from '../sign-up';
+import AppHeader from '../layout/app-header';
+import CreateAdvert from '../advert/create-advert';
+import SignIn from '../auth/sign-in';
+import SignUp from '../auth/sign-up';
 
-import AdvertList from '../advert-list';
-import AdvertDetails from '../advert-details';
-import UpdateAdvert from '../update-advert';
+import AdvertList from '../advert/advert-list';
+import AdvertDetails from '../advert/advert-details';
+import UpdateAdvert from '../advert/update-advert';
 
-import UsersList from '../users-list';
-import UserDetails from '../user-details';
-import UpdateUser from '../update-user';
+import UsersList from '../user/users-list';
+import UserDetails from '../user/user-details';
+import UpdateUser from '../user/update/update-user';
 
 import Search from '../search';
 
