@@ -55,7 +55,7 @@ class UpdateUserPassword extends Component {
             placeholder="Enter new password ..."
             onChange={this.handleChange} />
         </div>
-        <button className="button">change password</button>
+        <button className="button button_color_blue">change password</button>
       </form>
     );
   }

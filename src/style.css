@@ -182,25 +182,7 @@ footer {
 	border-bottom: var(--borderActive);
 }
 
-.input:focus::-webkit-input-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.input:focus::-moz-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.input:focus:-moz-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.input:focus:-ms-input-placeholder {
+.input:focus::placeholder {
 	transition: var(--placeholderTransition);
 
 	opacity: var(--placeholderOpacity);
@@ -229,25 +211,7 @@ footer {
 	border: var(--borderActive);
 }
 
-.textarea:focus::-webkit-input-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.textarea:focus::-moz-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.textarea:focus::-moz-placeholder {
-	transition: var(--placeholderTransition);
-
-	opacity: var(--placeholderOpacity);
-}
-
-.textarea:focus::-ms-input-placeholder {
+.textarea:focus::placeholder {
 	transition: var(--placeholderTransition);
 
 	opacity: var(--placeholderOpacity);
@@ -276,6 +240,7 @@ footer {
 	margin: 1.5em 0;
 	padding: 0.5em 1em;
 
+	cursor: pointer;
 	transition: var(--buttonTransition);
 	text-decoration: none;
 	text-transform: uppercase;
@@ -297,27 +262,11 @@ footer {
 	box-shadow: var(--buttonShadow);
 }
 
-.button_red {
-	margin: 1.5em 0;
-	padding: 0.5em 1em;
+.button_color_blue {
+	background-color: var(--accentColor);
+}
 
-	cursor: pointer;
-	transition: 0.3s;
-	text-transform: uppercase;
-
-	color: white;
-	border: none;
-	border-radius: var(--borderRadius);
-	outline: var(--outline);
+.button_color_red {
 	background-color: var(--errorColor);
-
-	font-family: var(--fontFamily);
-	font-size: 0.8em;
 }
 
-.button_red:active {
-	background-color: var(--buttonActive);
-	-webkit-box-shadow: var(--buttonShadow);
-	-moz-box-shadow: var(--buttonShadow);
-	box-shadow: var(--buttonShadow);
-}

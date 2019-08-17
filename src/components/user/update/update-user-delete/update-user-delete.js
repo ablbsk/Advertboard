@@ -44,7 +44,7 @@ class UpdateUserDelete extends Component {
             placeholder="Enter password ..."
             onChange={this.handleChange} />
         </div>
-        <button className="button_red">
+        <button className="button button_color_red">
           delete profile
         </button>
       </form>

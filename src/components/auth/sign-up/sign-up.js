@@ -82,7 +82,7 @@ class SignUp extends Component {
               />
             </div>
           ))}
-          <button className="button">create user</button>
+          <button className="button button_color_blue">create user</button>
         </form>
       </Fragment>
     )

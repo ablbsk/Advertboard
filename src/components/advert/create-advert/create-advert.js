@@ -105,7 +105,7 @@ class CreateAdvert extends Component {
               placeholder="Enter price ..."
               onChange={this.handleChange} />
           </div>
-          <button className="button">create advert</button>
+          <button className="button button_color_blue">create advert</button>
         </form>
       </Fragment>
     )

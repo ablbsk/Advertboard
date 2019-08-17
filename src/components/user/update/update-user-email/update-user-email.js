@@ -63,7 +63,7 @@ class UpdateUserEmail extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button className="button">update email</button>
+        <button className="button button_color_blue">update email</button>
       </form>
     );
   }

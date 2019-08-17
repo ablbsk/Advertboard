@@ -64,7 +64,7 @@ class SignIn extends Component {
               placeholder="Enter password"
               onChange={this.handleChange} />
           </div>
-          <button className="button">login</button>
+          <button className="button button_color_blue">login</button>
         </form>
       </Fragment>
     );

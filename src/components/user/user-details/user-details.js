@@ -29,7 +29,7 @@ const UserDetails = (props) => {
     ];
   const link = (auth.uid && auth.uid === id) ? (
     <NavLink
-        className="button"
+        className="button button_color_blue"
         to={`/users/${id}/update`}
       >
         update profile

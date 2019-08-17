@@ -25,7 +25,7 @@ class AdvertDetails extends Component {
     return (
       <div className="content-options">
         <NavLink
-          className="button"
+          className="button button_color_blue"
           to={`/advert/${id}/update-advert`}
         >
           update advert
@@ -34,7 +34,7 @@ class AdvertDetails extends Component {
           className="content-options__delete-form"
           onSubmit={this.removeAdvert}
         >
-          <button className="button_red">
+          <button className="button button_color_red">
             remove advert
           </button>
         </form>

@@ -118,7 +118,7 @@ class UpdateUserData extends Component {
             />
           </div>
         ))}
-        <button className="button">accept</button>
+        <button className="button button_color_blue">accept</button>
       </form>
     )
   }

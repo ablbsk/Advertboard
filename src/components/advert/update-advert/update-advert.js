@@ -117,7 +117,7 @@ class UpdateAdvert extends Component {
                 defaultValue={advert.price}
                 onChange={this.handleChange} />
           </div>
-          <button className="button">change advert</button>
+          <button className="button button_color_blue">change advert</button>
           </form>
       </Fragment>
     );
