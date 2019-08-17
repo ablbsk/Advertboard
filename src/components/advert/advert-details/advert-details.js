@@ -47,10 +47,7 @@ class AdvertDetails extends Component {
       <div>
         <label className="label">Last update</label>
         <p>
-          {moment(modified
-            .toDate())
-            .subtract(10, 'days')
-            .calendar()}
+          {moment(modified.toDate()).format('L')}
         </p>
       </div>
     )
@@ -153,9 +150,7 @@ class AdvertDetails extends Component {
                 <label className="label">Created at</label>
                 <p>
                   {moment(advert.created
-                    .toDate())
-                    .subtract(10, 'days')
-                    .calendar()}
+                    .toDate()).format('L')}
                 </p>
               </div>
               {update}

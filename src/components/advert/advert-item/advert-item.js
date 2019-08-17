@@ -25,10 +25,7 @@ const AdvertItem = ({ advert }) => {
             <span>{advert.username}</span>
             <span> in </span>
             <span>
-              {moment(advert.created
-                .toDate())
-                .subtract(10, 'days')
-                .calendar()}
+              {moment(advert.created.toDate()).format('L')}
             </span>
           </p>
         </div>

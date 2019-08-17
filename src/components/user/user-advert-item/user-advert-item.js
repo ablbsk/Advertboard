@@ -17,10 +17,7 @@ const UserAdvertItem = ({ id, data }) => (
         {data.views}
       </li>
       <li className="user-advert-item-info__item">
-        {moment(data.created
-          .toDate())
-          .subtract(10, 'days')
-          .calendar()}
+        {moment(data.created.toDate()).format('L')}
       </li>
     </ul>
   </div>
