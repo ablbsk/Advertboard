@@ -20,6 +20,7 @@
 	--placeholderTransition: opacity 0.5s ease;
 
 	--border: 2px solid var(--borderColor);
+	--borderError: 2px solid var(--errorColor);
 	--blockBorderRadius: 0.5em;
 	--borderRadius: 0.3em;
 	--borderActive: 2px solid var(--accentColor);
@@ -188,6 +189,11 @@ footer {
 	opacity: var(--placeholderOpacity);
 }
 
+.input_color_red {
+	border: none;
+	border-bottom: var(--borderError);
+}
+
 
 /* ======================= TEXTAREA ==================== */
 
@@ -217,6 +223,10 @@ footer {
 	opacity: var(--placeholderOpacity);
 }
 
+.textarea_color_red {
+	border: var(--borderError);
+	border-radius: var(--borderRadius);
+}
 
 /* ======================== SELECT ===================== */
 
@@ -227,6 +237,11 @@ footer {
 
 	font-family: var(--fontFamily);
 	font-size: var(--inputFontSize);
+}
+
+.select_color_red {
+	border: var(--borderError);
+	border-radius: var(--borderRadius);
 }
 
 .select:focus {
@@ -270,3 +285,13 @@ footer {
 	background-color: var(--errorColor);
 }
 
+/* ======================== ERROR ===================== */
+
+.error {
+	color: var(--errorColor);
+	padding: var(--inputPadding) 0;
+	margin: 0 auto;
+
+	font-family: var(--fontFamily);
+	font-size: 0.9em;
+}

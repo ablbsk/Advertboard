@@ -4,12 +4,15 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
-import { toastr } from 'react-redux-toastr';
 
-import { signUpValidation } from '../../../utils/validation/validation';
+import { userValidation } from '../../../utils/validation/user-validation';
 import { signUp } from '../../../actions/auth-actions';
 
 class SignUp extends Component {
+
+  state = {
+    errors: {}
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -19,19 +22,30 @@ class SignUp extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const resultValid = signUpValidation(this.state);
+    const resultValid = userValidation(this.state);
     const resultUsername = this.uniqueCheck();
     if (resultUsername) {
-      resultValid === 'good' ? this.props.signUp(this.state) : toastr.error('Error', resultValid);
+      resultValid === 'good' ? this.props.signUp(this.state) : this.addErrors(resultValid);
     }
+  };
+
+  addErrors = (result) => {
+    this.setState({
+      errors: result
+    }, () => {
+      console.log(this.state.errors);
+    })
   };
 
   uniqueCheck() {
   const { username } = this.state;
   const { users } = this.props;
+  const error = {
+    username: 'Such username already exists'
+  };
   for (let i = 0; i < users.length; i++) {
     if (username === users[i].username) {
-      toastr.error('Error', 'Such username already exists');
+      this.addErrors(error);
       return false;
       }
     }
@@ -39,14 +53,15 @@ class SignUp extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     const { auth } = this.props;
     const content = [
-      {id: 'username', label: 'Username', type: 'text', placeholder: 'username'},
-      {id: 'email', label: 'Email', type: 'email', placeholder: 'email'},
-      {id: 'password', label: 'Password', type: 'password', placeholder: 'password'},
-      {id: 'firstName', label: 'First name', type: 'text', placeholder: 'first name'},
-      {id: 'lastName', label: 'Last name', type: 'text', placeholder: 'last name'},
-      {id: 'phone', label: 'Phone', type: 'text', placeholder: 'phone'},
+      {id: 'username', label: 'Username', type: 'text', placeholder: 'username', error: errors.username},
+      {id: 'email', label: 'Email', type: 'email', placeholder: 'email', error: errors.email},
+      {id: 'password', label: 'Password', type: 'password', placeholder: 'password', error: errors.password},
+      {id: 'firstName', label: 'First name', type: 'text', placeholder: 'first name', error: errors.firstName},
+      {id: 'lastName', label: 'Last name', type: 'text', placeholder: 'last name', error: errors.lastName},
+      {id: 'phone', label: 'Phone', type: 'text', placeholder: 'phone', error: errors.phone},
     ];
 
     if (auth.uid) {
@@ -74,12 +89,13 @@ class SignUp extends Component {
                 {item.label}
               </label>
               <input
-                className="input"
+                className={ "input" + (item.id in errors ? " input_color_red" : "")}
                 id={item.id}
                 type={item.type}
                 placeholder={`Enter ${item.placeholder}`}
                 onChange={this.handleChange}
               />
+              { item.id in errors ? <span className="error">{item.error}</span> : null }
             </div>
           ))}
           <button className="button button_color_blue">create user</button>

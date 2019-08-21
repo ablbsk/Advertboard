@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {toastr} from 'react-redux-toastr';
 
-import { changePasswordValidation } from '../../../../utils/validation/validation';
-import {changePassword} from '../../../../actions/user-actions';
+import { changePasswordValidation } from '../../../../utils/validation/user-change-password-validation';
+import { changePassword } from '../../../../actions/user-actions';
 
 class UpdateUserPassword extends Component {
+
+  state = {
+    errors: {}
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -16,14 +19,23 @@ class UpdateUserPassword extends Component {
   changePassword = (e) => {
     e.preventDefault();
     const { curPassUserPass, newPassword } = this.state;
-    const resultValid = changePasswordValidation(this.state);
+    const result = changePasswordValidation(this.state);
 
-    resultValid === 'good' ?
+    result === 'good' ?
       this.props.changePassword(curPassUserPass, newPassword)
-      : toastr.error('Error', result);
+      : this.addErrors(result);
+  };
+
+  addErrors = (result) => {
+    this.setState({
+      errors: result
+    }, () => {
+      console.log(this.state.errors);
+    })
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <form onSubmit={this.changePassword}>
         <h4 className="headline-h4">change password</h4>
@@ -35,11 +47,13 @@ class UpdateUserPassword extends Component {
             Confirm the password
           </label>
           <input
-            className="input"
+            className={ "input" + ('curPassUserPass' in errors ? " input_color_red" : "")}
             type="password"
             id="curPassUserPass"
             placeholder="Enter current password ..."
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+          />
+          { 'curPassUserPass' in errors ? <span className="error">{errors.curPassUserPass}</span> : null }
         </div>
         <div className="content">
           <label
@@ -49,11 +63,13 @@ class UpdateUserPassword extends Component {
             New password
           </label>
           <input
-            className="input"
+            className={ "input" + ('newPassword' in errors ? " input_color_red" : "")}
             type="password"
             id="newPassword"
             placeholder="Enter new password ..."
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+          />
+          { 'newPassword' in errors ? <span className="error">{errors.newPassword}</span> : null }
         </div>
         <button className="button button_color_blue">change password</button>
       </form>

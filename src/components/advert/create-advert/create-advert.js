@@ -2,12 +2,15 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
-import { toastr } from 'react-redux-toastr';
 
 import { createAdvert } from '../../../actions/advert-actions';
-import { advertValidation } from '../../../utils/validation/validation';
+import { advertValidation } from '../../../utils/validation/advert-validation';
 
 class CreateAdvert extends Component {
+
+  state = {
+    errors: {}
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -22,11 +25,20 @@ class CreateAdvert extends Component {
       this.props.createAdvert(this.state);
       this.props.history.push('/');
     } else {
-      toastr.error('Error', result);
+      this.addErrors(result);
     }
   };
 
+  addErrors = (result) => {
+    this.setState({
+      errors: result
+    }, () => {
+      console.log(this.state.errors);
+    })
+  };
+
   render() {
+    const { errors } = this.state;
     const { auth } = this.props;
     const options = ['Transport', 'Equipment', 'Fashion', 'For kids', 'For home', 'Hobbies & sports', 'Work & study', 'Animals'];
 
@@ -53,11 +65,13 @@ class CreateAdvert extends Component {
               Title
             </label>
             <input
-              className="input"
+              className={ "input" + ('title' in errors ? " input_color_red" : "")}
               id="title"
               type="text"
               placeholder="Enter title ..."
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+            />
+            { 'title' in errors ? <span className="error">{errors.title}</span> : null }
           </div>
           <div className="content">
             <label
@@ -67,11 +81,12 @@ class CreateAdvert extends Component {
               Description
             </label>
             <textarea
-              className="textarea"
+              className={ "textarea" + ('description' in errors ? " textarea_color_red" : "")}
               id="description"
               placeholder="Enter description ..."
               onChange={this.handleChange}
             />
+            { 'description' in errors ? <span className="error">{errors.description}</span> : null }
           </div>
           <div className="content">
             <label
@@ -81,7 +96,7 @@ class CreateAdvert extends Component {
               Category
             </label>
             <select
-              className="select"
+              className={ "select" + ('category' in errors ? " select_color_red" : "" ) }
               id="category"
               defaultValue="none"
               onChange={this.handleChange}>
@@ -90,6 +105,7 @@ class CreateAdvert extends Component {
                 <option value={option} key={option}>{option}</option>
               ))}
             </select>
+            { 'category' in errors ? <span className="error">{errors.category}</span> : null }
           </div>
           <div className="content">
             <label
@@ -99,11 +115,13 @@ class CreateAdvert extends Component {
               Price
             </label>
             <input
-              className="input"
+              className={ "input" + ('price' in errors ? " input_color_red" : "") }
               id="price"
               type="text"
               placeholder="Enter price ..."
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+            />
+            { 'price' in errors ? <span className="error">{errors.price}</span> : null }
           </div>
           <button className="button button_color_blue">create advert</button>
         </form>

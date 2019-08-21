@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toastr } from 'react-redux-toastr';
 
-import { updateUserValidation } from '../../../../utils/validation/validation';
+import { userValidation } from '../../../../utils/validation/user-validation';
 import { updateUser } from '../../../../actions/user-actions';
 import { updatePhonelnAdvert, updateUsernamelnAdvert } from '../../../../actions/advert-actions';
 
 class UpdateUserData extends Component {
+
   state = {
     username: this.props.user.username,
     firstName: this.props.user.firstName,
     lastName: this.props.user.lastName,
     phone: this.props.user.phone,
+    errors: {}
   };
 
   handleChange = (e) => {
@@ -22,16 +23,27 @@ class UpdateUserData extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const result = updateUserValidation(this.state);
+    const result = userValidation(this.state);
     const resultUsername = this.uniqueCheck();
     if (resultUsername) {
-      result === 'good' ? this.setData() : toastr.error('Error', result);
+      result === 'good' ? this.setData() : this.addErrors(result);
     }
+  };
+
+  addErrors = (result) => {
+    this.setState({
+      errors: result
+    }, () => {
+      console.log(this.state.errors);
+    })
   };
 
   uniqueCheck() {
     const { username, oldUsername } = this.state;
     const { users } = this.props;
+    const error = {
+      username: 'Such username already exists'
+    };
 
     if (username === oldUsername) {
       return true;
@@ -39,7 +51,7 @@ class UpdateUserData extends Component {
 
     for (let i = 0; i < users.length; i++) {
       if (username === users[i].username) {
-        toastr.error('Error', 'Such username already exists.');
+        this.addErrors(error);
         return false;
       }
     }
@@ -91,12 +103,13 @@ class UpdateUserData extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     const { user } = this.props;
     const content = [
-      {head: 'Username', id: 'username', placeholder: 'username', defaultValue: user.username},
-      {head: 'First name', id: 'firstName', placeholder: 'first name', defaultValue: user.firstName},
-      {head: 'Last name', id: 'lastName', placeholder: 'last name', defaultValue: user.lastName},
-      {head: 'Phone', id: 'phone', placeholder: 'phone', defaultValue: user.phone}
+      {head: 'Username', id: 'username', placeholder: 'username', defaultValue: user.username, error: errors.username},
+      {head: 'First name', id: 'firstName', placeholder: 'first name', defaultValue: user.firstName, error: errors.firstName},
+      {head: 'Last name', id: 'lastName', placeholder: 'last name', defaultValue: user.lastName, error: errors.lastName},
+      {head: 'Phone', id: 'phone', placeholder: 'phone', defaultValue: user.phone, error: errors.phone}
     ];
     return (
       <form onSubmit={this.handleSubmit}>
@@ -109,13 +122,14 @@ class UpdateUserData extends Component {
               {item.head}
             </label>
             <input
-              className="input"
+              className={ "input" + (item.id in errors ? " input_color_red" : "")}
               type="text"
               id={item.id}
               placeholder={item.placeholder}
               defaultValue={item.defaultValue}
               onChange={this.handleChange}
             />
+            { item.id in errors ? <span className="error">{item.error}</span> : null }
           </div>
         ))}
         <button className="button button_color_blue">accept</button>
@@ -123,6 +137,12 @@ class UpdateUserData extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.firestore.ordered.users,
+  }
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -132,4 +152,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(null, mapDispatchToProps)(UpdateUserData);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserData);

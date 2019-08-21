@@ -62,10 +62,6 @@ class AdvertDetails extends Component {
     }, 2000);
   }
 
-  componentDidCatch(error, info) {
-    console.log(error, info);
-  }
-
   render() {
     const { advert, auth } = this.props;
 

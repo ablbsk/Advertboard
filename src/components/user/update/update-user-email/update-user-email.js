@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 
 import { changeEmail } from '../../../../actions/user-actions';
-import { changeUserEmailValidation } from '../../../../utils/validation/validation';
+import { changeUserEmailValidation } from '../../../../utils/validation/user-change-email-validation';
 
 class UpdateUserEmail extends Component {
 
@@ -18,7 +18,7 @@ class UpdateUserEmail extends Component {
     const { advertsList } = this.props.user;
     const {curPassUserEmail, email} = this.state;
     const resultValid = changeUserEmailValidation(this.state);
-    console.log(resultValid);
+
     if (resultValid === 'good') {
       delete this.state.curPassUserEmail;
       this.props.changeEmail(curPassUserEmail, email, advertsList);
